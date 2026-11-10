@@ -41,3 +41,6 @@ Photography and derived example artwork are not relicensed under the project's M
 `alps_dem.tif`: true terrain subset from [Skadi N46E008](https://s3.amazonaws.com/elevation-tiles-prod/skadi/N46/N46E008.hgt.gz), downloaded via the [AWS Terrain Tiles catalog](https://registry.opendata.aws/terrain-tiles/). Crop 8.45–8.75E / 46.80–46.99N, nearest-neighbor reduction to 300×190, no invented elevations. `alps_dem.source.json` hashes the included GeoTIFF. The product combines source-dependent data; Europe attribution includes EU-DEM/Copernicus, with USGS global sources and Mapzen assembly. Full source-specific terms/attribution are in [TERRAIN-ATTRIBUTION.md](data/TERRAIN-ATTRIBUTION.md). No survey accuracy or vertical datum conversion is claimed.
 
 The committed manifests store source hashes and retrieval timestamps. Dataset declarations are auditable; they are not cryptographic certification by the upstream publisher.
+
+
+To deliberately reacquire upstream data, install the terrain extra and run `python examples/fetch_data.py`. This performs small, policy-bound requests, refreshes source snapshots and may change real geometry. It is never run by CI. Review upstream terms/differences and update assertions only after validating a real dataset change. Normal rendering/reproduction uses the committed offline snapshots.

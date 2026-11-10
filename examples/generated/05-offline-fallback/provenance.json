@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-11-10T10:25:44.159189+00:00",
+  "location": {
+    "name": "User coordinates",
+    "lat": 46.98,
+    "lon": 8.42,
+    "accuracy": "exact_gps",
+    "coordinate_source": "explicit user GPS",
+    "source_id": null,
+    "bounds": null,
+    "conflicts": [],
+    "candidates": []
+  },
+  "sources": [],
+  "cartography": {
+    "drawn_features": [],
+    "omitted_features": [],
+    "reason": "No verified geometry available for selected mode"
+  },
+  "warnings": [
+    "Offline cache miss",
+    "No verified map rendered; returned a clean photograph. Supply location and suitable data",
+    "Limited negative space: review map placement and supply a subject exclusion mask",
+    "No verified geometry available for selected mode"
+  ],
+  "camera_heading": null,
+  "trust_boundary": "Provider declarations are auditable claims, not independent certification"
+}

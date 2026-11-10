@@ -1,0 +1,47 @@
+{
+  "camera_atlas_version": "0.1.0",
+  "input_sha256": "eb4097e7b829142c2e095ca4890512adee5d6d8ddc6901978adb997a301be467",
+  "normalized_mode": "RGBA 8-bit",
+  "geographic_input_sha256": {
+    "san_francisco.geojson": "8dee450ad562367c0da9e8b976a301d7125699ebd8bbe3e637c372117562c74e"
+  },
+  "map_mode": "urban",
+  "style": "urban-documentary",
+  "location": {
+    "name": "San Francisco",
+    "lat": 37.7955,
+    "lon": -122.4065,
+    "accuracy": "locality",
+    "coordinate_source": "Confirmed map region; not astronaut camera position",
+    "source_id": "osm",
+    "bounds": null,
+    "conflicts": [],
+    "candidates": []
+  },
+  "quality": {
+    "passed": true,
+    "median_overlay_rgb_delta": 48.666666666666664,
+    "low_contrast_fraction": 0.006648005598320504,
+    "dimensions": [
+      1280,
+      850
+    ],
+    "aspect_ratio_preserved": true,
+    "unexpected_base_pixels": 0,
+    "unexpected_composite_pixels": 0,
+    "repair_changed_pixels": 0,
+    "overlay_coverage": 0.018675551470588234,
+    "alpha_max": 188,
+    "edge_alpha_pixels": 0
+  },
+  "placement": {
+    "position": "top-left",
+    "texture_risk": 0.25302938398991986,
+    "method": "edge density and local contrast; manual subject masks recommended"
+  },
+  "repair": null,
+  "warnings": [
+    "Limited negative space: review map placement and supply a subject exclusion mask"
+  ],
+  "metadata_preserved": false
+}

@@ -1,0 +1,47 @@
+{
+  "camera_atlas_version": "0.1.0",
+  "input_sha256": "e41db127f7df8ff6eceb06ea29c2c96e8fc344396ca25f5fb3af4783b0329421",
+  "normalized_mode": "RGBA 8-bit",
+  "geographic_input_sha256": {
+    "lucerne.geojson": "34e3b5e322233d396167d2e6c807c7e7c9189b881254245c92e6cbe8386737fa"
+  },
+  "map_mode": "regional",
+  "style": "editorial-minimal",
+  "location": {
+    "name": "User coordinates",
+    "lat": 46.98,
+    "lon": 8.42,
+    "accuracy": "regional",
+    "coordinate_source": "user-confirmed region center",
+    "source_id": null,
+    "bounds": null,
+    "conflicts": [],
+    "candidates": []
+  },
+  "quality": {
+    "passed": true,
+    "median_overlay_rgb_delta": 64.16666666666666,
+    "low_contrast_fraction": 0.0,
+    "dimensions": [
+      1276,
+      1280
+    ],
+    "aspect_ratio_preserved": true,
+    "unexpected_base_pixels": 0,
+    "unexpected_composite_pixels": 0,
+    "repair_changed_pixels": 0,
+    "overlay_coverage": 0.001265551528213166,
+    "alpha_max": 191,
+    "edge_alpha_pixels": 0
+  },
+  "placement": {
+    "position": "top-left",
+    "texture_risk": 0.25032375403348855,
+    "method": "edge density and local contrast; manual subject masks recommended"
+  },
+  "repair": null,
+  "warnings": [
+    "Limited negative space: review map placement and supply a subject exclusion mask"
+  ],
+  "metadata_preserved": false
+}

@@ -37,3 +37,6 @@ Copernicus, SRTM, NASADEM and OpenTopography acquisition are not integrated onli
 ## Extending
 
 Implement `Provider.fetch(bounds)` returning validated `GeoData`. Use `CachedHTTP` for bounded retries (three attempts, exponential backoff, Retry-After cap), offline cache and identified requests. New providers must supply terms and source metadata. Provider failures become a clean photograph only when the pipeline handles `ProviderError`; invalid supplied data is a user-visible input error.
+
+
+For explicit fallback, `ProviderChain([primary, local_fallback]).fetch(bounds)` tries authorized providers in order. It preserves the first nonempty result's source metadata, retains failure warnings, and returns an empty `GeoData` when all fail. It never treats an invalid input schema as a recoverable remote outage. The CLI uses user-supplied local data or one configured Overpass endpoint rather than silently changing datasets.

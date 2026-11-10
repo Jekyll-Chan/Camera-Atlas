@@ -257,3 +257,48 @@ def test_source_missing_resolution_refused(data_dir):
     raw["sources"][0].pop("min_span_km")
     with pytest.raises(ValueError, match="min_span_km"):
         GeoData(sources=raw["sources"], features=raw["features"])
+
+
+def test_provider_fallback_retains_source(data_dir):
+    from camera_atlas.geography.providers import Provider, ProviderChain
+
+    class Outage(Provider):
+        def fetch(self, bounds):
+            raise ProviderError("simulated outage")
+
+    result = ProviderChain([Outage(), OfflineGeoJSON(data_dir / "lucerne.geojson")]).fetch((8, 46, 9, 47))
+    assert result.features and result.sources[0].id == "ne-lakes"
+    assert any("outage" in w for w in result.warnings)
+    empty = ProviderChain([Outage()]).fetch((8, 46, 9, 47))
+    assert not empty.features and empty.warnings
+
+
+def test_online_osm_geometry_parser(tmp_path):
+    # Public real OSM way snapshot (geometry comes from the committed authentic extract).
+    from pathlib import Path
+
+    data = json.loads((Path(__file__).parents[1] / "examples/data/san_francisco.geojson").read_text())
+    f = next(f for f in data["features"] if f["properties"]["kind"] == "road")
+    coords = f["geometry"]["coordinates"]
+    osm = {
+        "elements": [
+            {
+                "id": int(f["properties"]["osm_id"].split("/")[1]),
+                "type": "way",
+                "tags": {"highway": "residential", "name": f["properties"].get("name", "")},
+                "geometry": [{"lon": x, "lat": y} for x, y in coords],
+            }
+        ]
+    }
+    h = CachedHTTP(tmp_path, transport=httpx.MockTransport(lambda req: httpx.Response(200, json=osm)))
+    try:
+        result = Overpass(h).fetch((-122.410, 37.793, -122.403, 37.798))
+    finally:
+        h.close()
+    assert result.features[0]["geometry"]["coordinates"] == coords
+    assert result.features[0]["properties"]["kind"] == "road"
+
+
+def test_invalid_endpoint_config(values):
+    with pytest.raises(ValueError, match="HTTP"):
+        RenderConfig(**{**values, "overpass_url": "file:///tmp/data"})

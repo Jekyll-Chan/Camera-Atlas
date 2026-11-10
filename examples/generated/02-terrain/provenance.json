@@ -1,0 +1,591 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-11-10T10:25:43.155783+00:00",
+  "location": {
+    "name": "User coordinates",
+    "lat": 46.9,
+    "lon": 8.6,
+    "accuracy": "regional",
+    "coordinate_source": "user-confirmed region center",
+    "source_id": null,
+    "bounds": null,
+    "conflicts": [],
+    "candidates": []
+  },
+  "sources": [
+    {
+      "id": "terrain",
+      "dataset": "Mapzen Terrain Tiles / Skadi N46E008",
+      "version": "download snapshot 2026-11-10T10:09:28.896970+00:00",
+      "url": "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N46/N46E008.hgt.gz",
+      "license": "Source-dependent terms: https://github.com/tilezen/joerd/blob/master/docs/attribution.md",
+      "attribution": "Terrain: EU-DEM / Copernicus; USGS; Mapzen",
+      "retrieved_at": "2026-11-10T10:09:28.896970Z",
+      "resolution_m": 120.0,
+      "min_span_km": null,
+      "sha256": "4fb00d8aa5fab4a0c01b2af2d9c9e89ccac0a000de71334dd23061f271428cf3",
+      "units": "m",
+      "uncertainty": "Nearest-neighbor overview subset; mixed terrain sources; not a survey. Vertical datum not transformed."
+    }
+  ],
+  "cartography": {
+    "drawn_features": [
+      {
+        "index": 0,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 800.0
+      },
+      {
+        "index": 1,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 800.0
+      },
+      {
+        "index": 2,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 800.0
+      },
+      {
+        "index": 3,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 800.0
+      },
+      {
+        "index": 4,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 800.0
+      },
+      {
+        "index": 5,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 800.0
+      },
+      {
+        "index": 6,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 800.0
+      },
+      {
+        "index": 7,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 800.0
+      },
+      {
+        "index": 8,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1200.0
+      },
+      {
+        "index": 9,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1200.0
+      },
+      {
+        "index": 10,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1200.0
+      },
+      {
+        "index": 11,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1200.0
+      },
+      {
+        "index": 12,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1200.0
+      },
+      {
+        "index": 13,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1200.0
+      },
+      {
+        "index": 14,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1200.0
+      },
+      {
+        "index": 15,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 16,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 17,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 18,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 19,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 20,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 21,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 22,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 23,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 24,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 25,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 26,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 27,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 28,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 1600.0
+      },
+      {
+        "index": 29,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 30,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 31,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 32,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 33,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 34,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 35,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 36,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 37,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 38,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 39,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 40,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 41,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 42,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 43,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 44,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 45,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 46,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 47,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2000.0
+      },
+      {
+        "index": 48,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 49,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 50,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 51,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 52,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 53,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 54,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 55,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 56,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 57,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 58,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 59,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 60,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 61,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 62,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 63,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 64,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2400.0
+      },
+      {
+        "index": 65,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2800.0
+      },
+      {
+        "index": 66,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2800.0
+      },
+      {
+        "index": 67,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2800.0
+      },
+      {
+        "index": 68,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2800.0
+      },
+      {
+        "index": 69,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2800.0
+      },
+      {
+        "index": 70,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2800.0
+      },
+      {
+        "index": 71,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2800.0
+      },
+      {
+        "index": 72,
+        "source_id": "terrain",
+        "kind": "contour",
+        "label": null,
+        "elevation_m": 2800.0
+      }
+    ],
+    "omitted_features": [],
+    "marker": {
+      "accuracy": "regional",
+      "coordinates": [
+        8.6,
+        46.9
+      ],
+      "art_position": [
+        319.0,
+        262.0
+      ],
+      "meaning": "map location, never camera heading"
+    },
+    "projection": "+proj=aeqd +lat_0=46.9 +lon_0=8.6 +datum=WGS84 +units=m +type=crs",
+    "extent_projected_m": [
+      -16000.0,
+      -16000.0,
+      16000.0,
+      16000.0
+    ],
+    "art_rect_px": [
+      581,
+      57,
+      638,
+      638
+    ],
+    "scale": null,
+    "north_is_camera_heading": false,
+    "attribution": [
+      "Terrain: EU-DEM / Copernicus; USGS; Mapzen"
+    ],
+    "text_boxes_local_px": [
+      [
+        44.0,
+        530.0,
+        206.5,
+        537.5
+      ]
+    ],
+    "svg_note": "Font metrics depend on SVG viewer; PNG is the reference rendering"
+  },
+  "warnings": [
+    "Limited negative space: review map placement and supply a subject exclusion mask"
+  ],
+  "camera_heading": null,
+  "trust_boundary": "Provider declarations are auditable claims, not independent certification"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "FeatureCollection",
+  "features": [],
+  "sources": [],
+  "location": {
+    "name": "User coordinates",
+    "lat": 46.98,
+    "lon": 8.42,
+    "accuracy": "exact_gps",
+    "coordinate_source": "explicit user GPS",
+    "source_id": null,
+    "bounds": null,
+    "conflicts": [],
+    "candidates": []
+  }
+}

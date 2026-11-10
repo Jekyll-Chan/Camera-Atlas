@@ -12,9 +12,12 @@ from PIL import Image, ImageDraw
 def detect_text(path, size):
     if not shutil.which("tesseract"):
         raise ValueError("OCR requires the optional system tesseract executable")
-    result = subprocess.run(
-        ["tesseract", str(path), "stdout", "tsv"], capture_output=True, text=True, check=True
-    )
+    try:
+        result = subprocess.run(
+            ["tesseract", str(path), "stdout", "tsv"], capture_output=True, text=True, check=True
+        )
+    except subprocess.CalledProcessError as exc:
+        raise ValueError("Tesseract could not read the normalized image: " + exc.stderr[:300]) from exc
     mask = Image.new("L", size)
     draw = ImageDraw.Draw(mask)
     boxes = []

@@ -1,0 +1,16 @@
+{
+  "type": "FeatureCollection",
+  "features": [],
+  "sources": [],
+  "location": {
+    "name": "Unresolved",
+    "lat": null,
+    "lon": null,
+    "accuracy": "unresolved",
+    "coordinate_source": "none",
+    "source_id": null,
+    "bounds": null,
+    "conflicts": [],
+    "candidates": []
+  }
+}

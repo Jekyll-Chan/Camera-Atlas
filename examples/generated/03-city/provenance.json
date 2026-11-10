@@ -1,0 +1,1474 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-11-10T10:25:43.538204+00:00",
+  "location": {
+    "name": "San Francisco",
+    "lat": 37.7955,
+    "lon": -122.4065,
+    "accuracy": "locality",
+    "coordinate_source": "Confirmed map region; not astronaut camera position",
+    "source_id": "osm",
+    "bounds": null,
+    "conflicts": [],
+    "candidates": []
+  },
+  "sources": [
+    {
+      "id": "osm",
+      "dataset": "OpenStreetMap",
+      "version": "2026-11-10T10:08:01Z",
+      "url": "https://overpass-api.de/api/interpreter",
+      "license": "ODbL-1.0",
+      "attribution": "© OpenStreetMap contributors · openstreetmap.org/copyright",
+      "retrieved_at": "2026-11-10T10:16:44.672987Z",
+      "resolution_m": null,
+      "min_span_km": null,
+      "sha256": "2e11e6482cb70eb321f8a9bf9161f16b2d1df1bb94fd22d2f44f3112336be882",
+      "units": null,
+      "uncertainty": "Incomplete ways and relations are omitted; OSM coverage varies"
+    }
+  ],
+  "cartography": {
+    "drawn_features": [
+      {
+        "index": 0,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 1,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 2,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 3,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 4,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 5,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 7,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 8,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 9,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 10,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 11,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 12,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 13,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 14,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 16,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 17,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 18,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 20,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 21,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 22,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 24,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 25,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 26,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 27,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 28,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 29,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 30,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 31,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 32,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 33,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 34,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 35,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 36,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 38,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 39,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 40,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 42,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 43,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 44,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 45,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 46,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 47,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 48,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 49,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 50,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 51,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 52,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 53,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 54,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 55,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 57,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 58,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 59,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 60,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 62,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 63,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 64,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 65,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 66,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 67,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 68,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 69,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 70,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 71,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 72,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 73,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 74,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 75,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 76,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 77,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 78,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 79,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 80,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 81,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 82,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 83,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 84,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 85,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 86,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 87,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 88,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 89,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 90,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 91,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 92,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 93,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 94,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 95,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 96,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 97,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 98,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 99,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 100,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 101,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 102,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 103,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 104,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 105,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 106,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 107,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 108,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 109,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 110,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 111,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 112,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 113,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 114,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 115,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 116,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 117,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 118,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 119,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 120,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 121,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 122,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 123,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 124,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 125,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 126,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 127,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 128,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 129,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 130,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 131,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 132,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 133,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 134,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 135,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 136,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 137,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 138,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 139,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 140,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 141,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 142,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 143,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 144,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 145,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 146,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 147,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 148,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 149,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 150,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 151,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 152,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 153,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 154,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 155,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 156,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 157,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 158,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 159,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 161,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 162,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 163,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 164,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 222,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 223,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 227,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 354,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 355,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 356,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 357,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 359,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 360,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 361,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 362,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 363,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 380,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 381,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 382,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 383,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 386,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 390,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 394,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 395,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 406,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 407,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 409,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 410,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 424,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 425,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 439,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 441,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 442,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 443,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 444,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 445,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 562,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 563,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 569,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 570,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 574,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 575,
+        "source_id": "osm",
+        "kind": "road",
+        "label": null,
+        "elevation_m": null
+      },
+      {
+        "index": 0,
+        "source_id": "osm",
+        "kind": "label",
+        "label": "Spring Street"
+      },
+      {
+        "index": 1,
+        "source_id": "osm",
+        "kind": "label",
+        "label": "Bartol Street"
+      },
+      {
+        "index": 2,
+        "source_id": "osm",
+        "kind": "label",
+        "label": "Jack Kerouac Alley"
+      }
+    ],
+    "omitted_features": [],
+    "marker": {
+      "accuracy": "locality",
+      "coordinates": [
+        -122.4065,
+        37.7955
+      ],
+      "art_position": [
+        260.5,
+        214.0
+      ],
+      "meaning": "map location, never camera heading"
+    },
+    "projection": "+proj=aeqd +lat_0=37.7955 +lon_0=-122.4065 +datum=WGS84 +units=m +type=crs",
+    "extent_projected_m": [
+      -450.0,
+      -450.0,
+      450.0,
+      450.0
+    ],
+    "art_rect_px": [
+      38,
+      38,
+      521,
+      521
+    ],
+    "scale": null,
+    "north_is_camera_heading": false,
+    "attribution": [
+      "© OpenStreetMap contributors · openstreetmap.org/copyright"
+    ],
+    "text_boxes_local_px": [
+      [
+        356.2581010179599,
+        316.3967152172565,
+        439.2581010179599,
+        328.3967152172565
+      ],
+      [
+        371.30912799488556,
+        103.3933606471383,
+        449.80912799488556,
+        113.3933606471383
+      ],
+      [
+        270.5936063937022,
+        130.8699873908563,
+        391.5936063937022,
+        143.3699873908563
+      ],
+      [
+        36.0,
+        434.0,
+        264.0,
+        441.5
+      ]
+    ],
+    "svg_note": "Font metrics depend on SVG viewer; PNG is the reference rendering"
+  },
+  "warnings": [
+    "Limited negative space: review map placement and supply a subject exclusion mask"
+  ],
+  "camera_heading": null,
+  "trust_boundary": "Provider declarations are auditable claims, not independent certification"
+}

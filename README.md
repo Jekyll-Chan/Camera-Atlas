@@ -108,3 +108,6 @@ python -m build
 Offline CI uses small real-data extracts. Analytical rasters appear only in numerical algorithm tests and are labeled accordingly. Live network tests require `CAMERA_ATLAS_NETWORK=1 pytest -m network`. See [CONTRIBUTING](CONTRIBUTING.md), [release steps](docs/Release.md), and [Troubleshooting](docs/Troubleshooting.md).
 
 Roadmap: robust OSM relation assembly, semantic subject adapters, vertical datum transformations, high-bit-depth composition, managed DEM download adapters and additional geocoder adapters. The current core does not implement these capabilities.
+
+
+[Validation record / 实测记录](docs/Validation.md) · [Requirement status / 验收状态](docs/Acceptance.md)

@@ -15,7 +15,7 @@ Use `camera-atlas render --help` for generated types/defaults. All outputs are d
 | `--map-mode` | auto/coastline/topographic/urban/trail/river/regional/minimal |
 | `--style` | editorial-minimal/topographic-fine/coastal-atlas/urban-documentary/monochrome-print |
 | `--map-area` | Target area fraction .03–.30, default .20 |
-| `--radius-km` | Half-width of square map, .0–100, default 10 |
+| `--radius-km` | Half-width of square map, greater than 0 up to 100, default 10 |
 | `--opacity` | 0–1, default .65 (legal credit may use higher alpha) |
 | `--position` | auto/top-left/top-right/bottom-left/bottom-right |
 | `--labels/--no-labels` | Optional geography text; credit always retained |

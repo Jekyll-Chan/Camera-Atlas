@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 Mode = Literal["auto", "coastline", "topographic", "urban", "trail", "river", "regional", "minimal"]
 Style = Literal[
@@ -46,6 +46,18 @@ class RenderConfig(BaseModel):
     overpass_url: str = "https://overpass-api.de/api/interpreter"
     user_agent: str = "CameraAtlas/0.1 (local photography tool)"
     subject: Literal["unknown", "lake", "mountain", "city", "trail", "river", "coast"] = "unknown"
+
+    @field_validator("overpass_url", "nominatim_url")
+    @classmethod
+    def endpoint_url(cls, value):
+        if value is None:
+            return value
+        from urllib.parse import urlparse
+
+        url = urlparse(value)
+        if url.scheme not in ("http", "https") or not url.hostname:
+            raise ValueError("Provider endpoint must be an HTTP(S) URL")
+        return value
 
     @model_validator(mode="after")
     def validate_inputs(self):

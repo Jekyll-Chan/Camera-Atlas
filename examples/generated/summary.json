@@ -1,0 +1,16 @@
+{
+  "scenarios": 7,
+  "network": false,
+  "lake_source": {
+    "name": "Lake Lucerne",
+    "lat": 46.98,
+    "lon": 8.42,
+    "accuracy": "locality",
+    "coordinate_source": "Natural Earth lake overview region center; not camera GPS",
+    "source_id": "ne-lakes",
+    "bounds": null,
+    "conflicts": [],
+    "candidates": []
+  },
+  "note": "Educational NASA aerial photographs; map locators are regional"
+}

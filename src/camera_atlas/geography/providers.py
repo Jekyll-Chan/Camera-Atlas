@@ -122,3 +122,25 @@ way["boundary"="administrative"]({bbox});node["place"]({bbox}););out geom;"""
             except ValueError:
                 warnings.append(f"Omitted invalid OSM geometry: {f['properties']['osm_id']}")
         return GeoData(sources=[source], features=valid, warnings=warnings)
+
+
+class ProviderChain(Provider):
+    """Explicit ordered fallback for caller-selected, authorized providers."""
+
+    def __init__(self, providers: list[Provider]):
+        if not providers:
+            raise ValueError("ProviderChain needs at least one provider")
+        self.providers = providers
+
+    def fetch(self, bounds):
+        warnings = []
+        for provider in self.providers:
+            try:
+                data = provider.fetch(bounds)
+                if data.features:
+                    data.warnings = warnings + data.warnings
+                    return data
+                warnings.append(f"{type(provider).__name__}: no geographic features")
+            except ProviderError as exc:
+                warnings.append(f"{type(provider).__name__}: {exc}")
+        return GeoData(warnings=warnings + ["All configured providers unavailable or empty"])

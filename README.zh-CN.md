@@ -114,3 +114,6 @@ python examples/build_examples.py --output render-output/examples
 代码 MIT；OSM 数据保持 ODbL、DEM 保持各自来源条款、照片保持素材权利，均不得宣称为代码 MIT 许可。私人摄影、GPS、API Key 不得提交公开仓库。默认不导出 EXIF，但位置 manifest 仍有地理敏感性。参阅[贡献指南](CONTRIBUTING.md)、[发布步骤](docs/Release.md)和[故障排查](docs/Troubleshooting.md)。
 
 后续路线：OSM 关系组装、可选语义主体分析、高位深合成、垂直基准处理、合规在线 DEM 下载和更多地名服务适配器。本版未将这些未实现功能描述为已完成。
+
+
+[Validation record / 实测记录](docs/Validation.md) · [Requirement status / 验收状态](docs/Acceptance.md)

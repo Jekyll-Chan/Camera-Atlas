@@ -1,0 +1,13 @@
+{
+  "id": "terrain",
+  "dataset": "Mapzen Terrain Tiles / Skadi N46E008",
+  "version": "download snapshot 2026-11-10T10:09:28.896970+00:00",
+  "url": "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N46/N46E008.hgt.gz",
+  "license": "Source-dependent terms: https://github.com/tilezen/joerd/blob/master/docs/attribution.md",
+  "attribution": "Terrain: EU-DEM / Copernicus; USGS; Mapzen",
+  "retrieved_at": "2026-11-10T10:09:28.896970+00:00",
+  "resolution_m": 120,
+  "units": "m",
+  "sha256": "4fb00d8aa5fab4a0c01b2af2d9c9e89ccac0a000de71334dd23061f271428cf3",
+  "uncertainty": "Nearest-neighbor overview subset; mixed terrain sources; not a survey. Vertical datum not transformed."
+}

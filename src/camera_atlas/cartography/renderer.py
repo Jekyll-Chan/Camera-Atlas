@@ -2,6 +2,7 @@
 
 import html
 import math
+import textwrap
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
@@ -100,7 +101,7 @@ def render_map(size, rect, projection, data, location, mode, config, exclusion=N
     ink = (*theme.ink, alpha)
     accent = (*theme.accent, alpha)
     gutter = max(12, int(w * 0.07))
-    footer = max(35, int(h * 0.13))
+    footer = max(55, int(h * 0.18))
     usable = min(w - 2 * gutter, h - footer - 2 * gutter)
     r = projection.radius
     factor = usable / (2 * r)
@@ -231,13 +232,34 @@ def render_map(size, rect, projection, data, location, mode, config, exclusion=N
         used_ids.add(location.source_id)
     credits = list(dict.fromkeys(sources[s].attribution for s in sorted(used_ids)))
     # Attribution remains visible when optional geographic labels are disabled.
-    for i, credit in enumerate(credits):
+    credit_lines = [
+        line
+        for credit in credits
+        for line in textwrap.wrap(credit, width=max(16, int((w - 2 * gutter) / 4.6)))
+    ]
+    credit_start = len(c.text_boxes)
+    for i, credit in enumerate(credit_lines):
         if not c.text(
             (gutter, h - footer + 4 + i * 12), credit, 8, (*theme.ink, max(alpha, 190)), avoid=False
         ):
             raise ValueError(
                 "Map too small for required attribution; increase --map-area or shorten approved attribution"
             )
+    if exclusion is not None:
+        # Excluding legally required credit cannot yield a distributable attributed map.
+        protected = np.asarray(exclusion)
+        for bounds in c.text_boxes[credit_start:]:
+            bx0, by0, bx1, by1 = bounds
+            if np.any(protected[y + int(by0) : y + int(by1) + 1, x + int(bx0) : x + int(bx1) + 1]):
+                return (
+                    Image.new("RGBA", size),
+                    None,
+                    {
+                        "drawn_features": [],
+                        "omitted_features": omitted,
+                        "reason": "Subject exclusion would obscure required attribution",
+                    },
+                )
     local = c.finish()
     overlay = Image.new("RGBA", size)
     overlay.paste(local, (x, y))

@@ -1,0 +1,34 @@
+[
+  {
+    "file": "lake_photo.jpg",
+    "catalog": {
+      "center": "JSC",
+      "date_created": "1973-07-30T00:00:00Z",
+      "description": "SL3-121-2438 (July-September 1973) --- The Alps of Switzerland, France and Italy are featured in this exceptional photograph taken by a hand-held camera from the Skylab space station during the second manned Skylab mission. Also visible in the out-the-window 70mm Hasselblad view are Lake Geneva, Lake of Lucerne, Rhone River and many other features.  The Skylab 3 crewmen, astronauts Alan L. Bean, Owen K. Garriott and Jack R. Lousma completed a 59-day mission with a successful splashdown on Sept. 25, 1973. Photo credit: NASA",
+      "media_type": "image",
+      "nasa_id": "sl3-121-2438",
+      "title": "Snow covered Alps of France, Italy, and Switzerland"
+    },
+    "url": "https://images-assets.nasa.gov/image/sl3-121-2438/sl3-121-2438~medium.jpg",
+    "source_page": "https://images.nasa.gov/details/sl3-121-2438",
+    "usage_guidelines": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+    "use": "Educational engineering example; factual NASA photography, no endorsement",
+    "sha256": "e41db127f7df8ff6eceb06ea29c2c96e8fc344396ca25f5fb3af4783b0329421"
+  },
+  {
+    "file": "city_photo.jpg",
+    "catalog": {
+      "center": "JSC",
+      "date_created": "2010-01-28T00:00:00Z",
+      "description": "Earth Observations taken by the Expedition 22 Crew aboard the International Space Station (ISS). View of Treasure Island and Alcatraz in San Francisco,California.",
+      "media_type": "image",
+      "nasa_id": "iss022e050559",
+      "title": "Earth Observations taken by the Expedition 22 Crew"
+    },
+    "url": "https://images-assets.nasa.gov/image/iss022e050559/iss022e050559~medium.jpg",
+    "source_page": "https://images.nasa.gov/details/iss022e050559",
+    "usage_guidelines": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+    "use": "Educational engineering example; factual NASA photography, no endorsement",
+    "sha256": "eb4097e7b829142c2e095ca4890512adee5d6d8ddc6901978adb997a301be467"
+  }
+]

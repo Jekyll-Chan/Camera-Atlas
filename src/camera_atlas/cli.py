@@ -70,7 +70,7 @@ def render(
 def batch(
     input: Annotated[Path, typer.Option(exists=True, file_okay=False)],
     manifest: Annotated[Path, typer.Option(exists=True, dir_okay=False)],
-    output: Path,
+    output: Annotated[Path, typer.Option()],
     offline: bool = True,
     cache: Path = Path.home() / ".cache" / "camera-atlas",
 ):
@@ -110,7 +110,7 @@ def batch(
                             raise ValueError("confirmed_region must be true/false or 1/0")
                         values["confirmed_region"] = value in ("true", "1")
                     result = render_photo(RenderConfig(**values))
-                    success.append(str(result.final))
+                    success.append(str(result.final.relative_to(output)))
                     typer.echo(str(result.final))
                 except (ValueError, OSError) as exc:
                     failures.append({"row": n, "file": row.get("file"), "error": str(exc)})
@@ -126,7 +126,10 @@ def batch(
 
 
 @app.command("detect-text")
-def detect_text(input: Path, output: Path):
+def detect_text(
+    input: Annotated[Path, typer.Option(exists=True, dir_okay=False)],
+    output: Annotated[Path, typer.Option()],
+):
     """Create a candidate OCR mask for review. Never repairs automatically."""
     from .image.io import read_photo
     from .image.text import detect_text as detect

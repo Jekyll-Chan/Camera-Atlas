@@ -1,7 +1,8 @@
 import math
 
+import numpy as np
 from pyproj import CRS, Transformer
-from shapely.ops import transform
+from shapely import transform
 
 
 class MapProjection:
@@ -16,7 +17,7 @@ class MapProjection:
         self.extent = (-self.radius, -self.radius, self.radius, self.radius)
 
     def project(self, geometry):
-        return transform(self.forward.transform, geometry)
+        return transform(geometry, lambda xy: np.column_stack(self.forward.transform(xy[:, 0], xy[:, 1])))
 
     def bounds_wgs84(self):
         corners = [

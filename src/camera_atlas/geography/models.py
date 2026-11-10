@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 from shapely.geometry import shape
 
 
@@ -10,7 +10,7 @@ def now():
 
 
 class Source(BaseModel):
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
     id: str = Field(min_length=1)
     dataset: str = Field(min_length=1)
     version: str = Field(min_length=1)
@@ -23,6 +23,22 @@ class Source(BaseModel):
     sha256: str | None = None
     units: str | None = None
     uncertainty: str = "Dataset accuracy is not independently certified"
+
+    @field_validator("url")
+    @classmethod
+    def source_url(cls, value):
+        from urllib.parse import urlparse
+
+        parsed = urlparse(value)
+        if parsed.scheme not in ("https", "http") or not parsed.hostname:
+            raise ValueError("Source URL must be an auditable HTTP(S) resource")
+        return value
+
+    @model_validator(mode="after")
+    def overview_scale(self):
+        if "natural earth" in self.dataset.lower() and not self.min_span_km:
+            raise ValueError("Natural Earth source requires a conservative min_span_km")
+        return self
 
 
 class Location(BaseModel):

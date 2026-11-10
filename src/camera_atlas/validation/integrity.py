@@ -17,8 +17,15 @@ def verify(original, clean, overlay, final, repair_mask=None, exclusion=None):
         raise ValueError("Overlay intersects a user-protected subject")
     if not np.any(o[:, :, 3] == 0):
         raise ValueError("Map layer has no transparent pixels")
+    # Pixel-level legibility proxy. It is not a semantic or print-contrast guarantee.
+    delta = np.abs(f[:, :, :3].astype(float) - b[:, :, :3].astype(float)).mean(axis=2)
+    substantial = o[:, :, 3] >= 64
+    contrast = float(np.median(delta[substantial])) if np.any(substantial) else None
+    low_fraction = float((delta[substantial] < 12).mean()) if np.any(substantial) else None
     return {
         "passed": True,
+        "median_overlay_rgb_delta": contrast,
+        "low_contrast_fraction": low_fraction,
         "dimensions": list(original.size),
         "aspect_ratio_preserved": True,
         "unexpected_base_pixels": 0,

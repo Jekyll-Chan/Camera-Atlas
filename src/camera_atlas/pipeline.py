@@ -60,7 +60,7 @@ def render(config: RenderConfig | dict) -> RenderResult:
             sources=data.sources + terrain.sources,
             features=data.features + terrain.features,
             location=data.location,
-            warnings=data.warnings,
+            warnings=data.warnings + terrain.warnings,
         )
     http = CachedHTTP(config.cache, config.offline, config.user_agent)
     try:
@@ -85,6 +85,7 @@ def render(config: RenderConfig | dict) -> RenderResult:
     finally:
         http.close()
     data = GeoData(sources=data.sources, features=data.features, location=location, warnings=data.warnings)
+    warnings.extend(data.warnings)
     # Mode selection uses actual data in the visible geographic extent, not remote features.
     visible = data.features
     if projection:
@@ -111,6 +112,12 @@ def render(config: RenderConfig | dict) -> RenderResult:
         warnings.append("Limited negative space: review map placement and supply a subject exclusion mask")
     final = Image.alpha_composite(clean, overlay)
     quality = verify(original, clean, overlay, final, mask, exclusion)
+    if quality["low_contrast_fraction"] is not None and quality["low_contrast_fraction"] > 0.4:
+        warnings.append(
+            "Low overlay contrast; review placement, theme and opacity at the intended viewing size"
+        )
+    if cartography.get("reason"):
+        warnings.append(cartography["reason"])
     provenance = {
         "schema_version": "1.0",
         "created_at": now(),
@@ -125,6 +132,11 @@ def render(config: RenderConfig | dict) -> RenderResult:
         "camera_atlas_version": "0.1.0",
         "input_sha256": hashlib.sha256(config.input.read_bytes()).hexdigest(),
         "normalized_mode": "RGBA 8-bit",
+        "geographic_input_sha256": {
+            str(p.name): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in (config.geojson, config.dem, config.dem_source)
+            if p
+        },
         "map_mode": mode,
         "style": config.style,
         "location": location.model_dump(mode="json"),

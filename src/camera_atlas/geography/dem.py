@@ -45,12 +45,20 @@ def contours(path, source_path, interval):
         if len(levels) > 1000:
             raise ValueError("Contour interval creates more than 1000 levels")
         features = []
+        degenerate = 0
         for level in levels:
             for line in generator.lines(float(level)):
                 if len(line) < 2:
                     continue
                 lon, lat = transformer.transform(line[:, 0], line[:, 1])
-                coords = np.column_stack((lon, lat)).tolist()
+                coords_array = np.column_stack((lon, lat))
+                # Exact integer elevation extrema can produce a zero-length contour.
+                # Remove duplicate vertices; never perturb them into invented geometry.
+                keep = np.r_[True, np.any(np.diff(coords_array, axis=0) != 0, axis=1)]
+                coords = coords_array[keep].tolist()
+                if len(coords) < 2:
+                    degenerate += 1
+                    continue
                 features.append(
                     {
                         "type": "Feature",
@@ -62,4 +70,8 @@ def contours(path, source_path, interval):
                         },
                     }
                 )
-    return GeoData(sources=[source], features=features)
+    return GeoData(
+        sources=[source],
+        features=features,
+        warnings=[f"Omitted {degenerate} zero-length contour segments"] if degenerate else [],
+    )

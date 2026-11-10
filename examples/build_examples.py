@@ -90,7 +90,7 @@ def build(output):
         shutil.copy(DATA / "lake_photo.jpg", batch_input / f"{name}.jpg")
     manifest = output / "batch.csv"
     with manifest.open("w", newline="") as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, lineterminator="\n")
         writer.writerow(["file", "lat", "lon", "confirmed_region"])
         writer.writerows([["one.jpg", 46.98, 8.42, "true"], ["two.jpg", 46.98, 8.42, "true"]])
     cli = CliRunner().invoke(

@@ -17,6 +17,6 @@ This is a working initial release with explicit constraints, not a claim that ev
 | Automated quality control | Pixel integrity, dimensions, alpha, text bounds/collisions, exclusion, scale and contrast proxy; human aesthetic review still required |
 | Reusable outputs | Full-frame layers, input hashes, source manifests and geometry export; restyle clean base without repeated repair |
 | Documentation/examples | English and Chinese README, eight engineering guides plus release/validation/status, seven reproducible public-data scenarios |
-| GitHub preparation | Staged Git commits, CI/release workflows, MIT code license with separate data/photo rights; remote publication unavailable in current environment |
+| GitHub preparation | Staged Git commits, CI/release workflows, MIT code license with separate data/photo rights; public source repository published at https://github.com/Jekyll-Chan/Camera-Atlas |
 
 See [Validation.md](Validation.md) for the actual checks and [Release.md](Release.md) for exact publication steps. Do not advertise deferred semantic segmentation, complex OSM relation support, online DEM downloads or high-bit-depth processing as implemented.

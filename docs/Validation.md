@@ -34,4 +34,4 @@ The recorded environment emits one non-failing upstream rasterio/Affine PendingD
 - Polar/antimeridian cases require dedicated split data/projections; this version declines them conservatively.
 - Public geocoder/Overpass policies and availability may change; production services need their own authorized infrastructure.
 - Examples are real NASA aerial photographs used for educational verification, not a ground-level travel-photography portfolio.
-- No public GitHub repository or PyPI upload was performed. The connected GitHub account can be identified, but available connector tools cannot create a repository; this shell has no GitHub CLI/git publication credential. Follow [Release.md](Release.md) after installing/authenticating GitHub CLI.
+- Published source repository: https://github.com/Jekyll-Chan/Camera-Atlas . Initial publication used the authenticated GitHub Desktop app. No PyPI upload or tagged GitHub Release has been performed; see [Release.md](Release.md).

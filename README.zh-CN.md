@@ -2,6 +2,8 @@
 
 **Photography First. Geography Verified. 摄影优先，地理可核查。**
 
+[GitHub 开源仓库](https://github.com/Jekyll-Chan/Camera-Atlas)
+
 Camera Atlas 在原始摄影上叠加独立透明地理图层，生成克制的旅行杂志式作品。它不使用生成式图像模型重绘照片，不全局调色，不强制裁切。提供 Python CLI、可复用 API、Codex Agent Skill 和可追溯输出。当前版本为 0.1.0 初始版本；能力与限制均在下方说明。
 
 [English README](README.md) · [架构](docs/Architecture.md) · [CLI 全选项](docs/CLI-Reference.md) · [精度和溯源](docs/Accuracy-and-Provenance.md) · [公开示例与许可](examples/README.md)

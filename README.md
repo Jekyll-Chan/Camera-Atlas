@@ -2,6 +2,8 @@
 
 **Photography First. Geography Verified.**
 
+[GitHub repository](https://github.com/Jekyll-Chan/Camera-Atlas)
+
 Camera Atlas adds auditable vector geography to original travel photographs using independent transparent layers. It never regenerates or grades the photograph. Python 3.11+, local CLI, reusable API and Codex Agent Skill. Version 0.1.0 is an initial release; read the accuracy limits below.
 
 [中文说明](README.zh-CN.md) · [Architecture](docs/Architecture.md) · [CLI](docs/CLI-Reference.md) · [Accuracy](docs/Accuracy-and-Provenance.md)

@@ -8,7 +8,7 @@ Local validation date: 2026-11-10. macOS, Python 3.11.15. Exact tested packages:
 | Coverage | **85.77%** statement coverage (832 / 970 statements) |
 | Live Overpass integration | **1 passed**, run separately with explicit network opt-in |
 | Ruff lint | All checks passed |
-| Ruff format | 46 Python files formatted |
+| Ruff format | All selected source/document files passed the formatter |
 | Skill structural validator | Skill is valid |
 | Isolated package build | sdist and universal Python wheel built successfully |
 | Clean core wheel install | Separate new Python virtual environment; `pip check` and offline CLI lake render verified |

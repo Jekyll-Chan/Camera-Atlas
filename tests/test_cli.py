@@ -1,6 +1,11 @@
 import json
+import os
 import shutil
+import subprocess
+import sys
 
+import pytest
+from click import unstyle
 from typer.testing import CliRunner
 
 from camera_atlas.cli import app
@@ -8,9 +13,27 @@ from camera_atlas.cli import app
 runner = CliRunner()
 
 
-def test_cli_help():
-    result = runner.invoke(app, ["render", "--help"])
-    assert result.exit_code == 0 and "--geojson" in result.output
+@pytest.mark.parametrize("colored", [False, True], ids=["plain", "colored"])
+def test_cli_help(colored):
+    # Run fresh processes: Rich reads terminal/color settings during import.
+    env = dict(os.environ)
+    if colored:
+        env.pop("NO_COLOR", None)
+        env.update(FORCE_COLOR="1", TERM="xterm-256color")
+    else:
+        env.pop("FORCE_COLOR", None)
+        env.update(NO_COLOR="1", TERM="dumb")
+    result = subprocess.run(
+        [sys.executable, "-m", "camera_atlas.cli", "render", "--help"],
+        capture_output=True,
+        text=True,
+        env=env,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "--geojson" in unstyle(result.stdout)
+    if colored:
+        assert "\x1b[" in result.stdout
 
 
 def test_cli_render(values):

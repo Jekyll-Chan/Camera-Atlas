@@ -4,6 +4,7 @@ import hashlib
 import json
 import sqlite3
 import time
+from contextlib import contextmanager
 from pathlib import Path
 
 import httpx
@@ -23,8 +24,15 @@ class CachedHTTP:
             db.execute("CREATE TABLE IF NOT EXISTS cache (key TEXT PRIMARY KEY, value TEXT, stored REAL)")
             db.execute("CREATE TABLE IF NOT EXISTS limits (host TEXT PRIMARY KEY, stamp REAL)")
 
+    @contextmanager
     def connect(self):
-        return sqlite3.connect(self.db, timeout=30)
+        connection = sqlite3.connect(self.db, timeout=30)
+        try:
+            # sqlite's transaction context commits/rolls back but does not close.
+            with connection:
+                yield connection
+        finally:
+            connection.close()
 
     def close(self):
         self.client.close()

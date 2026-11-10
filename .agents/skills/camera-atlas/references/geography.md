@@ -1,0 +1,13 @@
+# Geographic decisions
+
+Location precision and source geometry are independent. Exact user/EXIF camera GPS may use a solid mark. A locality/region center uses an open ring; it is never a surveyed camera position. Explicit place names override EXIF even when unresolved. Multiple geocoder candidates require user disambiguation. No visual geolocation model is bundled; visual clues may support questions only.
+
+Supported inputs: RFC7946 WGS84 GeoJSON (no custom CRS), configured Nominatim-compatible search endpoint, bounded Overpass ways/place nodes, locally declared Natural Earth extracts, and georeferenced meter-unit DEM. The offline GeoJSON top-level `sources` array contains `id,dataset,version,url,license,attribution,retrieved_at`, optionally `min_span_km,resolution_m,sha256,uncertainty`. Every feature needs `properties.source_id` and a `kind` (water/coastline/road/trail/river/boundary/place/contour). Optional `location` describes known locality, not an inferred camera.
+
+Natural Earth is generalized overview data; choose a source-appropriate `min_span_km` and never zoom below it. DEM contours must derive from real grid values with nodata respected. No online DEM downloader is currently implemented: get a legally licensed raster using the relevant service and supply its metadata. Raster values are not ground-truth survey elevations; vertical datums are not transformed.
+
+Public Nominatim: https://operations.osmfoundation.org/policies/nominatim/ . The current policy restricts LLM-generated generic services, bulk/systematic use and autocomplete; maximum aggregate 1 request/s, identified client and persistent cache are required. No endpoint is configured by default. Developers must deliberately select an eligible service; that host additionally requires `--accept-public-nominatim-policy`. Batch is offline by default and cannot enable public geocoding through the CLI. A flag is not an exemption from provider terms. Use a self-hosted/authorized service for deployment.
+
+Overpass public resources are shared: https://dev.overpass-api.de/overpass-doc/en/preface/commons.html . Use occasional small queries, cache, and use local regional extracts for repeated/high-volume production. No tiles or commercial screenshots are scraped. Source OSM data remains ODbL; retain visible credit and https://www.openstreetmap.org/copyright in standalone graphics.
+
+An external GeoJSON provenance declaration can be false. Inspect trusted datasets and check source identity, acquisition timestamp and hashes; the software validates structure, not the truth of arbitrary user statements. Do not describe input declarations as independent geographic certification.

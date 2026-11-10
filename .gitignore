@@ -13,3 +13,6 @@ dist/
 .cache/
 private/
 render-output/
+
+examples/.download-cache/
+coverage.xml

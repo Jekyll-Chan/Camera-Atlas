@@ -20,3 +20,8 @@ This is a working initial release with explicit constraints, not a claim that ev
 | GitHub preparation | Staged Git commits, CI/release workflows, MIT code license with separate data/photo rights; public source repository published at https://github.com/Jekyll-Chan/Camera-Atlas |
 
 See [Validation.md](Validation.md) for the actual checks and [Release.md](Release.md) for exact publication steps. Do not advertise deferred semantic segmentation, complex OSM relation support, online DEM downloads or high-bit-depth processing as implemented.
+
+
+## Free Skill v2.0.0 adapter
+
+Capability-based render/planning, read-only doctor, checksum-verified isolated setup/public demo, lightweight platform ZIP and bilingual beginner documentation are implemented. Engine stays at 0.1.0. See [Agensi-v2.md](Agensi-v2.md) for the package, real local validation and outstanding marketplace review/session checks.

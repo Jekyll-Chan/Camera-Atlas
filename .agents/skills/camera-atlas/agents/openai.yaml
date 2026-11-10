@@ -1,6 +1,6 @@
 interface:
-  display_name: "Camera Atlas"
-  short_description: "Editorial photo maps with verified geography"
-  default_prompt: "Use $camera-atlas to add a verified editorial map to my travel photograph."
+  display_name: "Camera Atlas Free v2"
+  short_description: "Verified photo maps or a clear beginner design plan"
+  default_prompt: "Use $camera-atlas to check my setup and make a verified photo map, or explain the design plan if rendering is unavailable."
 policy:
   allow_implicit_invocation: true

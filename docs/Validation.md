@@ -35,3 +35,8 @@ The recorded environment emits one non-failing upstream rasterio/Affine PendingD
 - Public geocoder/Overpass policies and availability may change; production services need their own authorized infrastructure.
 - Examples are real NASA aerial photographs used for educational verification, not a ground-level travel-photography portfolio.
 - Published source repository: https://github.com/Jekyll-Chan/Camera-Atlas . Initial publication used the authenticated GitHub Desktop app. No PyPI upload or tagged GitHub Release has been performed; see [Release.md](Release.md).
+
+
+## Free Skill v2.0.0 follow-up
+
+The Skill adapter release uses the fixed engine 0.1.0 and adds 11 standalone/packaging cases: the full local suite now has **69 passing tests**, with one online test excluded. Read-only diagnosis, explicit interpreter handling, preservation of unmanaged environments, source-lock/checksum rejection, real demo asset hashes, temporary script paths and deterministic text-only packaging are covered. A clean isolated install plus actual public demo render also succeeded; see [v2 record](Agensi-v2.md). This is not an Agensi account/listing acceptance test.

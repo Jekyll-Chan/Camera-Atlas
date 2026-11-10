@@ -1,28 +1,35 @@
 ---
 name: camera-atlas
-description: Turn travel, landscape, and architectural photography into editorial photography or travel-zine artwork with verified geographic overlays, transparent editable layers, and auditable provenance. Use for photographic map annotation, not generative photo restyling.
+description: Create photography-preserving travel-zine artwork with verified geographic overlays, or deliver a clearly labeled editorial plan when the user's agent cannot render. Use for travel, landscape, and architectural photographs with real map annotation.
+metadata:
+  version: "2.0.0"
+  distribution: "Free Agensi adapter and repository skill"
 ---
 
-# Camera Atlas
+# Camera Atlas · Free Skill v2
 
-Use the installed `camera-atlas` Python CLI/API. From this repository, install with `python -m pip install '.[terrain,repair]'` if needed. Locate the repository through the current workspace or this skill's location; never assume the process starts in the repository. Do not install this repository's package name from an unrelated package index.
+Reply in the user's language. The user should only need a photo and a place, not a terminal, API key or knowledge of GIS. Keep the Python engine at the verified revision in [engine-lock.json](references/engine-lock.json); Skill v2 is distinct from engine 0.1.0.
 
-Preserve original photography. Never redraw scenery, invent coastlines/contours, infer a camera point from a place centroid, or substitute a map screenshot. Read [geography.md](references/geography.md) when selecting data and resolving ambiguity; read [design.md](references/design.md) for layout and review criteria.
+## Start simply
 
-1. Read the supplied photograph; inspect format, EXIF GPS/orientation and screenshot hints. Prefer an available original over a screenshot. The engine normalizes orientation and retains ICC; it does not crop or globally grade.
-2. Resolve location. Explicit user input overrides conflicting EXIF and is logged. GPS is exact only when supplied as camera coordinates. A named place resolves to locality; confirmed area coordinates require `--confirmed-region`. If multiple places match, ask for a distinguishing region while continuing photo inspection. Never choose by popularity or visual guess. If unresolved, a clean no-map output is valid and must be explained.
-3. Determine whether old text needs removal. Run `camera-atlas detect-text` only if useful. OCR masks are candidates, never location evidence. Repair only an explicitly reviewed mask via `--remove-text --text-mask`. Flag interpolated details for review and retain the mask.
-4. Select data and geographic span using source resolution. Offline GeoJSON requires source records and per-feature source IDs. DEM needs georeferencing plus `--dem-source` metadata with meter units. Check source URLs/licenses. Name lookup needs a deliberately configured Nominatim-compatible provider; public endpoint restrictions are in the geography reference. Never invent a response to an unavailable API.
-5. Use `--map-mode auto` or a user-specified mode. Inspect negative space and protect recognizable subjects using `--exclusion-mask`; the built-in analyzer is a texture heuristic, not a semantic detector. Choose a larger map span instead of magnifying coarse data.
-6. Render to a new output directory, normally with `--svg`. For example:
+Use the supplied photo/place first. Ask together for only the missing photo and location. Do not request exact GPS when a named locality is sufficient. If useful, offer a public sample instead of asking for private photography.
 
-   ```bash
-   camera-atlas render --input photo.jpg --location 'Lake Lucerne' \
-     --geojson examples/data/lucerne.geojson --radius-km 45 --offline \
-     --svg --output render-output/lucerne
-   ```
+Check actual capabilities before promising files:
+- **Render:** the agent can execute Python 3.11+, read/write image files and access the engine. Use the workflow below. Image inspection is needed to claim a visual review; if unavailable, report only automated checks and request human review.
+- **Plan:** no usable execution environment, installation/network unavailable, or user wants advice. Read [planning.md](references/planning.md). Deliver an editorial plan with verified facts and uncertainties; never present it as an edited photograph. Without vision, ask for a description and say the image was not inspected.
 
-7. Inspect `final.png`, transparent `map_overlay.png`, `metadata.json` and `provenance.json`. Verify no unexpected pixel changes, no subject or label clipping, visible attribution, correct precision and suitable contrast. Reject unauditable labels, arbitrary curves or inaccurate scale claims. North is map north, not camera bearing.
-8. Return the final artwork, independent layers and provenance with source restrictions and remaining uncertainty. Do not publish original user photography or GPS without explicit authorization.
+Explain the selected route in one plain sentence. Do not make the user choose technical modes or install GIS libraries manually. Never purchase a tool, subscribe, or upload private photos/GPS to a new service as an implicit setup step. This free adapter requires no paid Agensi tool.
 
-For batch CSV format and all switches, use `camera-atlas batch --help`, `camera-atlas render --help`, or the repository's `docs/CLI-Reference.md`. Regenerate styling from `clean_base.png` plus `location.geojson` without repeating repair.
+## Render route
+
+Read [rendering.md](references/rendering.md) when rendering. If setup is needed, read [onboarding.md](references/onboarding.md); its standard-library helper supports read-only diagnosis, isolated installation and a verified public demo. Explain the one-time setup/download; proceed within the user's existing installation authorization. Never install into global Python or replace another environment. On Agensi, fetch supporting text files on demand and run scripts unchanged from temporary files, with explicit paths; no repository checkout or skill-directory working path can be assumed.
+
+Resolve explicit input/EXIF/locality and any conflict. Ambiguous names require disambiguation. Region centers use open rings; only actual camera GPS uses solid marks. Obtain traceable vector data; contours require real DEM. Read [geography.md](references/geography.md) for sources, licensing and public-service limits. Missing verified data means a clean photograph or a plan with a clear explanation, never invented map lines.
+
+Keep original framing, normalized pixels and color. Use default editorial-minimal/auto; read [design.md](references/design.md) for placement and subject protection. Avoid unexplained options or repeated setup questions. Old-text repair needs a reviewed mask and is not authentic recovery of hidden scenery.
+
+Return `final.png` first, then transparent `map_overlay.png`, optional SVG and provenance. Inspect the actual files and automated integrity report. Explain warnings, location precision and whether visual review was possible. A clean fallback must be described as a clean photo, not a successful map composition. Keep private originals local to the authorized agent environment.
+
+## Beginner help
+
+Give the user the guide in their language when requested or when connection/setup is confusing: [English](references/START-HERE.en.md) · [简体中文](references/START-HERE.zh-CN.md). They contain copy-and-paste requests, sample-photo and troubleshooting paths. No Agensi listing approval or all-agent compatibility has been verified yet; do not claim otherwise.

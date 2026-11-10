@@ -8,6 +8,14 @@ Camera Atlas adds auditable vector geography to original travel photographs usin
 
 [中文说明](README.zh-CN.md) · [Architecture](docs/Architecture.md) · [CLI](docs/CLI-Reference.md) · [Accuracy](docs/Accuracy-and-Provenance.md)
 
+
+## Free Skill v2
+
+**Skill version 2.0.0; Python engine 0.1.0.** The free Agensi adapter checks the agent's capabilities, prepares an isolated environment when authorized, offers a public sample and clearly falls back to planning when actual rendering is unavailable. This is a prepared adapter, not a claim of an approved Agensi listing or all-agent compatibility.
+
+Start here: [English beginner guide](.agents/skills/camera-atlas/references/START-HERE.en.md) · [中文新手指南](.agents/skills/camera-atlas/references/START-HERE.zh-CN.md) · [v2 details](docs/Agensi-v2.md) · [Changelog](CHANGELOG.md).
+
+
 ## Install
 
 ```bash

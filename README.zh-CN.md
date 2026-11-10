@@ -8,6 +8,14 @@ Camera Atlas 在原始摄影上叠加独立透明地理图层，生成克制的�
 
 [English README](README.md) · [架构](docs/Architecture.md) · [CLI 全选项](docs/CLI-Reference.md) · [精度和溯源](docs/Accuracy-and-Provenance.md) · [公开示例与许可](examples/README.md)
 
+
+## 免费 Skill v2
+
+**Skill 版本 2.0.0；Python 引擎保持 0.1.0。** 新版先检查 Agent 能力，可自动准备独立环境并运行公开样片；能制图就输出实际文件，不能执行则明确交付设计方案。它是已准备的免费适配版，不表示已经在 Agensi 上架或所有 Agent 都通过实测。
+
+先看：[中文小白指南](.agents/skills/camera-atlas/references/START-HERE.zh-CN.md) · [English beginner guide](.agents/skills/camera-atlas/references/START-HERE.en.md) · [v2 说明](docs/Agensi-v2.md) · [版本记录](CHANGELOG.md)。
+
+
 ## 安装
 
 要求 Python 3.11+。在仓库根目录运行：

@@ -1,0 +1,27 @@
+{
+  "revision": "f9595def3d63c56b3d0326160d28b989f39b9f8d",
+  "source_url": "https://codeload.github.com/Jekyll-Chan/Camera-Atlas/zip/f9595def3d63c56b3d0326160d28b989f39b9f8d",
+  "sha256": "e1c82da00ed51dece0e0f2c1e101fbd39aebba75b6c20375821806a84c225b80",
+  "bytes": 64248941,
+  "schema_version": "1.0",
+  "skill_version": "2.0.0",
+  "engine_version": "0.1.0",
+  "repository": "https://github.com/Jekyll-Chan/Camera-Atlas",
+  "demo_files": [
+    {
+      "path": "lake_photo.jpg",
+      "url": "https://raw.githubusercontent.com/Jekyll-Chan/Camera-Atlas/f9595def3d63c56b3d0326160d28b989f39b9f8d/examples/data/lake_photo.jpg",
+      "sha256": "e41db127f7df8ff6eceb06ea29c2c96e8fc344396ca25f5fb3af4783b0329421"
+    },
+    {
+      "path": "lucerne.geojson",
+      "url": "https://raw.githubusercontent.com/Jekyll-Chan/Camera-Atlas/f9595def3d63c56b3d0326160d28b989f39b9f8d/examples/data/lucerne.geojson",
+      "sha256": "34e3b5e322233d396167d2e6c807c7e7c9189b881254245c92e6cbe8386737fa"
+    },
+    {
+      "path": "photos.sources.json",
+      "url": "https://raw.githubusercontent.com/Jekyll-Chan/Camera-Atlas/f9595def3d63c56b3d0326160d28b989f39b9f8d/examples/data/photos.sources.json",
+      "sha256": "bb56e579c46ac897c1dd9ab6f0e3fd471e3f2bd34ba56469c17313c150d553ec"
+    }
+  ]
+}

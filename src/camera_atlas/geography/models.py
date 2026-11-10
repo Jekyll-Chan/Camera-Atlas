@@ -65,12 +65,15 @@ class GeoData(BaseModel):
                 raise ValueError("Empty or invalid geographic geometry")
             if g.geom_type not in {"Point", "LineString", "MultiLineString", "Polygon", "MultiPolygon"}:
                 raise ValueError("Unsupported geographic geometry type")
-            x0,y0,x1,y1 = g.bounds
+            x0, y0, x1, y1 = g.bounds
             if not (-180 <= x0 <= x1 <= 180 and -90 <= y0 <= y1 <= 90):
                 raise ValueError("GeoJSON must use WGS84 longitude/latitude")
         return self
 
     def geojson(self):
-        return {"type":"FeatureCollection", "features":self.features,
-                "sources":[s.model_dump(mode="json") for s in self.sources],
-                "location": self.location.model_dump(mode="json") if self.location else None}
+        return {
+            "type": "FeatureCollection",
+            "features": self.features,
+            "sources": [s.model_dump(mode="json") for s in self.sources],
+            "location": self.location.model_dump(mode="json") if self.location else None,
+        }

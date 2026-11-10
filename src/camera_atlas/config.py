@@ -4,7 +4,9 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 Mode = Literal["auto", "coastline", "topographic", "urban", "trail", "river", "regional", "minimal"]
-Style = Literal["editorial-minimal", "topographic-fine", "coastal-atlas", "urban-documentary", "monochrome-print"]
+Style = Literal[
+    "editorial-minimal", "topographic-fine", "coastal-atlas", "urban-documentary", "monochrome-print"
+]
 
 
 class RenderConfig(BaseModel):
@@ -22,8 +24,8 @@ class RenderConfig(BaseModel):
     map_mode: Mode = "auto"
     style: Style = "editorial-minimal"
     map_enabled: bool = True
-    map_area: float = Field(.20, ge=.03, le=.30)
-    opacity: float = Field(.65, ge=0, le=1)
+    map_area: float = Field(0.20, ge=0.03, le=0.30)
+    opacity: float = Field(0.65, ge=0, le=1)
     position: Literal["auto", "top-left", "top-right", "bottom-left", "bottom-right"] = "auto"
     label_language: Literal["en", "local", "bilingual"] = "en"
     labels: bool = True
@@ -32,7 +34,7 @@ class RenderConfig(BaseModel):
     layers: bool = True
     preserve_metadata: bool = False
     offline: bool = False
-    cache: Path = Field(default_factory=lambda: Path.home()/".cache"/"camera-atlas")
+    cache: Path = Field(default_factory=lambda: Path.home() / ".cache" / "camera-atlas")
     radius_km: float = Field(10, gt=0, le=100)
     scale: bool = False
     north: bool = False

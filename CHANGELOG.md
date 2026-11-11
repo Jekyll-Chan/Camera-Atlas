@@ -1,5 +1,9 @@
 # Changelog
 
+## Skill 2.0.1 — 2026-11-11
+
+The Agensi submission ZIP places `SKILL.md` at its root and includes a public sample walkthrough with its GeoJSON and photo attribution. The skill and both listing descriptions state the buyer’s local Python, file access and isolated environment requirements.
+
 ## Skill 2.0.0 — 2026-11-10
 
 Free Agensi/repository adapter release. Python engine remains 0.1.0 at an immutable verified revision.

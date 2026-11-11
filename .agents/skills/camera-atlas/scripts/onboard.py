@@ -18,7 +18,7 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-SKILL_VERSION = "2.0.0"
+SKILL_VERSION = "2.0.1"
 CORE_MODULES = ("PIL", "numpy", "shapely", "pyproj", "pydantic", "typer", "httpx")
 EXTRA_MODULES = {"terrain": ("rasterio", "contourpy"), "repair": ("cv2",), "heic": ("pillow_heif",)}
 REPOSITORY = "https://github.com/Jekyll-Chan/Camera-Atlas"
@@ -116,7 +116,7 @@ def digest(path):
 
 
 def download(url, target, expected_hash, max_bytes):
-    request = urllib.request.Request(url, headers={"User-Agent": "CameraAtlasSkill/2.0.0"})
+    request = urllib.request.Request(url, headers={"User-Agent": f"CameraAtlasSkill/{SKILL_VERSION}"})
     size = 0
     try:
         with urllib.request.urlopen(request, timeout=45) as response, target.open("wb") as handle:

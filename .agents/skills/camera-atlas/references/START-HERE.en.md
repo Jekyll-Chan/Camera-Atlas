@@ -55,4 +55,4 @@ Photos stay within the agent environment you authorize. Online map queries discl
 - No map: ask the agent to explain the provenance warnings; do not request invented geographic detail.
 - No output file: ask for the actual existing `final.png` attachment/path. A plan should never be described as a completed image.
 
-Versions: **Skill v2.0.0** is this free adapter; its pinned, tested **Python engine is 0.1.0**. v2 does not mean Agensi supplies a hosted renderer or that every agent has been tested.
+Versions: **Skill v2.0.1** is this free adapter; its pinned, tested **Python engine is 0.1.0**. v2 does not mean Agensi supplies a hosted renderer or that every agent has been tested.

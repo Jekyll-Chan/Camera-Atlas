@@ -1,6 +1,6 @@
-# Camera Atlas Free Skill v2.0.0
+# Camera Atlas Free Skill v2.0.1
 
-This release adapts the existing open-source engine to text-delivered Agensi skills and beginner use. The Skill version is **2.0.0**; the Python package stays **0.1.0**, pinned to an immutable, previously verified commit and SHA256. This is an adapter release, not a claim of a new renderer or hosted service.
+This release adapts the existing open-source engine to text-delivered Agensi skills and beginner use. The Skill version is **2.0.1**; the Python package stays **0.1.0**, pinned to an immutable, previously verified commit and SHA256. This is an adapter release, not a claim of a new renderer or hosted service.
 
 Beginner instructions: [English](../.agents/skills/camera-atlas/references/START-HERE.en.md) · [简体中文](../.agents/skills/camera-atlas/references/START-HERE.zh-CN.md).
 
@@ -17,10 +17,10 @@ The standard-library `onboard.py` supports read-only doctor, verified isolated s
 ## Platform packaging
 
 ```bash
-python scripts/package_agensi.py --output dist/camera-atlas-agensi-v2.0.0.zip
+python scripts/package_agensi.py --output dist/camera-atlas-agensi-v2.0.1.zip
 ```
 
-The package contains one Skill, bilingual guides, supporting references, a standard-library helper, a source lock and the MIT code license. It contains no source photos, raster terrain, virtual environment, secrets or compiled executable. Source code and example photography/data keep their existing license boundaries. Do not upload the full project source archive as the skill package.
+The ZIP places `SKILL.md` at its root. It includes bilingual guides, a standard-library helper, a source lock, a public sample walkthrough and its text data, and the MIT code license. The public photograph is available at a pinned link in the sample walkthrough. It contains no source photos, raster terrain, virtual environment, secrets or compiled executable. Source code and example photography/data keep their existing license boundaries. Do not upload the full project source archive as the skill package.
 
 Platform declarations checked against official docs on 2026-11-10:
 - [Packaging](https://www.agensi.io/docs/packaging): text/code delivery, temporary exact script execution, 50 MB website / 5 MB agent upload, no bundled dependency environments.
@@ -34,7 +34,7 @@ No paid Agensi tool is configured or needed. There is no external checkout link.
 The local package, helper, source lock and engine/demo paths are testable without an Agensi account. Marketplace security review, account connection, listing approval and a real buyer session have not been verified. Listing copy is prepared under `marketplace/`; no claim of platform certification, guaranteed compatibility, sales or user demand is made.
 
 
-## Recorded validation — 2026-11-10
+## v2.0.0 validation — 2026-11-10
 
 - Local suite: **69 passed**, one live-network test excluded by default.
 - Ruff lint/format and Skill structural validator passed.

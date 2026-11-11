@@ -23,9 +23,13 @@ def build(output):
         files[path.relative_to(SKILL).as_posix()] = data
     if "SKILL.md" not in files:
         raise ValueError("Missing skill entrypoint")
+    for name in ("lucerne.geojson", "photos.sources.json"):
+        data = (ROOT / "examples/data" / name).read_bytes()
+        data.decode("utf-8")
+        files[f"sample/{name}"] = data
     files["LICENSE"] = (ROOT / "LICENSE").read_bytes()
     manifest = {
-        "skill_version": "2.0.0",
+        "skill_version": "2.0.1",
         "engine_version": "0.1.0",
         "price": "Free",
         "platform_tested": False,
@@ -36,7 +40,7 @@ def build(output):
     output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for name, data in sorted(files.items()):
-            info = zipfile.ZipInfo("camera-atlas/" + name, date_time=(2020, 1, 1, 0, 0, 0))
+            info = zipfile.ZipInfo(name, date_time=(2020, 1, 1, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o100644 << 16
             archive.writestr(info, data)
@@ -44,7 +48,7 @@ def build(output):
         raise ValueError("Package exceeds the documented agent-upload limit")
     return {
         "output": str(output),
-        "skill_version": "2.0.0",
+        "skill_version": "2.0.1",
         "files": len(files),
         "bytes": output.stat().st_size,
         "sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
@@ -54,5 +58,5 @@ def build(output):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output", type=Path, default=ROOT / "dist/camera-atlas-agensi-v2.0.0.zip")
+    parser.add_argument("--output", type=Path, default=ROOT / "dist/camera-atlas-agensi-v2.0.1.zip")
     print(json.dumps(build(parser.parse_args().output), indent=2))

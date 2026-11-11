@@ -4,7 +4,7 @@
   "sha256": "e1c82da00ed51dece0e0f2c1e101fbd39aebba75b6c20375821806a84c225b80",
   "bytes": 64248941,
   "schema_version": "1.0",
-  "skill_version": "2.0.0",
+  "skill_version": "2.0.1",
   "engine_version": "0.1.0",
   "repository": "https://github.com/Jekyll-Chan/Camera-Atlas",
   "demo_files": [

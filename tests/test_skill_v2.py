@@ -30,7 +30,7 @@ def test_doctor_is_read_only_and_preserves_venv_path(helper, tmp_path):
     workspace = tmp_path / "absent"
     report = helper.doctor(workspace, Path(sys.executable))
     assert report["ready"] and report["recommended_mode"] == "render"
-    assert report["skill_version"] == "2.0.0" and report["engine_version"] == "0.1.0"
+    assert report["skill_version"] == "2.0.1" and report["engine_version"] == "0.1.0"
     assert report["python"] == str(Path(sys.executable).absolute())
     assert not workspace.exists()
 
@@ -98,7 +98,7 @@ def test_temporary_script_has_no_repository_path_assumption(tmp_path):
         check=False,
     )
     assert result.returncode == 0, result.stderr
-    assert json.loads(result.stdout)["skill_version"] == "2.0.0"
+    assert json.loads(result.stdout)["skill_version"] == "2.0.1"
     assert not workspace.exists()
 
 
@@ -113,13 +113,20 @@ def test_skill_package_is_small_text_only_and_reproducible(tmp_path):
     with zipfile.ZipFile(first) as archive:
         assert archive.testzip() is None
         names = archive.namelist()
-        assert "camera-atlas/SKILL.md" in names
-        assert "camera-atlas/references/START-HERE.en.md" in names
-        assert "camera-atlas/references/START-HERE.zh-CN.md" in names
-        manifest = json.loads(archive.read("camera-atlas/package-manifest.json"))
+        assert "SKILL.md" in names
+        assert "references/START-HERE.en.md" in names
+        assert "references/START-HERE.zh-CN.md" in names
+        assert "references/public-sample.md" in names
+        assert archive.read("sample/lucerne.geojson") == (ROOT / "examples/data/lucerne.geojson").read_bytes()
+        assert (
+            archive.read("sample/photos.sources.json")
+            == (ROOT / "examples/data/photos.sources.json").read_bytes()
+        )
+        manifest = json.loads(archive.read("package-manifest.json"))
+        assert manifest["skill_version"] == "2.0.1"
         assert manifest["price"] == "Free" and not manifest["platform_tested"]
         for name, data_hash in manifest["files"].items():
-            content = archive.read("camera-atlas/" + name)
+            content = archive.read(name)
             content.decode("utf-8")
             assert hashlib.sha256(content).hexdigest() == data_hash
         assert not any(name.endswith((".jpg", ".png", ".tif", ".whl")) for name in names)

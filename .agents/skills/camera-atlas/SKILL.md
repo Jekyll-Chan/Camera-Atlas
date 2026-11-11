@@ -2,13 +2,19 @@
 name: camera-atlas
 description: Create photography-preserving travel-zine artwork with verified geographic overlays, or deliver a clearly labeled editorial plan when the user's agent cannot render. Use for travel, landscape, and architectural photographs with real map annotation.
 metadata:
-  version: "2.0.0"
+  version: "2.0.1"
   distribution: "Free Agensi adapter and repository skill"
 ---
 
 # Camera Atlas · Free Skill v2
 
 Reply in the user's language. The user should only need a photo and a place, not a terminal, API key or knowledge of GIS. Keep the Python engine at the verified revision in [engine-lock.json](references/engine-lock.json); Skill v2 is distinct from engine 0.1.0.
+
+## Requirements for rendering
+
+Rendering runs on the buyer’s machine. The agent needs local Python 3.11 or later, permission to read the chosen photo and write output files, and permission to create an isolated Python environment and install the renderer on first use. First setup needs network access unless the verified source and dependencies are already available locally. The planning route is available when these requirements cannot be met.
+
+Try the [public sample](references/public-sample.md) to see the inputs and expected result.
 
 ## Start simply
 

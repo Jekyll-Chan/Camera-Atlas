@@ -1,26 +1,26 @@
 {
-  "revision": "aff52e15153809eb95b07f23f83ccbd2242cbf87",
-  "source_url": "https://codeload.github.com/Jekyll-Chan/Camera-Atlas/zip/aff52e15153809eb95b07f23f83ccbd2242cbf87",
-  "sha256": "0af51fe4156fbd8f61ab1ee9cff29cbbfcdf9efa7a77dbcfebaae89baccaed04",
-  "bytes": 64790955,
+  "revision": "966a7567f278ef825b4e1ffc07076f2437d0d829",
+  "source_url": "https://codeload.github.com/Jekyll-Chan/Camera-Atlas/zip/966a7567f278ef825b4e1ffc07076f2437d0d829",
+  "sha256": "f89b721efd771821672bc62c780df541ee791da17b2a83a5121b50774ac7e30c",
+  "bytes": 64795450,
   "schema_version": "1.0",
-  "skill_version": "2.2.0",
+  "skill_version": "2.2.1",
   "engine_version": "0.1.0",
   "repository": "https://github.com/Jekyll-Chan/Camera-Atlas",
   "demo_files": [
     {
       "path": "lake_photo.jpg",
-      "url": "https://raw.githubusercontent.com/Jekyll-Chan/Camera-Atlas/aff52e15153809eb95b07f23f83ccbd2242cbf87/examples/data/lake_photo.jpg",
+      "url": "https://raw.githubusercontent.com/Jekyll-Chan/Camera-Atlas/966a7567f278ef825b4e1ffc07076f2437d0d829/examples/data/lake_photo.jpg",
       "sha256": "e41db127f7df8ff6eceb06ea29c2c96e8fc344396ca25f5fb3af4783b0329421"
     },
     {
       "path": "lucerne.geojson",
-      "url": "https://raw.githubusercontent.com/Jekyll-Chan/Camera-Atlas/aff52e15153809eb95b07f23f83ccbd2242cbf87/examples/data/lucerne.geojson",
+      "url": "https://raw.githubusercontent.com/Jekyll-Chan/Camera-Atlas/966a7567f278ef825b4e1ffc07076f2437d0d829/examples/data/lucerne.geojson",
       "sha256": "34e3b5e322233d396167d2e6c807c7e7c9189b881254245c92e6cbe8386737fa"
     },
     {
       "path": "photos.sources.json",
-      "url": "https://raw.githubusercontent.com/Jekyll-Chan/Camera-Atlas/aff52e15153809eb95b07f23f83ccbd2242cbf87/examples/data/photos.sources.json",
+      "url": "https://raw.githubusercontent.com/Jekyll-Chan/Camera-Atlas/966a7567f278ef825b4e1ffc07076f2437d0d829/examples/data/photos.sources.json",
       "sha256": "bb56e579c46ac897c1dd9ab6f0e3fd471e3f2bd34ba56469c17313c150d553ec"
     }
   ],

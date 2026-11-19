@@ -1,6 +1,6 @@
 # Agensi / Codex validation · 2026-11-19
 
-Status: live legacy instruction delivery verified; the revised local workflow passed one supplied-photo acceptance. Agensi 2.2.0 is live and its independent Codex photo-to-file run completed. The final visual audit found street lines crossing labels; a 2.2.1 typography/profile patch is being validated before release.
+Status: live legacy instruction delivery verified; the revised local workflow passed one supplied-photo acceptance. Agensi 2.2.0 is live and its independent Codex photo-to-file run completed. The final visual audit found street lines crossing labels; the 2.2.1 typography/profile correction passed independent visual acceptance and is completing publication.
 
 ## Observed live result
 
@@ -52,6 +52,12 @@ The new output covered the selected sky using all nine required real map tiles. 
 
 The patch separates geographic ink from annotations and removes only underlying map ink around accepted text. This creates transparent reading space without an opaque card or altered photograph, and is represented in PNG and SVG. The renderer also exports the independent overlay with the composition ICC profile directly.
 
-Before claiming the patch complete, verify the corrected live-case composition, publish/pin the patched source, check fresh installation, publish the versioned download packages, and verify the actual Agensi 2.2.1 update and execution. At this checkpoint Agensi 2.2.0 remains the last verified live version.
+The corrected nine-tile live-case render passed an independent full-image, sky, roof-edge, label and credit review. Both collisions are gone. Only 1,492 pixels differ from the earlier live image, within text-clearance boxes or their anti-alias fringe. All source/pixel checks still pass; final and independent overlay both preserve the original 536-byte ICC profile.
+
+Patch source is public at `966a7567f278ef825b4e1ffc07076f2437d0d829`. [CI run 44522700221](https://github.com/Jekyll-Chan/Camera-Atlas/actions/runs/44522700221) passed on Python 3.11–3.13. Local verification: 178 tests passed, two opt-in network tests excluded, lint and formatting passed. The official archive is 64,795,450 bytes, SHA256 `f89b721efd771821672bc62c780df541ee791da17b2a83a5121b50774ac7e30c`; runtime files and font assets match the accepted patch. The updated engine lock pins this source.
+
+A fresh isolated installation of the pinned patch reported online readiness and reproduced the accepted live-case final and overlay pixels exactly, including both original ICC profiles. It imported exclusively from its installed site-packages, with no development checkout substitution.
+
+Remaining gates at this source checkpoint: public download assets and actual Agensi 2.2.1 delivery/render verification. Agensi 2.2.0 remains the last verified live version until those observations are recorded.
 
 These checks cover one supplied Yasaka Shrine photograph and locality. They do not establish universal photo, geography, network or agent-client compatibility. Private imagery and test artifacts remain outside this public repository.

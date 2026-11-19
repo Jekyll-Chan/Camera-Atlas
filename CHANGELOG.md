@@ -1,5 +1,13 @@
 # Changelog
 
+## Skill 2.2.1 — 2026-11-19
+
+Patch prepared after an independent Codex photo-and-place test of the approved, live Agensi 2.2.0 Skill completed setup, full-sky rendering and file delivery. Visual review found street lines crossing type, so workflow execution was not treated as polished visual acceptance. Publication remains separate; see [the validation record](docs/Agensi-Live-Validation.md) for the current live version.
+
+- Clear map strokes transparently behind labels and attribution so streets do not cross letterforms. Keep the photograph unchanged and avoid opaque label cards.
+- Include the composition color profile in the independent PNG overlay so it can be reused with the matching clean base.
+- Update Skill, installer, package metadata and release downloads to 2.2.1. The full-region workflow still requires version 2.2 or later, plus actual renderer capability checks; the Python package label remains 0.1.0.
+
 ## Skill 2.2.0 — 2026-11-19
 
 Photo-and-place workflow in the user's own capable agent, with optional Agensi discovery and no required Camera Atlas cloud backend. Publication and observed end-to-end results are tracked separately in [the validation record](docs/Agensi-Live-Validation.md); this entry does not establish marketplace availability.

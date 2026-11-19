@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 
 import numpy as np
 import pytest
-from PIL import Image
+from PIL import Image, ImageCms
 
 from camera_atlas import render
 from camera_atlas.cartography import renderer
@@ -71,6 +71,99 @@ def test_missing_bundled_font_has_working_latin_fallback(monkeypatch, tmp_path):
     assert canvas.text((10, 10), "San Francisco", 12, (255, 255, 255, 200))
     assert not canvas.text((10, 40), "京都", 12, (255, 255, 255, 200))
     assert canvas.finish().getbbox() is not None
+
+
+def test_transparent_text_clearance_removes_only_linework_and_matches_svg():
+    # Analytical drawing primitives, not claimed geographic features.
+    canvas = renderer.Canvas((220, 100))
+    canvas.line([(0, 25), (219, 25)], (220, 220, 220, 180), 2)
+    untouched_geometry = canvas.image.tobytes()
+    canvas.begin_annotations()
+    canvas.circle(35, 25, 5, (232, 72, 58, 245), filled=False)
+    marker_before = canvas.image.copy()
+    assert canvas.text((40, 20), "A place", 14, (240, 235, 220, 220))
+    assert canvas.geometry_image.tobytes() == untouched_geometry
+    left, top, right, bottom = canvas.text_clearances[0]
+    cleared = np.asarray(canvas.cleared_geometry())
+    assert not cleared[top * 2 : bottom * 2, left * 2 : right * 2, 3].any()
+    assert cleared[50, 10, 3] > 0
+    # Marker lies partly inside the clearance rectangle but on another layer.
+    marker_pixels = np.asarray(marker_before)[:, :, 3] > 0
+    assert np.array_equal(np.asarray(canvas.image)[marker_pixels], np.asarray(marker_before)[marker_pixels])
+    assert np.any(np.asarray(canvas.finish())[:, :, 3] == 0)
+    root = ET.fromstring('<svg xmlns="http://www.w3.org/2000/svg">' + canvas.svg_markup() + "</svg>")
+    ns = {"s": "http://www.w3.org/2000/svg"}
+    geometry_group = root.find('s:g[@mask="url(#map-geometry-clearance)"]', ns)
+    assert geometry_group.find("s:polyline", ns) is not None
+    assert geometry_group.find("s:circle", ns) is None
+    assert root.find("s:circle", ns) is not None and root.find("s:text", ns) is not None
+    knockout = root.find('s:defs/s:mask/s:rect[@fill="black"]', ns)
+    assert tuple(int(knockout.attrib[k]) for k in ("x", "y", "width", "height")) == (
+        left,
+        top,
+        right - left,
+        bottom - top,
+    )
+
+
+def test_rejected_text_does_not_knock_out_any_geometry():
+    canvas = renderer.Canvas((160, 90))
+    canvas.line([(0, 25), (159, 25)], (220, 220, 220, 180), 2)
+    canvas.begin_annotations()
+    before = canvas.finish().tobytes()
+    assert not canvas.text((150, 20), "Cannot fit here", 14, (240, 235, 220, 220))
+    assert canvas.finish().tobytes() == before and not canvas.text_clearances
+
+
+def test_overlay_exports_composition_icc_without_photo_exif(values, tmp_path):
+    source = tmp_path / "profiled.png"
+    icc = ImageCms.ImageCmsProfile(ImageCms.createProfile("sRGB")).tobytes()
+    with Image.open(values["input"]) as image:
+        exif = Image.Exif()
+        exif[270] = "Private photographic description"
+        image.save(source, icc_profile=icc, exif=exif)
+    result = render({**values, "input": source, "preserve_metadata": True})
+    with (
+        Image.open(result.output / "clean_base.png") as base,
+        Image.open(result.output / "map_overlay.png") as overlay,
+        Image.open(result.final) as final,
+    ):
+        assert base.info["icc_profile"] == overlay.info["icc_profile"] == final.info["icc_profile"] == icc
+        assert not overlay.getexif()
+        assert np.array_equal(np.asarray(Image.alpha_composite(base, overlay)), np.asarray(final))
+
+
+def test_region_distribution_excludes_labels_and_counts_cleared_geometry(
+    values, data_dir, tmp_path, monkeypatch
+):
+    captured = []
+    original = renderer.ink_distribution
+
+    def observe(geometry, allowed):
+        captured.append(np.asarray(geometry).copy())
+        return original(geometry, allowed)
+
+    monkeypatch.setattr(renderer, "ink_distribution", observe)
+    mask = tmp_path / "full-region.png"
+    Image.new("L", (1000, 700), 255).save(mask)
+    result = render(
+        {
+            **values,
+            "geojson": data_dir / "san_francisco.geojson",
+            "location": "San Francisco",
+            "location_label": "San Francisco",
+            "radius_km": 0.08,
+            "map_mode": "urban",
+            "region_mask": mask,
+        }
+    )
+    art = json.loads((result.output / "provenance.json").read_text())["cartography"]
+    assert len(captured) == 1 and captured[0].any()
+    overlay = np.asarray(Image.open(result.output / "map_overlay.png"))
+    for record in art["text_records"]:
+        left, top, right, bottom = (round(v) for v in record["bounds"])
+        assert not captured[0][top:bottom, left:right].any()
+        assert overlay[top:bottom, left:right, 3].any()
 
 
 @pytest.mark.parametrize("exact", [False, True])

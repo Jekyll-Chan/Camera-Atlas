@@ -2,15 +2,15 @@
 name: camera-atlas
 description: Create photography-preserving travel-zine artwork with verified geographic overlays, or deliver a clearly labeled editorial plan when the user's agent cannot render. Use for travel, landscape, and architectural photographs with real map annotation.
 metadata:
-  version: "2.2.0"
+  version: "2.2.1"
   distribution: "Free Agensi adapter and repository skill"
 ---
 
-# Camera Atlas · Free Skill v2.2 · Bring your own agent
+# Camera Atlas · Free Skill v2.2.1 · Bring your own agent
 
 Reply in the user's language. The user supplies a photo and a place; the agent handles setup, verified geography, region selection and file delivery. Use the full selected region as the map viewport, following [region-fill.md](references/region-fill.md). Before rendering, verify the actual agent bridge, `region_mask` support and online map decoder. A package version label alone does not establish these capabilities.
 
-Rendering runs through the user's code-capable agent without a Camera Atlas cloud account or server. Agensi delivers these instructions; the source-bundled Agent Kit is an alternative. Read [agent-workflow.md](references/agent-workflow.md) for the common workflow. A standalone Skill import still needs the renderer: use the verified immutable source in [engine-lock.json](references/engine-lock.json), or the trusted source kit. If a received lock lacks the declared agent/region/online capabilities, do not install it as the v2.2 workflow. Verify actual file access, execution and image inspection rather than inferring them from the model/product name.
+Rendering runs through the user's code-capable agent without a Camera Atlas cloud account or server. Agensi delivers these instructions; the source-bundled Agent Kit is an alternative. Read [agent-workflow.md](references/agent-workflow.md) for the common workflow. A standalone Skill import still needs the renderer: use the verified immutable source in [engine-lock.json](references/engine-lock.json), or the trusted source kit. If a received lock lacks the declared agent/region/online capabilities, do not install it as the v2.2.1 workflow. Verify actual file access, execution and image inspection rather than inferring them from the model/product name.
 
 ## Requirements for rendering
 
@@ -42,4 +42,4 @@ Return `final.png` first, then transparent `map_overlay.png`, region mask, optio
 
 ## Beginner help
 
-Give the user the guide in their language when requested or when connection/setup is confusing: [English](references/START-HERE.en.md) · [简体中文](references/START-HERE.zh-CN.md). Reload the live Agensi Skill on a new use and check its returned version; a listing link does not prove v2.2 is serving yet. Current release evidence is recorded in the repository's [validation report](https://github.com/Jekyll-Chan/Camera-Atlas/blob/main/docs/Agensi-Live-Validation.md). Listing approval is not universal agent compatibility. Deliver actual existing files, not a claim that another service generated them.
+Give the user the guide in their language when requested or when connection/setup is confusing: [English](references/START-HERE.en.md) · [简体中文](references/START-HERE.zh-CN.md). Reload the live Agensi Skill on a new use and check its returned version; a listing link does not prove v2.2.1 is serving yet. Current release evidence is recorded in the repository's [validation report](https://github.com/Jekyll-Chan/Camera-Atlas/blob/main/docs/Agensi-Live-Validation.md). Listing approval is not universal agent compatibility. Deliver actual existing files, not a claim that another service generated them.

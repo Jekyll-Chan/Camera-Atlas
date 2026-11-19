@@ -1,13 +1,13 @@
 # Camera Atlas · 照片＋地点 / Photo + place
 
-Skill v2.2 使用你已有的 Agent 制图，无需 Camera Atlas 云后台。首次使用需准备环境；只有上传图片能力的普通聊天窗口不一定能执行。发布和实测状态见[验证记录](Agensi-Live-Validation.md)。
+Skill v2.2.1 使用你已有的 Agent 制图，无需 Camera Atlas 云后台。首次使用需准备环境；只有上传图片能力的普通聊天窗口不一定能执行。发布和实测状态见[验证记录](Agensi-Live-Validation.md)。
 
-Skill v2.2 runs in your own capable agent, without a Camera Atlas cloud backend. First use needs setup; image upload alone does not establish execution support. See the [validation record](Agensi-Live-Validation.md) for observed publication and test status.
+Skill v2.2.1 runs in your own capable agent, without a Camera Atlas cloud backend. First use needs setup; image upload alone does not establish execution support. See the [validation record](Agensi-Live-Validation.md) for observed publication and test status.
 
 ## 中文
 
 1. **已有 Agensi 连接**：让 Agent 加载免费的 [Camera Atlas](https://www.agensi.io/skills/camera-atlas)，确认返回的 Skill 为 2.2 或更高。连接方法见 [Agensi 官方指南](https://www.agensi.io/docs/mcp-setup)。
-2. **不使用 Agensi，或平台仍提供旧版**：使用 v2.2 **Agent Kit**，解压后在 Codex 或其他有文件、命令和看图能力的 Agent 中打开 **Camera-Atlas** 文件夹。让它先读取 `.agents/skills/camera-atlas/SKILL.md`。
+2. **不使用 Agensi，或平台仍提供旧版**：使用 v2.2.1 **Agent Kit**，解压后在 Codex 或其他有文件、命令和看图能力的 Agent 中打开 **Camera-Atlas** 文件夹。让它先读取 `.agents/skills/camera-atlas/SKILL.md`。
 3. 上传照片，填上地点，发送：
 
 > 请用 Camera Atlas 加工这张照片，地点是【地点＋城市/国家】。请你完成环境准备、查真实地图、选区和导出，我不会运行代码。地图铺满适合的整片天空或水面，避开主体，保留方向、构图、颜色和光影。只在确实不确定时问我，最后给我成品、透明地图和来源文件。
@@ -19,7 +19,7 @@ Skill v2.2 runs in your own capable agent, without a Camera Atlas cloud backend.
 ## English
 
 1. **Agensi already connected:** load the free [Camera Atlas](https://www.agensi.io/skills/camera-atlas) Skill and check that its returned version is 2.2 or later. See [Agensi's connection guide](https://www.agensi.io/docs/mcp-setup) for first setup.
-2. **Without Agensi, or while an older version is live:** extract the v2.2 **Agent Kit**, open **Camera-Atlas** in Codex or another agent with file, command and image tools, and ask it to read `.agents/skills/camera-atlas/SKILL.md` first.
+2. **Without Agensi, or while an older version is live:** extract the v2.2.1 **Agent Kit**, open **Camera-Atlas** in Codex or another agent with file, command and image tools, and ask it to read `.agents/skills/camera-atlas/SKILL.md` first.
 3. Attach your photo and send:
 
 > Use Camera Atlas on this photo, taken at [PLACE + CITY/COUNTRY]. Handle environment setup, verified map data, region selection and export for me. I do not know how to run code. Fill the appropriate whole sky or water region, protect the subject, and preserve orientation, framing, colors and light. Ask only when something is uncertain. Return the finished image, transparent map and source report.
@@ -28,12 +28,12 @@ First use may need normal permission prompts and dependency downloads. Later ses
 
 ## 下载 / Downloads
 
-v2.2 发布后，以下文件会出现在[版本页面](https://github.com/Jekyll-Chan/Camera-Atlas/releases/tag/v2.2.0)。下载前查看上方验证记录，勿将准备完成等同于已发布。
+v2.2.1 发布后，以下文件会出现在[版本页面](https://github.com/Jekyll-Chan/Camera-Atlas/releases/tag/v2.2.1)。下载前查看上方验证记录，勿将准备完成等同于已发布。
 
-When v2.2 is published, these files are available on the [release page](https://github.com/Jekyll-Chan/Camera-Atlas/releases/tag/v2.2.0). Check the validation record for the observed status.
+When v2.2.1 is published, these files are available on the [release page](https://github.com/Jekyll-Chan/Camera-Atlas/releases/tag/v2.2.1). Check the validation record for the observed status.
 
-- [Agent Kit — 包含源码 / includes renderer source](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.0/Camera-Atlas-Agent-Kit-v2.2.0.zip)
-- [Skill ZIP — 说明和安装工具 / instructions and installer](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.0/Camera-Atlas-Skill-v2.2.0.zip)
+- [Agent Kit — 包含源码 / includes renderer source](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.1/Camera-Atlas-Agent-Kit-v2.2.1.zip)
+- [Skill ZIP — 说明和安装工具 / instructions and installer](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.1/Camera-Atlas-Skill-v2.2.1.zip)
 
 ## 条件、费用与隐私 / Requirements, cost and privacy
 

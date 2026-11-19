@@ -188,7 +188,9 @@ def render(config: RenderConfig | dict) -> RenderResult:
         if config.layers:
             original.save(stage / "original.png", **options)
             clean.save(stage / "clean_base.png", **options)
-            overlay.save(stage / "map_overlay.png")
+            # The layer's RGB values were composited in the base photo's color
+            # space. Preserve that profile for independent reuse, without EXIF.
+            overlay.save(stage / "map_overlay.png", **png_info(info))
             saliency.save(stage / "saliency_mask.png")
             if mask:
                 mask.save(stage / "text_removal_mask.png")

@@ -1,19 +1,19 @@
 # Camera Atlas
 
-> **Photo + place, through your own agent.** Skill v2.2 prepares real maps, fills the selected sky or water region and returns image files without a Camera Atlas cloud backend. First setup requires a capable local agent. [Bilingual quickstart](docs/Agent-Quickstart.md) · [Publication and test status](docs/Agensi-Live-Validation.md).
+> **Photo + place, through your own agent.** Skill v2.2.1 prepares real maps, fills the selected sky or water region and returns image files without a Camera Atlas cloud backend. First setup requires a capable local agent. [Bilingual quickstart](docs/Agent-Quickstart.md) · [Publication and test status](docs/Agensi-Live-Validation.md).
 
 **Photography First. Geography Verified.**
 
 [GitHub repository](https://github.com/Jekyll-Chan/Camera-Atlas)
 
-Camera Atlas adds auditable vector geography to original travel photographs using independent transparent layers. It never regenerates or grades the photograph. Python 3.11+, local CLI, reusable API and Codex Agent Skill. The Python package label remains 0.1.0; use the source revision and capability checks to identify the v2.2 renderer. Read the accuracy limits below.
+Camera Atlas adds auditable vector geography to original travel photographs using independent transparent layers. It never regenerates or grades the photograph. Python 3.11+, local CLI, reusable API and Codex Agent Skill. The Python package label remains 0.1.0; use the source revision and capability checks to identify the v2.2.1 renderer. Read the accuracy limits below.
 
 [中文说明](README.zh-CN.md) · [Architecture](docs/Architecture.md) · [CLI](docs/CLI-Reference.md) · [Accuracy](docs/Accuracy-and-Provenance.md)
 
 
 ## Free Skill v2
 
-**Skill: 2.2.0; Python engine label: 0.1.0.** Check the Skill version returned by Agensi: versions below 2.2 do not provide this workflow. Use the verified v2.2 Agent Kit if an older version is still live. File access, command execution, image inspection and an isolated installation are required; `doctor.online_ready` verifies the bridge, region renderer and map decoder. A text plan is not a rendered image.
+**Skill: 2.2.1; Python engine label: 0.1.0.** Check the Skill version returned by Agensi: versions below 2.2 do not provide this workflow. Use the verified v2.2.1 Agent Kit if an older version is still live. File access, command execution, image inspection and an isolated installation are required; `doctor.online_ready` verifies the bridge, region renderer and map decoder. A text plan is not a rendered image.
 
 Start here: [English beginner guide](.agents/skills/camera-atlas/references/START-HERE.en.md) · [中文新手指南](.agents/skills/camera-atlas/references/START-HERE.zh-CN.md) · [v2 details](docs/Agensi-v2.md) · [Changelog](CHANGELOG.md).
 
@@ -84,7 +84,7 @@ Each render writes `final.png`, normalized `original.png`, `clean_base.png`, ful
 
 No crop, resampling of the photograph, global recoloring or generative model. EXIF orientation is normalized, ICC profile retained. Outside overlay alpha and a reviewed repair mask, normalized pixels are checked for exact equality. PNG output is lossless relative to the normalized 8-bit source; JPEG decompression is not reversible.
 
-Seven modes: coastline, topographic, urban, trail, river, regional, minimal; automatic selection uses verified feature kinds, an optional subject hint, and data within the geographic viewport. The v2.2 agent workflow uses a reviewed full-region mask: real geography expands at uniform scale to fill its bounds and is clipped around protected subjects. The older automatic corner placement applies only when no region is selected. Region suggestions use color, edges and contrast, **not semantic segmentation**; the agent must inspect the image and refine the mask. Use `--exclusion-mask` for guaranteed pixel exclusion.
+Seven modes: coastline, topographic, urban, trail, river, regional, minimal; automatic selection uses verified feature kinds, an optional subject hint, and data within the geographic viewport. The v2.2.1 agent workflow uses a reviewed full-region mask: real geography expands at uniform scale to fill its bounds and is clipped around protected subjects. The older automatic corner placement applies only when no region is selected. Region suggestions use color, edges and contrast, **not semantic segmentation**; the agent must inspect the image and refine the mask. Use `--exclusion-mask` for guaranteed pixel exclusion.
 
 Five themes share the same data engine. Required dataset attribution remains visible even with `--no-labels`. Maps have no rectangular fill. Region locations use an open ring; exact GPS uses one solid mark. North refers only to the map. Optional scales are checked by inverse projection and WGS84 geodesic distance. Missing verified geometry produces a clean photograph with a warning, never invented map lines.
 

@@ -5,7 +5,7 @@ import math
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFont
 from pyproj import Geod
 from shapely.geometry import box, shape
 
@@ -39,6 +39,19 @@ class Canvas:
         self.text_boxes = []
         self.text_records = []
         self.allowed = None
+        self.geometry_image = None
+        self.geometry_svg = []
+        self.text_clearances = []
+
+    def begin_annotations(self):
+        """Keep verified linework separate so label clearance cannot erase markers."""
+        if self.geometry_image is not None:
+            raise ValueError("Annotation layer was already started")
+        self.geometry_image = self.image
+        self.geometry_svg = self.svg
+        self.image = Image.new("RGBA", self.geometry_image.size)
+        self.draw = ImageDraw.Draw(self.image)
+        self.svg = []
 
     def color(self, rgba):
         return f"rgb({rgba[0]},{rgba[1]},{rgba[2]})", rgba[3] / 255
@@ -113,6 +126,17 @@ class Canvas:
             return False
         x, y = xy
         b = self.text_bounds(xy, text, size)
+        if self.geometry_image is not None:
+            # Only remove geographic ink under this accepted label. There is
+            # no background fill: the untouched photograph shows through.
+            self.text_clearances.append(
+                (
+                    max(0, math.floor(b[0]) - 3),
+                    max(0, math.floor(b[1]) - 3),
+                    min(self.size[0], math.ceil(b[2]) + 3),
+                    min(self.size[1], math.ceil(b[3]) + 3),
+                )
+            )
         self.draw.text((x * 2, y * 2), text, font=self.font(size), fill=color, anchor="lt")
         self.text_boxes.append(b)
         self.text_records.append({"text": text, "size_px": size, "bounds": b})
@@ -125,8 +149,40 @@ class Canvas:
         )
         return True
 
+    def cleared_geometry(self):
+        if self.geometry_image is None:
+            return None
+        geometry = self.geometry_image.copy()
+        if self.text_clearances:
+            mask = Image.new("L", geometry.size, 255)
+            drawing = ImageDraw.Draw(mask)
+            for left, top, right, bottom in self.text_clearances:
+                drawing.rectangle((left * 2, top * 2, right * 2 - 1, bottom * 2 - 1), fill=0)
+            geometry.putalpha(ImageChops.multiply(geometry.getchannel("A"), mask))
+        return geometry
+
     def finish(self):
-        return self.image.resize(self.size, Image.Resampling.LANCZOS)
+        geometry = self.cleared_geometry()
+        image = Image.alpha_composite(geometry, self.image) if geometry is not None else self.image
+        return image.resize(self.size, Image.Resampling.LANCZOS)
+
+    def svg_markup(self):
+        if self.geometry_image is None:
+            return "".join(self.svg)
+        geometry = "".join(self.geometry_svg)
+        if self.text_clearances:
+            w, h = self.size
+            rectangles = "".join(
+                f'<rect x="{left}" y="{top}" width="{right - left}" height="{bottom - top}" fill="black"/>'
+                for left, top, right, bottom in self.text_clearances
+            )
+            geometry = (
+                f'<defs><mask id="map-geometry-clearance" maskUnits="userSpaceOnUse" '
+                f'x="0" y="0" width="{w}" height="{h}" style="mask-type:luminance">'
+                f'<rect x="0" y="0" width="{w}" height="{h}" fill="white"/>{rectangles}'
+                '</mask></defs><g mask="url(#map-geometry-clearance)">' + geometry + "</g>"
+            )
+        return geometry + "".join(self.svg)
 
 
 def compact_credits(credits):
@@ -286,6 +342,7 @@ def render_map(size, rect, projection, data, location, mode, config, exclusion=N
                 "reason": "No verified geometry available for selected mode",
             },
         )
+    c.begin_annotations()
     marker = {
         "accuracy": location.accuracy,
         "coordinates": [location.lon, location.lat],
@@ -413,6 +470,17 @@ def render_map(size, rect, projection, data, location, mode, config, exclusion=N
                         "reason": "Subject exclusion would obscure required attribution",
                     },
                 )
+    geometry_alpha = c.cleared_geometry().resize(c.size, Image.Resampling.LANCZOS).getchannel("A")
+    if allowed is not None and not ((np.asarray(geometry_alpha) > 0) & c.allowed).any():
+        return (
+            Image.new("RGBA", size),
+            None,
+            {
+                "drawn_features": [],
+                "omitted_features": omitted,
+                "reason": "No verified geometry remains visible after label clearance",
+            },
+        )
     local = c.finish()
     overlay = Image.new("RGBA", size)
     overlay.paste(local, (x, y))
@@ -440,7 +508,7 @@ def render_map(size, rect, projection, data, location, mode, config, exclusion=N
         f'viewBox="0 0 {size[0]} {size[1]}">{mask_svg}'
         + ('<g mask="url(#exclude)">' if exclusion is not None or config.region_mask else "<g>")
         + f'<g transform="translate({x} {y})">'
-        + "".join(c.svg)
+        + c.svg_markup()
         + "</g></g></svg>"
     )
     return (
@@ -459,9 +527,14 @@ def render_map(size, rect, projection, data, location, mode, config, exclusion=N
             "display_attribution": credit_text,
             "text_boxes_local_px": c.text_boxes,
             "text_records": c.text_records,
+            "text_clearance": {
+                "method": "transparent knockout of geographic ink only; annotations and photo unchanged",
+                "rectangles_local_px": c.text_clearances,
+                "padding_px": 3,
+            },
             "svg_note": "Font metrics depend on SVG viewer; PNG is the reference rendering",
             "region_distribution": ink_distribution(geometry_alpha, Image.fromarray(c.allowed))
-            if geometry_alpha is not None
+            if c.allowed is not None
             else None,
         },
     )

@@ -36,7 +36,7 @@ def build(output):
         for name in ("agent_bridge", "region_fill", "online_maps")
     )
     manifest = {
-        "skill_version": "2.2.0",
+        "skill_version": "2.2.1",
         "engine_version": "0.1.0",
         "price": "Free",
         "platform_tested": False,
@@ -59,7 +59,7 @@ def build(output):
         raise ValueError("Package exceeds the documented agent-upload limit")
     return {
         "output": str(output),
-        "skill_version": "2.2.0",
+        "skill_version": "2.2.1",
         "files": len(files),
         "bytes": output.stat().st_size,
         "sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
@@ -69,5 +69,5 @@ def build(output):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output", type=Path, default=ROOT / "dist/camera-atlas-agensi-v2.2.0.zip")
+    parser.add_argument("--output", type=Path, default=ROOT / "dist/Camera-Atlas-Skill-v2.2.1.zip")
     print(json.dumps(build(parser.parse_args().output), indent=2))

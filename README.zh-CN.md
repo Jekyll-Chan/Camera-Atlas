@@ -1,19 +1,19 @@
 # Camera Atlas
 
-> **照片＋地点，由你已有的 Agent 完成。** Skill v2.2 准备真实地图，铺满所选天空或水面，并交付图片，无需 Camera Atlas 云后台。首次使用需要有本机执行能力的 Agent 完成环境准备。[中英上手指南](docs/Agent-Quickstart.md) · [发布与实测状态](docs/Agensi-Live-Validation.md)。
+> **照片＋地点，由你已有的 Agent 完成。** Skill v2.2.1 准备真实地图，铺满所选天空或水面，并交付图片，无需 Camera Atlas 云后台。首次使用需要有本机执行能力的 Agent 完成环境准备。[中英上手指南](docs/Agent-Quickstart.md) · [发布与实测状态](docs/Agensi-Live-Validation.md)。
 
 **Photography First. Geography Verified. 摄影优先，地理可核查。**
 
 [GitHub 开源仓库](https://github.com/Jekyll-Chan/Camera-Atlas)
 
-Camera Atlas 在原始摄影上叠加独立透明地理图层，生成克制的旅行杂志式作品。它不使用生成式图像模型重绘照片，不全局调色，不强制裁切。提供 Python CLI、可复用 API、Codex Agent Skill 和可追溯输出。Python 包版本号仍为 0.1.0，需通过源码版本和能力检查区分 v2.2 引擎；能力与限制均在下方说明。
+Camera Atlas 在原始摄影上叠加独立透明地理图层，生成克制的旅行杂志式作品。它不使用生成式图像模型重绘照片，不全局调色，不强制裁切。提供 Python CLI、可复用 API、Codex Agent Skill 和可追溯输出。Python 包版本号仍为 0.1.0，需通过源码版本和能力检查区分 v2.2.1 引擎；能力与限制均在下方说明。
 
 [English README](README.md) · [架构](docs/Architecture.md) · [CLI 全选项](docs/CLI-Reference.md) · [精度和溯源](docs/Accuracy-and-Provenance.md) · [公开示例与许可](examples/README.md)
 
 
 ## 免费 Skill v2
 
-**Skill 为 2.2.0，Python 引擎版本号仍为 0.1.0。** 检查 Agensi 实际返回的 Skill 版本；低于 2.2 的旧版不具备这条完整流程。如果平台仍是旧版，使用已验证的 v2.2 Agent Kit。需要文件、命令和看图能力，以及首次独立安装；`doctor.online_ready` 检查执行桥接、区域渲染和地图解码能力。文字方案不等于已生成图片。
+**Skill 为 2.2.1，Python 引擎版本号仍为 0.1.0。** 检查 Agensi 实际返回的 Skill 版本；低于 2.2 的旧版不具备这条完整流程。如果平台仍是旧版，使用已验证的 v2.2.1 Agent Kit。需要文件、命令和看图能力，以及首次独立安装；`doctor.online_ready` 检查执行桥接、区域渲染和地图解码能力。文字方案不等于已生成图片。
 
 先看：[中文小白指南](.agents/skills/camera-atlas/references/START-HERE.zh-CN.md) · [English beginner guide](.agents/skills/camera-atlas/references/START-HERE.en.md) · [v2 说明](docs/Agensi-v2.md) · [版本记录](CHANGELOG.md)。
 
@@ -88,7 +88,7 @@ print(result.final, result.metadata["quality"])
 
 EXIF 方向只规范化一次，ICC 配置保留，照片不缩放、不裁切、不做全局调色。除透明图层覆盖区域和明确授权的文字修复区域外，程序验证规范化像素完全一致。原始压缩文件保留在输入位置；规范化 PNG 并非原 JPEG 文件的字节副本。
 
-七种地图模式：coastline、topographic、urban、trail、river、regional、minimal；自动选择只使用当前地理范围内真实可用的数据，可用 `--subject` 提供主体提示或 `--map-mode` 手动覆盖。五种主题使用同一地理引擎。v2.2 Agent 流程按审阅后的完整选区扩展真实地理范围，统一比例并避开主体，不再受旧角落地图大小限制；未指定区域时才使用原有自动角落布局。细线条、克制透明度，不加中央标题或不透明卡片。`--no-labels` 可关闭可选文字，但数据许可要求的署名必须保留。
+七种地图模式：coastline、topographic、urban、trail、river、regional、minimal；自动选择只使用当前地理范围内真实可用的数据，可用 `--subject` 提供主体提示或 `--map-mode` 手动覆盖。五种主题使用同一地理引擎。v2.2.1 Agent 流程按审阅后的完整选区扩展真实地理范围，统一比例并避开主体，不再受旧角落地图大小限制；未指定区域时才使用原有自动角落布局。细线条、克制透明度，不加中央标题或不透明卡片。`--no-labels` 可关闭可选文字，但数据许可要求的署名必须保留。
 
 区域建议使用颜色、边缘与对比度，不是语义分割；需由 Agent 看图并修正，不能自动保证识别人、山峰、建筑、船只或天空。可用 `--exclusion-mask` 保护明确主体，非零像素不被地图覆盖。截图黑条仅作启发式提示，不自动裁切播放器。所有成品仍须人工检查构图与可读性。
 

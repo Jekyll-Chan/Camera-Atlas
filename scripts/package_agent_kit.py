@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PREFIX = "Camera-Atlas"
-VERSION = "2.2.0"
+VERSION = "2.2.1"
 SOURCE_DIRS = ("", "cartography", "composition", "geography", "image", "validation")
 TOP_LEVEL = (
     "pyproject.toml",
@@ -154,5 +154,5 @@ def build(output, root=ROOT):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output", type=Path, default=ROOT / "dist/Camera-Atlas-Agent-Kit-v2.2.0.zip")
+    parser.add_argument("--output", type=Path, default=ROOT / "dist/Camera-Atlas-Agent-Kit-v2.2.1.zip")
     print(json.dumps(build(parser.parse_args().output), indent=2))

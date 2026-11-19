@@ -1,6 +1,6 @@
 # Agensi / Codex validation · 2026-11-19
 
-Status: live legacy instruction delivery verified; the revised local workflow passed one supplied-photo acceptance. The accepted renderer source is public and fresh isolated setup is verified; release assets and the live Agensi rerun are in progress.
+Status: live legacy instruction delivery verified; the revised local workflow passed one supplied-photo acceptance. Agensi 2.2.0 is live and its independent Codex photo-to-file run completed. The final visual audit found street lines crossing labels; a 2.2.1 typography/profile patch is being validated before release.
 
 ## Observed live result
 
@@ -40,11 +40,18 @@ The official commit archive was downloaded and verified against all runtime sour
 
 A new isolated environment installed this locked archive and its `maps` dependencies. The actual interpreter reported `online_ready: true`; it did not use an editable development checkout. The fresh installation independently completed photo preparation, actual Photon search, fresh map acquisition and rendering using the already reviewed mask. Visual and pixel checks passed, including zero changes outside the sky, preserved ICC and exact output-pixel agreement with the accepted development render. This installation check reused the reviewed mask; it is not a second blind region-selection test.
 
-## Remaining release gates
+## Live Agensi 2.2.0 photo-to-file run
 
-1. Publish the versioned source kit and text-only Skill package, and verify the Agensi submission outcome.
-2. After approval, load the live new Skill through Codex and verify actual photo-to-file execution again. A prepared package or submitted update is not yet a tested live version.
+The first MCP update was rejected for the extensionless `LICENSE` filename. Packaging was corrected to emit the same licence as `LICENSE.txt` and sample GeoJSON as `sample/lucerne.json`. Agensi accepted all 18 text files, approved version 2.2.0 and reported `review_status: live`, `security_status: approved`, and no pending update. Live `SKILL.md`, `engine-lock.json` and `onboard.py` matched submitted SHA256 hashes.
 
-The old Agensi version remains the last verified live version at this checkpoint. No claim is made that arbitrary photographs, every geography or every agent client are already verified.
+A separate Codex CLI session loaded the live Skill and references, received only the user's photo and Kyoto locality plus the full-sky requirement, installed the pinned public source in its own environment, resolved the shrine through Photon, created a new sky mask and rendered real geography. It did not read the development checkout or reuse the earlier mask. The supplied bootstrap interpreter path was wrong; the agent found the installed Python 3.11.15 and continued. First setup needed roughly two minutes for source/dependencies; total agent work also included map acquisition and review.
 
-The first v2.2 MCP update submission was rejected because the platform requires a recognized text extension on `LICENSE`. No pending update was created. The package builder now emits the unchanged licence as `LICENSE.txt` and the unchanged sample GeoJSON as `sample/lucerne.json`, with a packaging regression check. Resubmission is pending at this checkpoint.
+The new output covered the selected sky using all nine required real map tiles. Independent checks found zero changed pixels outside the mask or at zero overlay alpha, preserved original ICC and normalized base, exact recomposition, and matching tile/geocoder hashes. The independent visual audit nevertheless found street lines crossing the main place label and source credit. Execution succeeded, but polished visual acceptance failed. The producing agent also tagged the standalone overlay with the composition ICC profile without changing pixels.
+
+## 2.2.1 correction and remaining gates
+
+The patch separates geographic ink from annotations and removes only underlying map ink around accepted text. This creates transparent reading space without an opaque card or altered photograph, and is represented in PNG and SVG. The renderer also exports the independent overlay with the composition ICC profile directly.
+
+Before claiming the patch complete, verify the corrected live-case composition, publish/pin the patched source, check fresh installation, publish the versioned download packages, and verify the actual Agensi 2.2.1 update and execution. At this checkpoint Agensi 2.2.0 remains the last verified live version.
+
+These checks cover one supplied Yasaka Shrine photograph and locality. They do not establish universal photo, geography, network or agent-client compatibility. Private imagery and test artifacts remain outside this public repository.

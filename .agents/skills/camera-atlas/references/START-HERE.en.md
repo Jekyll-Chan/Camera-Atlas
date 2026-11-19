@@ -1,4 +1,4 @@
-# Camera Atlas v2.2: a photo and a place
+# Camera Atlas v2.2.1: a photo and a place
 
 Use an agent that can open your photo, run local commands and show the finished file. First use needs setup; later sessions can reuse that environment.
 
@@ -14,13 +14,13 @@ The agent prepares a separate Python environment, finds the location, selects th
 
 ## Without an Agensi connection
 
-Use the **Camera Atlas Agent Kit**, which includes the renderer source. When v2.2 is published, get it from the [release page](https://github.com/Jekyll-Chan/Camera-Atlas/releases/tag/v2.2.0) or [Agent Kit download](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.0/Camera-Atlas-Agent-Kit-v2.2.0.zip).
+Use the **Camera Atlas Agent Kit**, which includes the renderer source. When v2.2.1 is published, get it from the [release page](https://github.com/Jekyll-Chan/Camera-Atlas/releases/tag/v2.2.1) or [Agent Kit download](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.1/Camera-Atlas-Agent-Kit-v2.2.1.zip).
 
 Extract it, open **Camera-Atlas** in your agent, and attach your photo. Add this sentence before the request above:
 
 > Read `.agents/skills/camera-atlas/SKILL.md` in this project first.
 
-The smaller [Skill ZIP](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.0/Camera-Atlas-Skill-v2.2.0.zip), when published, contains instructions and the verified installer. Importing it does not itself install the renderer. See the [validation report](https://github.com/Jekyll-Chan/Camera-Atlas/blob/main/docs/Agensi-Live-Validation.md) for observed publication and test status.
+The smaller [Skill ZIP](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.1/Camera-Atlas-Skill-v2.2.1.zip), when published, contains instructions and the verified installer. Importing it does not itself install the renderer. See the [validation report](https://github.com/Jekyll-Chan/Camera-Atlas/blob/main/docs/Agensi-Live-Validation.md) for observed publication and test status.
 
 ## Your files and revisions
 

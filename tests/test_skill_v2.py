@@ -33,7 +33,7 @@ def test_doctor_is_read_only_and_preserves_venv_path(helper, tmp_path):
     assert report["online_ready"] and report["offline_ready"] and report["region_fill_ready"]
     assert report["agent_bridge_supported"] and report["optional_features"]["maps"]
     assert not report["unavailable_capabilities"]
-    assert report["skill_version"] == "2.2.0" and report["engine_version"] == "0.1.0"
+    assert report["skill_version"] == "2.2.1" and report["engine_version"] == "0.1.0"
     assert report["python"] == str(Path(sys.executable).absolute())
     assert not workspace.exists()
 
@@ -222,7 +222,7 @@ def test_temporary_script_has_no_repository_path_assumption(tmp_path):
         check=False,
     )
     assert result.returncode == 0, result.stderr
-    assert json.loads(result.stdout)["skill_version"] == "2.2.0"
+    assert json.loads(result.stdout)["skill_version"] == "2.2.1"
     assert not workspace.exists()
 
 
@@ -249,7 +249,7 @@ def test_skill_package_is_small_text_only_and_reproducible(tmp_path):
             == (ROOT / "examples/data/photos.sources.json").read_bytes()
         )
         manifest = json.loads(archive.read("package-manifest.json"))
-        assert manifest["skill_version"] == "2.2.0"
+        assert manifest["skill_version"] == "2.2.1"
         assert manifest["price"] == "Free" and not manifest["platform_tested"]
         for name, data_hash in manifest["files"].items():
             content = archive.read(name)

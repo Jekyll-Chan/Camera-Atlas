@@ -1,4 +1,4 @@
-# Camera Atlas v2.2：给照片和地点
+# Camera Atlas v2.2.1：给照片和地点
 
 使用能看照片、运行本地命令并交付文件的 Agent。第一次需要准备环境，之后通常可以复用。
 
@@ -14,13 +14,13 @@ Agent 会准备独立 Python 环境、确认地点、选择区域并导出。你
 
 ## 不连接 Agensi 也能使用
 
-选择包含渲染源码的 **Camera Atlas Agent Kit**。v2.2 发布后，可在[版本页面](https://github.com/Jekyll-Chan/Camera-Atlas/releases/tag/v2.2.0)或[源码包下载](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.0/Camera-Atlas-Agent-Kit-v2.2.0.zip)取得。
+选择包含渲染源码的 **Camera Atlas Agent Kit**。v2.2.1 发布后，可在[版本页面](https://github.com/Jekyll-Chan/Camera-Atlas/releases/tag/v2.2.1)或[源码包下载](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.1/Camera-Atlas-Agent-Kit-v2.2.1.zip)取得。
 
 解压后，在 Agent 中打开 **Camera-Atlas** 文件夹，上传照片，在上面的请求前加一句：
 
 > 请先读取项目中的 `.agents/skills/camera-atlas/SKILL.md`。
 
-发布后的[小体积 Skill ZIP](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.0/Camera-Atlas-Skill-v2.2.0.zip)包含说明和经过校验的安装工具；导入说明不等于引擎已安装。具体发布和实测进度见[验证记录](https://github.com/Jekyll-Chan/Camera-Atlas/blob/main/docs/Agensi-Live-Validation.md)。
+发布后的[小体积 Skill ZIP](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.1/Camera-Atlas-Skill-v2.2.1.zip)包含说明和经过校验的安装工具；导入说明不等于引擎已安装。具体发布和实测进度见[验证记录](https://github.com/Jekyll-Chan/Camera-Atlas/blob/main/docs/Agensi-Live-Validation.md)。
 
 ## 领取和修改
 

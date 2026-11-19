@@ -1,6 +1,6 @@
 # Public samples · engineering checks
 
-Use the bridge in [agent-workflow.md](agent-workflow.md) with the verified v2.2 engine. The source kit contains two matched offline examples:
+Use the bridge in [agent-workflow.md](agent-workflow.md) with the verified v2.2.1 engine. The source kit contains two matched offline examples:
 
 | Photo under `examples/data/` | Built-in place ID | Geography |
 | --- | --- | --- |
@@ -13,7 +13,7 @@ Run prepare, inspect/refine the region mask, then render with the matching built
 
 > Run Camera Atlas's Lake Lucerne public demo. Prepare the local environment if needed, then show me the finished image, transparent layer and source report.
 
-The helper's `demo` command is a basic installation check, not proof of full-sky visual quality. Follow [onboarding](onboarding.md); use the current verified lock and do not replace a working v2.2 environment with an older engine. The helper obtains the public photograph, GeoJSON and source record from `demo_files` in `engine-lock.json`, checks their hashes and writes the result locally.
+The helper's `demo` command is a basic installation check, not proof of full-sky visual quality. Follow [onboarding](onboarding.md); use the current verified lock and do not replace a working v2.2.1 environment with an older engine. The helper obtains the public photograph, GeoJSON and source record from `demo_files` in `engine-lock.json`, checks their hashes and writes the result locally.
 
 The example uses a NASA photograph of the Alps taken from Skylab 3 and a Natural Earth lake outline. The lake is the mapped locality, not an exact camera position. The photo source record contains credit and reuse information. The text-only Agensi ZIP includes the GeoJSON and source record under `sample/`; it downloads the matched public photograph when needed. These sample licenses do not extend to the user's private photos.
 

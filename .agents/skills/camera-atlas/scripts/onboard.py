@@ -18,7 +18,7 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-SKILL_VERSION = "2.2.0"
+SKILL_VERSION = "2.2.1"
 CORE_MODULES = ("PIL", "numpy", "shapely", "pyproj", "pydantic", "typer", "httpx")
 EXTRA_MODULES = {
     "terrain": ("rasterio", "contourpy"),

@@ -1,6 +1,6 @@
-# Camera Atlas Free Skill v2.2
+# Camera Atlas Free Skill v2.2.1
 
-Skill v2.2 provides a photo-and-place workflow through the user's code-capable agent: isolated setup, real geographic data, a reviewed full-region mask, independent map compositing and actual files. Agensi delivers instructions; it does not host this renderer. The Python package version remains **0.1.0**; the immutable revision and verified capabilities distinguish the updated engine from the older package with that same label.
+Skill v2.2.1 provides a photo-and-place workflow through the user's code-capable agent: isolated setup, real geographic data, a reviewed full-region mask, independent map compositing and actual files. Agensi delivers instructions; it does not host this renderer. The Python package version remains **0.1.0**; the immutable revision and verified capabilities distinguish the updated engine from the older package with that same label.
 
 Beginner instructions: [English](../.agents/skills/camera-atlas/references/START-HERE.en.md) · [简体中文](../.agents/skills/camera-atlas/references/START-HERE.zh-CN.md) · [Bilingual quickstart](Agent-Quickstart.md).
 
@@ -18,6 +18,8 @@ The standard-library `onboard.py` runs unchanged from a temporary file with an e
 
 ## What changed
 
+Patch 2.2.1 addresses street lines crossing type in the approved 2.2.0 workflow: map ink is cleared transparently behind labels/credits, and the independent PNG overlay carries the composition color profile. No opaque label card or photograph edit is needed. Check the validation record before claiming this patch is live.
+
 - A selected whole sky, water or other negative-space region sets the geographic viewport; the old square-corner size cap does not apply.
 - Expanding the region or radius queries a larger real extent at uniform scale, then clips the transparent layer around protected subjects.
 - The agent chooses and reviews the mask; a novice is not asked to paint it. Heuristic suggestions are not semantic segmentation.
@@ -27,8 +29,8 @@ The standard-library `onboard.py` runs unchanged from a temporary file with an e
 ## Packages
 
 ```bash
-python scripts/package_agensi.py --output dist/Camera-Atlas-Skill-v2.2.0.zip
-python scripts/package_agent_kit.py --output dist/Camera-Atlas-Agent-Kit-v2.2.0.zip
+python scripts/package_agensi.py --output dist/Camera-Atlas-Skill-v2.2.1.zip
+python scripts/package_agent_kit.py --output dist/Camera-Atlas-Agent-Kit-v2.2.1.zip
 ```
 
 The Agensi ZIP has `SKILL.md` at its root and contains text instructions, bilingual guides, the installer, source lock and public sample text data. It contains no private photos, environment, cache or compiled executable. The separate Agent Kit includes renderer source and licensed public samples. Never upload the entire repository archive as the text-only Agensi package.
@@ -37,8 +39,10 @@ No paid Agensi image tool is required. The user's agent/API, computer and networ
 
 ## Publication and validation
 
-The [validation record](Agensi-Live-Validation.md) is the source of observed status. The earlier live marketplace listing was version **1.0**, containing Skill **2.0.1**; those are different version fields. Its pinned corner-map renderer could not fulfill the full-sky test. Loading that older Skill through Codex does not validate v2.2 delivery.
+The [validation record](Agensi-Live-Validation.md) is the source of observed status. The earlier live marketplace listing was version **1.0**, containing Skill **2.0.1**; those are different version fields. Its pinned corner-map renderer could not fulfill the full-sky test. Loading that older Skill through Codex does not validate v2.2.1 delivery.
 
-For v2.2, publish and verify the updated immutable renderer, test a fresh installation from its lock, submit the new package, then load the newest live version through Codex and test actual file delivery. A prepared ZIP, submitted update, approved listing and verified photo workflow are distinct states. One supplied-photo result does not establish universal image, agent or network compatibility.
+Agensi 2.2.0 was subsequently approved and served live. An independent Codex test completed setup, place lookup, full-sky masking, rendering and file delivery from a photo and place. Visual review found street lines crossing type; successful execution did not establish polished visual acceptance. Patch 2.2.1 addresses that refinement and still needs its own release/live validation.
+
+For v2.2.1, publish and verify the updated immutable renderer, test a fresh installation from its lock, submit the new package, then load the newest live version through Codex and test actual file delivery. A prepared ZIP, submitted update, approved listing and verified photo workflow are distinct states. One supplied-photo result does not establish universal image, agent or network compatibility.
 
 Official platform references, checked 2026-11-19: [connection](https://www.agensi.io/docs/mcp-setup), [file loading](https://www.agensi.io/docs/how-agents-load-skills), [agent submission](https://www.agensi.io/docs/submit-from-your-agent), [updates](https://www.agensi.io/docs/updates). Updates keep serving the previous live version until approved; check what `get_skill` actually returns.

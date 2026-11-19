@@ -1,6 +1,6 @@
-# Camera Atlas — Free v2.2
+# Camera Atlas — Free v2.2.1
 
-Price: Free. Skill version: 2.2.0. Python engine label: 0.1.0, with an immutable source revision and capability checks.
+Price: Free. Skill version: 2.2.1. Python engine label: 0.1.0, with an immutable source revision and capability checks.
 
 Give your capable AI agent a travel photo and its place. Camera Atlas helps it prepare the local renderer, find verified map data, select the whole suitable sky or water region and return the finished photograph, transparent map and source report. It preserves original framing, orientation and supported colors/light; maps are independent layers, not a regenerated photo or opaque square card.
 
@@ -21,4 +21,4 @@ Limits: local images up to 18 MB and 25 megapixels; optional HEIC decoder; 8-bit
 
 [Open-source renderer and documentation](https://github.com/Jekyll-Chan/Camera-Atlas). Code is MIT; geographic data, fonts and sample photos retain their own licenses. [Current publication and test evidence](https://github.com/Jekyll-Chan/Camera-Atlas/blob/main/docs/Agensi-Live-Validation.md).
 
-This is v2.2 listing copy. Apply it with the corresponding approved version; an older live listing does not automatically gain these capabilities. Keep the requirements and limits visible.
+This is v2.2.1 listing copy. Apply it with the corresponding approved version; an older live listing does not automatically gain these capabilities. Keep the requirements and limits visible.

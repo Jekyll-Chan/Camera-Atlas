@@ -241,7 +241,9 @@ def test_skill_package_is_small_text_only_and_reproducible(tmp_path):
         assert "references/START-HERE.en.md" in names
         assert "references/START-HERE.zh-CN.md" in names
         assert "references/public-sample.md" in names
-        assert archive.read("sample/lucerne.geojson") == (ROOT / "examples/data/lucerne.geojson").read_bytes()
+        assert archive.read("sample/lucerne.json") == (ROOT / "examples/data/lucerne.geojson").read_bytes()
+        assert archive.read("LICENSE.txt") == (ROOT / "LICENSE").read_bytes()
+        assert all(Path(name).suffix in {".md", ".txt", ".json", ".yaml", ".py"} for name in names)
         assert (
             archive.read("sample/photos.sources.json")
             == (ROOT / "examples/data/photos.sources.json").read_bytes()

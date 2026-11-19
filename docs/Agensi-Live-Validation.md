@@ -1,6 +1,6 @@
 # Agensi / Codex validation · 2026-11-19
 
-Status: live legacy instruction delivery verified; the revised local workflow passed one supplied-photo acceptance. New-version publication and live Agensi rerun remain pending.
+Status: live legacy instruction delivery verified; the revised local workflow passed one supplied-photo acceptance. The accepted renderer source is public and fresh isolated setup is verified; release assets and the live Agensi rerun are in progress.
 
 ## Observed live result
 
@@ -32,11 +32,19 @@ This validates one Yasaka Shrine photograph and locality, not arbitrary photos, 
 - Original format, orientation and available GPS are kept in private workspace metadata for location-conflict review.
 - Onboarding separately verifies offline, region-fill and online capabilities, including actual imports of the bridge and vector decoder. A legacy or incomplete install cannot report the primary workflow ready.
 
+## Published source and fresh installation
+
+The accepted renderer is public at immutable commit `aff52e15153809eb95b07f23f83ccbd2242cbf87`. [GitHub CI run 44519181301](https://github.com/Jekyll-Chan/Camera-Atlas/actions/runs/44519181301) completed successfully on Python 3.11, 3.12 and 3.13, including tests, lint, formatting and package builds.
+
+The official commit archive was downloaded and verified against all runtime source files, bundled font assets and public sample hashes. Its size is 64,790,955 bytes and SHA256 is `0af51fe4156fbd8f61ab1ee9cff29cbbfcdf9efa7a77dbcfebaae89baccaed04`. The v2.2 engine lock declares the agent bridge, region-fill and online-map capabilities and pins this exact archive.
+
+A new isolated environment installed this locked archive and its `maps` dependencies. The actual interpreter reported `online_ready: true`; it did not use an editable development checkout. The fresh installation independently completed photo preparation, actual Photon search, fresh map acquisition and rendering using the already reviewed mask. Visual and pixel checks passed, including zero changes outside the sky, preserved ICC and exact output-pixel agreement with the accepted development render. This installation check reused the reviewed mask; it is not a second blind region-selection test.
+
 ## Remaining release gates
 
-1. Publish the accepted renderer source to GitHub and inspect CI.
-2. Pin its immutable commit and checksum, and test a fresh isolated installation.
-3. Build and publish the source kit and text-only Skill package, then submit the Agensi update.
-4. After approval, load the live new Skill through Codex and verify actual photo-to-file execution again. A prepared package or submitted update is not yet a tested live version.
+1. Publish the versioned source kit and text-only Skill package, and verify the Agensi submission outcome.
+2. After approval, load the live new Skill through Codex and verify actual photo-to-file execution again. A prepared package or submitted update is not yet a tested live version.
 
-No new GitHub source or Agensi update has been published as part of this validation checkpoint. No claim is made that arbitrary photographs, every geography or every agent client are already verified.
+The old Agensi version remains the last verified live version at this checkpoint. No claim is made that arbitrary photographs, every geography or every agent client are already verified.
+
+The first v2.2 MCP update submission was rejected because the platform requires a recognized text extension on `LICENSE`. No pending update was created. The package builder now emits the unchanged licence as `LICENSE.txt` and the unchanged sample GeoJSON as `sample/lucerne.json`, with a packaging regression check. Resubmission is pending at this checkpoint.

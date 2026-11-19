@@ -26,8 +26,10 @@ def build(output):
     for name in ("lucerne.geojson", "photos.sources.json"):
         data = (ROOT / "examples/data" / name).read_bytes()
         data.decode("utf-8")
-        files[f"sample/{name}"] = data
-    files["LICENSE"] = (ROOT / "LICENSE").read_bytes()
+        # The MCP uploader validates filename extensions, not only UTF-8 content.
+        target = "lucerne.json" if name == "lucerne.geojson" else name
+        files[f"sample/{target}"] = data
+    files["LICENSE.txt"] = (ROOT / "LICENSE").read_bytes()
     lock = json.loads(files["references/engine-lock.json"])
     region_pinned = all(
         lock.get("capabilities", {}).get(name) is True

@@ -4,15 +4,35 @@ import numpy as np
 from PIL import Image, ImageOps
 
 
-def read_photo(path: Path):
-    if path.suffix.lower() in (".heic", ".heif"):
+def prepare_photo_decoder(header: bytes, suffix=""):
+    """Register optional HEIF support before Pillow probes anonymous uploads.
+
+    Uploads are stored as ``.input`` files, so a filename extension alone cannot
+    select their decoder. HEIF declares its brands in the ISO BMFF ftyp box.
+    """
+    brands = set()
+    if len(header) >= 16 and header[4:8] == b"ftyp":
+        size = min(int.from_bytes(header[:4], "big"), len(header))
+        brands = {header[8:12], *(header[i : i + 4] for i in range(16, size - 3, 4))}
+    heif_brands = {b"heic", b"heix", b"hevc", b"hevx", b"heim", b"heis", b"hevm", b"hevs", b"mif1", b"msf1"}
+    if suffix.lower() in (".heic", ".heif") or brands & heif_brands:
         try:
             import pillow_heif
 
             pillow_heif.register_heif_opener()
         except ImportError as exc:
-            raise ValueError("Install camera-atlas[heic] for HEIC input") from exc
+            raise ValueError(
+                "HEIC/HEIF input needs the optional camera-atlas[heic] decoder in the renderer's "
+                "isolated environment. The original has not been converted or resized."
+            ) from exc
+
+
+def read_photo(path: Path):
+    path = Path(path)
+    with path.open("rb") as source:
+        prepare_photo_decoder(source.read(4096), path.suffix)
     with Image.open(path) as image:
+        check_photo_colour(image)
         gps = read_gps(image)
         exif = image.getexif()
         info = {
@@ -25,6 +45,33 @@ def read_photo(path: Path):
         # ICC is retained; no conversion, enhancement, resizing or tone mapping.
         base = ImageOps.exif_transpose(image).convert("RGBA")
     return base, info
+
+
+def check_photo_colour(image):
+    """Reject HEIF inputs this 8-bit compositor cannot preserve faithfully."""
+    if image.format != "HEIF":
+        return
+    profile = image.info.get("nclx_profile") or {}
+    high_depth = image.info.get("bit_depth", 8) > 8
+    hdr = profile.get("transfer_characteristics") in (16, 18)
+    hdr |= bool(image.info.get("mastering_display_colour_volume"))
+    hdr |= any("hdrgainmap" in str(key).lower() for key in image.info.get("aux", {}))
+    if high_depth or hdr:
+        raise ValueError(
+            "This HEIC/HEIF contains high-bit-depth or HDR image data. The current renderer only "
+            "preserves 8-bit SDR images; provide an approved SDR export. No automatic colour or "
+            "tone conversion was applied."
+        )
+    if (
+        profile
+        and not image.info.get("icc_profile")
+        and (profile.get("color_primaries"), profile.get("transfer_characteristics")) != (1, 13)
+    ):
+        raise ValueError(
+            "This HEIC/HEIF uses a non-sRGB NCLX colour profile without an ICC profile. The current "
+            "PNG exporter cannot preserve that profile; provide an approved sRGB export or an "
+            "8-bit SDR image with an embedded ICC profile. No automatic colour conversion was applied."
+        )
 
 
 def read_gps(image):

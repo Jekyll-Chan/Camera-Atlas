@@ -29,6 +29,9 @@ def render(
     input: Annotated[Path, typer.Option(exists=True, dir_okay=False)],
     output: Annotated[Path, typer.Option()],
     location: str | None = None,
+    location_label: Annotated[
+        str | None, typer.Option(help="Verified display name; never changes the sourced map coordinates.")
+    ] = None,
     lat: float | None = None,
     lon: float | None = None,
     confirmed_region: bool = False,
@@ -56,6 +59,9 @@ def render(
     remove_text: bool = False,
     text_mask: Path | None = None,
     exclusion_mask: Path | None = None,
+    region_mask: Annotated[
+        Path | None, typer.Option(help="White selects the full map region; black protects the photo.")
+    ] = None,
     nominatim_url: str | None = None,
     accept_public_nominatim_policy: bool = False,
     overpass_url: str = "https://overpass-api.de/api/interpreter",

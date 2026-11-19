@@ -12,16 +12,20 @@ python3.11 /tmp/onboard.py setup --workspace ./camera-atlas-work --lock /tmp/eng
 python3.11 /tmp/onboard.py demo --workspace ./camera-atlas-work --lock /tmp/engine-lock.json
 ```
 
-`doctor`: reports Python version, core/optional dependencies, readiness and render/setup/plan recommendation. An existing trusted engine can be checked via `--python /actual/path/to/python`; its source trust is still the agent's responsibility. No photo, GPS, environment secrets or web account is read.
+`doctor`: reports Python version, core/optional dependencies and separate offline, region-fill and online readiness. For the agent workflow require `online_ready`, not merely a version label or `offline_ready`. This verifies an importable agent bridge and vector decoder as well as region-fill support. An existing trusted engine can be checked via `--python /actual/path/to/python`; its source trust is still the agent's responsibility. No photo, GPS, environment secrets or web account is read.
 
-`setup`: downloads an immutable official GitHub source ZIP, verifies SHA256 before installing, creates a separate `.venv`, installs engine 0.1.0 and checks dependencies. The source archive is about 61 MB; Python packages need additional network/disk space. It does not install a model service, upload photos or create a paid account. It refuses an unmanaged existing `.venv`. If the request already authorizes setup, do not ask again. If policy/user constraints prohibit installation, use Plan mode. For offline installation, `--source-archive` accepts an already-obtained source ZIP only when its checksum matches. Add `--extra terrain`, `--extra repair`, or `--extra heic` only for an actual requested need.
+`setup`: downloads the immutable official GitHub source ZIP named in the lock, verifies SHA256 before installing, creates a separate `.venv`, installs the engine and checks dependencies. Read the archive size from the lock; dependencies need additional network and disk space. A lock declaring `agent_bridge`, `region_fill` and `online_maps` installs `maps` by default and verifies those capabilities. An unmarked older lock can only prepare its offline demo and must not report the online agent ready. The package version remains 0.1.0, so inspect capabilities rather than that label alone. Setup does not install a model service, upload photos or create a paid account. It refuses an unmanaged existing `.venv`. If setup is already authorized, do not ask again. If installation is unavailable, offer the clearly labeled planning route. `--source-archive` accepts a previously downloaded archive only when its checksum matches. Add `--extra terrain`, `--extra repair`, or `--extra heic` only for an actual need.
 
 `demo`: retrieves checksum-verified NASA photo, Natural Earth lake GeoJSON and photo notices from the pinned official repository, then renders offline. Returns exact final/overlay/provenance paths and warnings. It downloads no private imagery and makes no public geocoder/Overpass request. NASA aerial photography is an engineering sample, not ground-level travel photography. The sample is a locality locator, never an astronaut's ground camera point. Existing outputs and changed inputs are never overwritten.
 
-After setup, use the returned Python path:
+After setup, use the returned Python path for the photo/place workflow in [agent-workflow.md](agent-workflow.md):
 
 ```bash
-/path/returned/by/doctor -m camera_atlas.cli render --input /actual/photo.jpg   --geojson /actual/verified-data.geojson --location 'Verified place name'   --radius-km 45 --svg --output /new/result-directory
+/path/returned/by/doctor -m camera_atlas.agent prepare --input /actual/photo.jpg --workspace /actual/private-task
 ```
 
-Map span must match the actual dataset resolution. The example radius is suitable for the bundled Natural Earth overview, not every user location. For original photos, follow rendering.md rather than reusing the demo's location or data. Keep setup failures actionable: say what is unavailable, preserve the photo, offer a plan or another code-enabled agent; do not dump raw pip logs on a novice.
+Then resolve the user's place, inspect/refine the region and render actual files. Never reuse the public demo's location or data for another photograph. Keep setup failures actionable: say what is unavailable, preserve the photo, and offer a plan or another code-enabled agent; do not dump raw installation logs on a novice.
+
+## Region-fill capability
+
+The doctor reports `region_fill_supported`, `agent_bridge_supported` and `online_ready`. The current workflow needs all three. If only older code is available, explain the missing capability; do not substitute a small corner map and call the task complete. Keep the immutable revision and checksum unchanged during normal use. Updating that pin is a release operation requiring source verification and fresh-install testing.

@@ -1,24 +1,24 @@
-# Camera Atlas — Free v2
+# Camera Atlas — Free v2.2
 
-Price: Free. Skill version: 2.0.1. Engine: 0.1.0, pinned verified source.
+Price: Free. Skill version: 2.2.0. Python engine label: 0.1.0, with an immutable source revision and capability checks.
 
-Turn an original travel photograph into restrained editorial artwork with real geographic map annotation. Keep the photograph's framing and color, return an independent transparent layer and explain data sources. Start with a photo and a place; exact camera GPS is optional.
+Give your capable AI agent a travel photo and its place. Camera Atlas helps it prepare the local renderer, find verified map data, select the whole suitable sky or water region and return the finished photograph, transparent map and source report. It preserves original framing, orientation and supported colors/light; maps are independent layers, not a regenerated photo or opaque square card.
 
-The skill checks your agent first. With Python 3.11+ and file access it can set up an isolated local engine and render. Without suitable execution tools it delivers a clearly labeled editorial plan, not an image. Without visual tools it will not claim image inspection. A public NASA/Natural Earth sample lets you try the workflow before supplying private photos.
+When the region is wider or taller, it expands the real geographic viewport at uniform scale and protects buildings, people and important branches. The agent checks the result, including the region edges, location marker and readable source credit. Exact camera GPS is optional; named places use an honest locality marker.
 
-Rendering runs on your own machine and requires these capabilities.
+Rendering runs on the buyer's machine and requires:
 
-- Local Python 3.11 or later.
-- Permission to read your selected photo and write the resulting files.
-- Permission to create an isolated Python environment and install the renderer and its dependencies on first use.
-- Network for first setup and online geography; reliable local data can support offline rendering after setup.
-- Image understanding for visual composition review; otherwise human review is required.
-- Browsing or trusted supplied sources for externally verified planning facts.
+- Python 3.11 or later; file read/write and command execution.
+- Permission to create an isolated environment and install the checksum-verified renderer and dependencies on first use.
+- Network for setup and online geography, or suitable verified offline data already available.
+- Image inspection for composition and final visual review.
 
-Includes English and Simplified Chinese beginner guides. No paid Agensi image tool, generative photo regeneration or geocoder API key is required by the core/sample workflow. Your AI agent and infrastructure may have separate costs. No hosted rendering service is included.
+Includes English and Simplified Chinese beginner guides. The agent handles commands, map queries and the reviewed selection. First setup is required; image upload alone in an ordinary chat app is not sufficient. Missing execution tools lead to a clearly labeled plan, not a claim that a photo was generated.
 
-Important limits: subject saliency is a texture heuristic; complex OSM relation assembly, automatic DEM download, high-bit-depth processing and universal agent compatibility are not implemented. Missing geography yields a clean photograph or an explained plan. Text interpolation requires a reviewed mask and cannot recover authentic hidden details.
+No paid Agensi image tool, hosted Camera Atlas account or geocoder API key is required. Your existing AI subscription/API, computer and network may have separate costs.
 
-The renderer is open source under the MIT license. Geographic data and photos retain their own licenses. [Renderer source and documentation](https://github.com/Jekyll-Chan/Camera-Atlas)
+Limits: local images up to 18 MB and 25 megapixels; optional HEIC decoder; 8-bit SDR compositing. Unsupported HDR/high-bit-depth or color profiles require an approved export. Suggested regions need review; screenshot cleanup is separate and cannot recover authentic hidden detail. Contours require a real DEM. Public data availability, all photograph types and all agent clients are not guaranteed. Trae and ordinary DeepSeek web/app sessions have not been verified.
 
-Status: submission copy only; not yet approved/listed/tested inside Agensi. Actual user-facing listing must keep the requirements and limits visible.
+[Open-source renderer and documentation](https://github.com/Jekyll-Chan/Camera-Atlas). Code is MIT; geographic data, fonts and sample photos retain their own licenses. [Current publication and test evidence](https://github.com/Jekyll-Chan/Camera-Atlas/blob/main/docs/Agensi-Live-Validation.md).
+
+This is v2.2 listing copy. Apply it with the corresponding approved version; an older live listing does not automatically gain these capabilities. Keep the requirements and limits visible.

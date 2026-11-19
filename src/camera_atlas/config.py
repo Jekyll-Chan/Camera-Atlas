@@ -16,6 +16,7 @@ class RenderConfig(BaseModel):
     lat: float | None = Field(None, ge=-90, le=90)
     lon: float | None = Field(None, ge=-180, le=180)
     location: str | None = None
+    location_label: str | None = Field(None, min_length=1, max_length=80)
     confirmed_region: bool = False
     geojson: Path | None = None
     dem: Path | None = None
@@ -41,11 +42,22 @@ class RenderConfig(BaseModel):
     remove_text: bool = False
     text_mask: Path | None = None
     exclusion_mask: Path | None = None
+    region_mask: Path | None = None
     nominatim_url: str | None = None
     accept_public_nominatim_policy: bool = False
     overpass_url: str = "https://overpass-api.de/api/interpreter"
     user_agent: str = "CameraAtlas/0.1 (local photography tool)"
     subject: Literal["unknown", "lake", "mountain", "city", "trail", "river", "coast"] = "unknown"
+
+    @field_validator("location_label")
+    @classmethod
+    def readable_location_label(cls, value):
+        if value is None:
+            return None
+        value = value.strip()
+        if not value or any(ord(char) < 32 for char in value):
+            raise ValueError("Location label must be one readable line")
+        return value
 
     @field_validator("overpass_url", "nominatim_url")
     @classmethod

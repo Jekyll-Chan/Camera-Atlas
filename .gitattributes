@@ -1,0 +1,2 @@
+# Preserve the upstream font licence byte-for-byte, including its whitespace.
+src/camera_atlas/assets/fonts/OFL.txt -whitespace

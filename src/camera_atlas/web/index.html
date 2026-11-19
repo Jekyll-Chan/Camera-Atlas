@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#fafbf9">
+<title>Camera Atlas</title><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header><a class="brand" href="./index.html">Camera <em>Atlas</em><span aria-hidden="true">·</span></a><details class="about"><summary>Preview</summary><div>Processed on this computer. Preview maps: San Francisco and Lake Lucerne. Global search and automatic selection are not connected yet.<a href="https://github.com/Jekyll-Chan/Camera-Atlas" target="_blank" rel="noreferrer">Project & credits</a></div></details></header>
+<main>
+<div class="intro"><h1>Your journey, mapped.</h1></div>
+<div class="workspace">
+<nav aria-label="Create your photo" class="steps"><button data-step="1" aria-current="step">Photo</button><button data-step="2" disabled>Place</button><button data-step="3" disabled>Map</button><button data-step="4" disabled>Save</button><span class="step-line" aria-hidden="true"></span></nav>
+<section id="step1" class="panel">
+<label class="upload" for="photo"><span class="upload-icon" aria-hidden="true">＋</span><strong>Choose a photo</strong><span>JPG · PNG · WebP</span></label>
+<input type="file" id="photo" accept="image/jpeg,image/png,image/webp" class="file-input">
+<button class="sample" id="sample">Try a sample</button>
+<p class="footnote center">Preview: San Francisco · Lake Lucerne</p>
+<div id="local-file-notice" class="file-notice" hidden><p>View only. Start the launcher to edit.</p><a class="primary" href="http://127.0.0.1:8765/">Open app</a></div>
+</section>
+<section id="step2" class="panel" hidden>
+<h2>Where was it?</h2><label for="place" class="sr-only">Where was it?</label><input id="place" type="search" placeholder="Search a place" autocomplete="off">
+<div id="candidates" class="candidates" aria-live="polite"></div><div id="chosen" class="chosen" hidden></div>
+<button id="confirm" class="primary" disabled>Confirm place</button>
+</section>
+<section id="step3" class="panel editor" hidden>
+<div class="section-heading"><h2>Map area</h2><button id="undo" class="text-button" disabled>Undo</button></div>
+<div class="stage"><canvas id="editor" aria-label="Paint a map area or use the area buttons below" role="img"></canvas><span class="stage-label">Selected area</span></div>
+<div class="presets" aria-label="Quick selection"><button data-region="top">Top</button><button data-region="right">Right</button><button data-region="all">All</button><button data-region="clear">Clear</button></div>
+<div class="tools"><div class="segmented"><button id="paint" aria-pressed="true">Paint</button><button id="erase" aria-pressed="false">Erase</button></div><label for="brush">Brush<input id="brush" type="range" min="2" max="18" value="8"></label></div>
+<label class="slider-label" for="opacity">Ink <output id="opacityValue">70%</output></label><input id="opacity" type="range" min="20" max="100" value="70">
+<button id="generate" class="primary" disabled>Preview map</button>
+</section>
+<section id="step4" class="panel" hidden>
+<div class="section-heading"><h2>Your print</h2><button class="text-button" id="adjust">Edit</button></div>
+<div class="result-stage"><img id="result" alt="Photo with a geographic overlay"></div>
+<button id="compare" class="secondary">View original</button><p id="resultNote" class="footnote" hidden></p>
+<a id="download" class="primary download">Save image</a>
+<details class="extras"><summary>More</summary><div class="download-options"><a id="overlayDownload">Map layer</a><a id="maskDownload">Selection</a><a id="sourceDownload">Map sources</a></div></details>
+</section>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+<button id="retryJob" class="sample" hidden>Retry</button>
+</div>
+</main>
+<footer><a href="mailto:flyawaypencil480@gmail.com" aria-label="Contact Jekyll Chan: flyawaypencil480@gmail.com"><span>Jekyll Chan</span>flyawaypencil480@gmail.com</a></footer>
+<script src="./app.js" defer></script>
+</body></html>

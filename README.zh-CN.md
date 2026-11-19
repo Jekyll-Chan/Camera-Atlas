@@ -1,17 +1,19 @@
 # Camera Atlas
 
+> **照片＋地点，由你已有的 Agent 完成。** Skill v2.2 准备真实地图，铺满所选天空或水面，并交付图片，无需 Camera Atlas 云后台。首次使用需要有本机执行能力的 Agent 完成环境准备。[中英上手指南](docs/Agent-Quickstart.md) · [发布与实测状态](docs/Agensi-Live-Validation.md)。
+
 **Photography First. Geography Verified. 摄影优先，地理可核查。**
 
 [GitHub 开源仓库](https://github.com/Jekyll-Chan/Camera-Atlas)
 
-Camera Atlas 在原始摄影上叠加独立透明地理图层，生成克制的旅行杂志式作品。它不使用生成式图像模型重绘照片，不全局调色，不强制裁切。提供 Python CLI、可复用 API、Codex Agent Skill 和可追溯输出。当前版本为 0.1.0 初始版本；能力与限制均在下方说明。
+Camera Atlas 在原始摄影上叠加独立透明地理图层，生成克制的旅行杂志式作品。它不使用生成式图像模型重绘照片，不全局调色，不强制裁切。提供 Python CLI、可复用 API、Codex Agent Skill 和可追溯输出。Python 包版本号仍为 0.1.0，需通过源码版本和能力检查区分 v2.2 引擎；能力与限制均在下方说明。
 
 [English README](README.md) · [架构](docs/Architecture.md) · [CLI 全选项](docs/CLI-Reference.md) · [精度和溯源](docs/Accuracy-and-Provenance.md) · [公开示例与许可](examples/README.md)
 
 
 ## 免费 Skill v2
 
-**Skill 版本 2.0.1；Python 引擎保持 0.1.0。** 新版先检查 Agent 能力，可自动准备独立环境并运行公开样片；能制图就输出实际文件，不能执行则明确交付设计方案。它是已准备的免费适配版，不表示已经在 Agensi 上架或所有 Agent 都通过实测。
+**Skill 为 2.2.0，Python 引擎版本号仍为 0.1.0。** 检查 Agensi 实际返回的 Skill 版本；低于 2.2 的旧版不具备这条完整流程。如果平台仍是旧版，使用已验证的 v2.2 Agent Kit。需要文件、命令和看图能力，以及首次独立安装；`doctor.online_ready` 检查执行桥接、区域渲染和地图解码能力。文字方案不等于已生成图片。
 
 先看：[中文小白指南](.agents/skills/camera-atlas/references/START-HERE.zh-CN.md) · [English beginner guide](.agents/skills/camera-atlas/references/START-HERE.en.md) · [v2 说明](docs/Agensi-v2.md) · [版本记录](CHANGELOG.md)。
 
@@ -23,11 +25,11 @@ Camera Atlas 在原始摄影上叠加独立透明地理图层，生成克制的�
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
-pip install '.[terrain,repair]'
+pip install '.[maps,terrain,repair]'
 camera-atlas --help
 ```
 
-只用矢量图层可 `pip install .`。可选依赖：`terrain` 为 rasterio/contourpy，`repair` 为 OpenCV，`heic` 为 HEIC 解码，`dev` 为测试、检查和构建工具。离线功能不需要模型服务或 API Key。TIFF/HEIC/HDR 均规范化为 8 位 RGBA；本版不提供高位深归档合成。
+只用矢量图层可 `pip install .`。可选依赖：`maps` 为在线矢量解码，`terrain` 为 rasterio/contourpy，`repair` 为 OpenCV，`heic` 为 HEIC 解码，`dev` 为测试、检查和构建工具。离线功能不需要模型服务或 API Key。合成使用 8 位 SDR。不支持的 HDR、高位深或色彩配置会被拒绝，不静默转换；可选 HEIC 解码仍需受支持的色彩配置。
 
 ## 使用
 
@@ -47,7 +49,7 @@ camera-atlas render --input photo.jpg --location 'Lake Lucerne' \
   --output render-output/locality
 ```
 
-地点名使用配置好的 Nominatim 兼容服务查询，或匹配离线 GeoJSON 的已声明地区。不会默认启用公共地名服务。查询多个结果时保持未解决状态，并返回候选；不得凭热度选取。若只知道区域中心，使用 `--confirmed-region --lat ... --lon ...`，输出空心地区标记，不伪装成精确机位。
+底层 CLI 使用配置好的 Nominatim 兼容服务查询，或匹配离线 GeoJSON 的已声明地区。Agent 流程则提供明确、有限范围的 Photon 地点搜索与 OpenFreeMap 地图查询。查询多个结果时保持未解决状态，并返回候选；不得凭热度选取。若只知道区域中心，使用 `--confirmed-region --lat ... --lon ...`，输出空心地区标记，不伪装成精确机位。
 
 ```bash
 camera-atlas render --input photo.jpg --location 'Sayram Lake, Xinjiang, China' \
@@ -86,9 +88,9 @@ print(result.final, result.metadata["quality"])
 
 EXIF 方向只规范化一次，ICC 配置保留，照片不缩放、不裁切、不做全局调色。除透明图层覆盖区域和明确授权的文字修复区域外，程序验证规范化像素完全一致。原始压缩文件保留在输入位置；规范化 PNG 并非原 JPEG 文件的字节副本。
 
-七种地图模式：coastline、topographic、urban、trail、river、regional、minimal；自动选择只使用当前地理范围内真实可用的数据，可用 `--subject` 提供主体提示或 `--map-mode` 手动覆盖。五种主题使用同一地理引擎。默认地图约占 20% 画幅，细暖白线、较低透明度，不加中央标题或不透明卡片。`--no-labels` 可关闭可选文字，但数据许可要求的署名必须保留。
+七种地图模式：coastline、topographic、urban、trail、river、regional、minimal；自动选择只使用当前地理范围内真实可用的数据，可用 `--subject` 提供主体提示或 `--map-mode` 手动覆盖。五种主题使用同一地理引擎。v2.2 Agent 流程按审阅后的完整选区扩展真实地理范围，统一比例并避开主体，不再受旧角落地图大小限制；未指定区域时才使用原有自动角落布局。细线条、克制透明度，不加中央标题或不透明卡片。`--no-labels` 可关闭可选文字，但数据许可要求的署名必须保留。
 
-负空间分析仅使用边缘密度与局部对比度，不是语义分割；不能可靠识别人、山峰、建筑、船只或天空。可用 `--exclusion-mask` 保护明确主体，非零像素不被地图覆盖。截图黑条仅作启发式提示，不自动裁切播放器。所有成品仍须人工检查构图与可读性。
+区域建议使用颜色、边缘与对比度，不是语义分割；需由 Agent 看图并修正，不能自动保证识别人、山峰、建筑、船只或天空。可用 `--exclusion-mask` 保护明确主体，非零像素不被地图覆盖。截图黑条仅作启发式提示，不自动裁切播放器。所有成品仍须人工检查构图与可读性。
 
 可选 `detect-text` 依赖系统 Tesseract，只生成候选掩膜。审阅后显式传入 `--remove-text --text-mask reviewed.png`，才用 OpenCV TELEA 局部插值。它无法恢复被文字遮挡的真实摄影细节；输出会标注待人工复核。修复掩膜超过画面 10% 会被拒绝，区域外像素不变，OCR 不用于推断位置。
 
@@ -111,7 +113,7 @@ EXIF 方向只规范化一次，ICC 配置保留，照片不缩放、不裁切�
 ## 测试、文档与开源
 
 ```bash
-pip install '.[terrain,repair,dev]'
+pip install '.[terrain,repair,heic,dev,service]'
 pytest --cov=camera_atlas
 ruff check .
 ruff format --check .

@@ -46,3 +46,7 @@ city.jpg,San Francisco,../examples/data/san_francisco.geojson,37.7955,-122.4065,
 ```
 
 Python API accepts `RenderConfig` or a dict and exposes the same fields (`map_enabled` corresponds to `--map`). It raises `ValueError`/Pydantic validation errors for invalid inputs. A clean fallback is a successful result with a clear warning and no geographic alpha.
+
+## Region-fill (local development update)
+
+`--region-mask PATH` selects the entire allowed map region. The grayscale mask must match EXIF-normalized dimensions: white includes, black protects. Exclusion masks override it. This mode ignores corner position/map-area, expands the long geographic axis at uniform scale, and clips ink to the selection. Radius is half the short-axis span. Existing offline data are not automatically expanded. See [region-fill](Region-Fill.md).

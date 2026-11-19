@@ -12,10 +12,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: python -m pip install '.[terrain,repair,dev]'
+      - run: python -m pip install '.[terrain,repair,heic,dev,service]'
       - run: pytest
       - run: ruff check .
+      - run: ruff format --check .
       - run: python -m build
+      - run: python scripts/package_agent_kit.py --output dist/Camera-Atlas-Agent-Kit-v2.2.0.zip
+      - run: python scripts/package_agensi.py --output dist/Camera-Atlas-Skill-v2.2.0.zip
       - env:
           GH_TOKEN: ${{ github.token }}
         run: gh release create "$GITHUB_REF_NAME" dist/* --generate-notes --verify-tag

@@ -10,6 +10,7 @@ from PIL import Image
 from .cartography.design import select_mode
 from .cartography.renderer import render_map
 from .composition.analyzer import analyze, place
+from .composition.region import prepare_region
 from .config import RenderConfig
 from .geography.dem import contours
 from .geography.http import CachedHTTP, ProviderError
@@ -51,6 +52,22 @@ def render(config: RenderConfig | dict) -> RenderResult:
     exclusion = load_mask(config.exclusion_mask, original.size) if config.exclusion_mask else None
     saliency, hints = analyze(clean, exclusion)
     warnings.extend(hints)
+    region = load_mask(config.region_mask, original.size) if config.region_mask else None
+    allowed = None
+    anchor = (0.5, 0.5)
+    if region is not None:
+        rect, allowed, anchor = prepare_region(region, exclusion)
+        placement = {
+            "position": "selected-region",
+            "texture_risk": 0,
+            "method": "expand geographic extent to region aspect; clip to selected pixels",
+            "rect_px": rect,
+            "anchor": anchor,
+            "visual_review_required": True,
+            "map_area_ignored": True,
+        }
+    else:
+        rect, placement = place(clean.size, saliency, config.map_area, config.position)
     data = OfflineGeoJSON(config.geojson).fetch() if config.geojson else GeoData()
     if config.dem:
         terrain = contours(config.dem, config.dem_source, config.contour_interval)
@@ -70,6 +87,8 @@ def render(config: RenderConfig | dict) -> RenderResult:
         if config.map_enabled and location.lat is not None and location.accuracy != "unresolved":
             try:
                 projection = MapProjection(location.lat, location.lon, config.radius_km)
+                if region is not None:
+                    projection.fit_region(rect[2], rect[3], anchor)
                 bounds = projection.bounds_wgs84()
             except ValueError as exc:
                 warnings.append(str(exc))
@@ -94,13 +113,12 @@ def render(config: RenderConfig | dict) -> RenderResult:
         viewport = box(*projection.extent)
         visible = [f for f in data.features if projection.project(shape(f["geometry"])).intersects(viewport)]
     mode = select_mode(visible, config.map_mode, config.subject)
-    rect, placement = place(clean.size, saliency, config.map_area, config.position)
     overlay = Image.new("RGBA", clean.size)
     svg = None
     cartography = {"drawn_features": []}
     if config.map_enabled and projection:
         overlay, svg, cartography = render_map(
-            clean.size, rect, projection, data, location, mode, config, exclusion
+            clean.size, rect, projection, data, location, mode, config, exclusion, allowed
         )
     if config.map_enabled and not cartography["drawn_features"]:
         warnings.append(
@@ -112,6 +130,20 @@ def render(config: RenderConfig | dict) -> RenderResult:
         warnings.append("Limited negative space: review map placement and supply a subject exclusion mask")
     final = Image.alpha_composite(clean, overlay)
     quality = verify(original, clean, overlay, final, mask, exclusion)
+    if allowed is not None:
+        import numpy as np
+
+        if np.any((np.asarray(overlay)[:, :, 3] > 0) & (np.asarray(allowed) == 0)):
+            raise ValueError("Overlay escaped the selected map region")
+        quality["outside_region_pixels"] = 0
+        warnings.append(
+            "Region fitted without stretching; inspect geographic coverage across the entire selection"
+        )
+        distribution = cartography.get("region_distribution", {})
+        if distribution.get("cells_with_geometry", 0) < distribution.get("eligible_cells", 0):
+            warnings.append(
+                "Some selected cells contain no map lines. Review source extent and real geography; do not invent filler"
+            )
     if quality["low_contrast_fraction"] is not None and quality["low_contrast_fraction"] > 0.4:
         warnings.append(
             "Low overlay contrast; review placement, theme and opacity at the intended viewing size"
@@ -160,6 +192,8 @@ def render(config: RenderConfig | dict) -> RenderResult:
             saliency.save(stage / "saliency_mask.png")
             if mask:
                 mask.save(stage / "text_removal_mask.png")
+            if allowed is not None:
+                allowed.save(stage / "map_region_mask.png")
         if config.svg and svg:
             (stage / "map_overlay.svg").write_text(svg, encoding="utf-8")
         _json(stage / "location.geojson", data.geojson())

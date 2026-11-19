@@ -1,17 +1,19 @@
 # Camera Atlas
 
+> **Photo + place, through your own agent.** Skill v2.2 prepares real maps, fills the selected sky or water region and returns image files without a Camera Atlas cloud backend. First setup requires a capable local agent. [Bilingual quickstart](docs/Agent-Quickstart.md) · [Publication and test status](docs/Agensi-Live-Validation.md).
+
 **Photography First. Geography Verified.**
 
 [GitHub repository](https://github.com/Jekyll-Chan/Camera-Atlas)
 
-Camera Atlas adds auditable vector geography to original travel photographs using independent transparent layers. It never regenerates or grades the photograph. Python 3.11+, local CLI, reusable API and Codex Agent Skill. Version 0.1.0 is an initial release; read the accuracy limits below.
+Camera Atlas adds auditable vector geography to original travel photographs using independent transparent layers. It never regenerates or grades the photograph. Python 3.11+, local CLI, reusable API and Codex Agent Skill. The Python package label remains 0.1.0; use the source revision and capability checks to identify the v2.2 renderer. Read the accuracy limits below.
 
 [中文说明](README.zh-CN.md) · [Architecture](docs/Architecture.md) · [CLI](docs/CLI-Reference.md) · [Accuracy](docs/Accuracy-and-Provenance.md)
 
 
 ## Free Skill v2
 
-**Skill version 2.0.1; Python engine 0.1.0.** The free Agensi adapter checks the agent's capabilities, prepares an isolated environment when authorized, offers a public sample and clearly falls back to planning when actual rendering is unavailable. This is a prepared adapter, not a claim of an approved Agensi listing or all-agent compatibility.
+**Skill: 2.2.0; Python engine label: 0.1.0.** Check the Skill version returned by Agensi: versions below 2.2 do not provide this workflow. Use the verified v2.2 Agent Kit if an older version is still live. File access, command execution, image inspection and an isolated installation are required; `doctor.online_ready` verifies the bridge, region renderer and map decoder. A text plan is not a rendered image.
 
 Start here: [English beginner guide](.agents/skills/camera-atlas/references/START-HERE.en.md) · [中文新手指南](.agents/skills/camera-atlas/references/START-HERE.zh-CN.md) · [v2 details](docs/Agensi-v2.md) · [Changelog](CHANGELOG.md).
 
@@ -21,11 +23,11 @@ Start here: [English beginner guide](.agents/skills/camera-atlas/references/STAR
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
-pip install '.[terrain,repair]'
+pip install '.[maps,terrain,repair]'
 camera-atlas --help
 ```
 
-Core installation is `pip install .`. Optional extras: `terrain` (rasterio/contourpy), `repair` (OpenCV), `heic` (pillow-heif), `dev` (tests/build/lint). No model service or API key is required for offline rendering. TIFF and HEIC normalize to 8-bit RGBA; high-bit-depth/HDR preservation is not supported.
+Core installation is `pip install .`. Optional extras: `maps` (online vector decoding), `terrain` (rasterio/contourpy), `repair` (OpenCV), `heic` (pillow-heif), `dev` (tests/build/lint). No model service or API key is required for offline rendering. Compositing is 8-bit SDR. Unsupported HDR/high-bit-depth or color-profile inputs are rejected instead of silently converted; optional HEIC support still requires a supported profile.
 
 ## Quick start
 
@@ -43,7 +45,7 @@ camera-atlas render --input photo.jpg --location 'Lake Lucerne' \
   --output render-output/locality
 ```
 
-A configured Nominatim-compatible endpoint can resolve place names. No public geocoder is enabled by default. Multiple candidates remain unresolved until the user confirms one. A lake centroid is a locality, never a precise camera point. `--confirmed-region --lat ... --lon ...` declares only a region center.
+The low-level CLI can use a configured Nominatim-compatible endpoint. The agent bridge instead provides explicit bounded Photon place searches and OpenFreeMap data queries. Multiple candidates remain unresolved until the user confirms one. A lake centroid is a locality, never a precise camera point. `--confirmed-region --lat ... --lon ...` declares only a region center.
 
 ```bash
 camera-atlas render --input photo.jpg --location 'Sayram Lake, Xinjiang, China' \
@@ -55,7 +57,7 @@ camera-atlas render --input photo.jpg --lat 46.98 --lon 8.60 \
 camera-atlas batch --input photos --manifest locations.csv --output render-output/batch
 ```
 
-Coordinate-based online requests use Overpass, bounded to a small area, with persistent cache and bounded retries. Hosted or high-volume applications must use their own service or legal regional extracts. Offline mode can reuse cached responses, but never makes HTTP requests.
+Low-level CLI coordinate-based online requests use Overpass, bounded to a small area, with persistent cache and bounded retries. Hosted or high-volume applications must use their own service or legal regional extracts. Offline mode can reuse cached responses, but never makes HTTP requests.
 
 ## Python API
 
@@ -82,7 +84,7 @@ Each render writes `final.png`, normalized `original.png`, `clean_base.png`, ful
 
 No crop, resampling of the photograph, global recoloring or generative model. EXIF orientation is normalized, ICC profile retained. Outside overlay alpha and a reviewed repair mask, normalized pixels are checked for exact equality. PNG output is lossless relative to the normalized 8-bit source; JPEG decompression is not reversible.
 
-Seven modes: coastline, topographic, urban, trail, river, regional, minimal; automatic selection uses verified feature kinds, an optional subject hint, and data within the geographic viewport. Placement uses edge density/local contrast, shrinks in busy compositions, and supports a user exclusion mask. This is **not semantic segmentation**: it cannot reliably identify people, peaks, boats, buildings or sky. Review every composition. Use `--exclusion-mask` for guaranteed pixel exclusion.
+Seven modes: coastline, topographic, urban, trail, river, regional, minimal; automatic selection uses verified feature kinds, an optional subject hint, and data within the geographic viewport. The v2.2 agent workflow uses a reviewed full-region mask: real geography expands at uniform scale to fill its bounds and is clipped around protected subjects. The older automatic corner placement applies only when no region is selected. Region suggestions use color, edges and contrast, **not semantic segmentation**; the agent must inspect the image and refine the mask. Use `--exclusion-mask` for guaranteed pixel exclusion.
 
 Five themes share the same data engine. Required dataset attribution remains visible even with `--no-labels`. Maps have no rectangular fill. Region locations use an open ring; exact GPS uses one solid mark. North refers only to the map. Optional scales are checked by inverse projection and WGS84 geodesic distance. Missing verified geometry produces a clean photograph with a warning, never invented map lines.
 
@@ -109,7 +111,7 @@ Code is MIT. Geographic data and example photos keep their own licenses; MIT nev
 [Example gallery and licenses](examples/README.md). Public data subsets and licensed photography are separated from private user inputs. Reproduce with `python examples/build_examples.py` after installing extras.
 
 ```bash
-pip install '.[terrain,repair,dev]'
+pip install '.[terrain,repair,heic,dev,service]'
 pytest --cov=camera_atlas
 ruff check .
 python -m build

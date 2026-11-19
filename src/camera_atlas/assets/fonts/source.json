@@ -1,0 +1,18 @@
+{
+  "font": "EB Garamond",
+  "license": "SIL Open Font License 1.1",
+  "repository": "https://github.com/google/fonts",
+  "revision": "f8c1d3d6cc75e30d77130bdcbfbff27e3b6233fe",
+  "files": {
+    "EBGaramond.ttf": {
+      "url": "https://raw.githubusercontent.com/google/fonts/f8c1d3d6cc75e30d77130bdcbfbff27e3b6233fe/ofl/ebgaramond/EBGaramond%5Bwght%5D.ttf",
+      "sha256": "ef9512f92f6d579e5dc75af59a5a4b1b8b47d2eda89e00b954d44520e5369027",
+      "bytes": 851176
+    },
+    "OFL.txt": {
+      "url": "https://raw.githubusercontent.com/google/fonts/f8c1d3d6cc75e30d77130bdcbfbff27e3b6233fe/ofl/ebgaramond/OFL.txt",
+      "sha256": "0985066662eb755ed3683ae5482a81a9195b49ce3f7e165cc2388b3dbece7dd7",
+      "bytes": 4398
+    }
+  }
+}

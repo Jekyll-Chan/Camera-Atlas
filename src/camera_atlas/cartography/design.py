@@ -4,7 +4,7 @@ from dataclasses import dataclass
 @dataclass(frozen=True)
 class Theme:
     ink: tuple[int, int, int] = (237, 234, 222)
-    accent: tuple[int, int, int] = (173, 67, 56)
+    accent: tuple[int, int, int] = (232, 72, 58)
     line: float = 0.85
     max_labels: int = 4
 
@@ -14,13 +14,13 @@ THEMES = {
     "topographic-fine": Theme(line=0.6, max_labels=2),
     "coastal-atlas": Theme(ink=(228, 235, 230), line=1.0),
     "urban-documentary": Theme(ink=(238, 238, 233), line=0.65, max_labels=3),
-    "monochrome-print": Theme(ink=(224, 224, 218), accent=(160, 160, 155), line=0.85),
+    "monochrome-print": Theme(ink=(224, 224, 218), line=0.85),
 }
 
 KINDS = {
     "coastline": {"water", "coastline", "place"},
     "topographic": {"contour", "place"},
-    "urban": {"road", "boundary", "place"},
+    "urban": {"road", "boundary", "water", "coastline", "river", "place"},
     "trail": {"trail", "contour", "place"},
     "river": {"river", "water", "place"},
     "regional": {"boundary", "water", "coastline", "place"},
@@ -42,13 +42,16 @@ def select_mode(features, requested, subject="unknown"):
     }.get(subject)
     if preferred and kinds & (KINDS[preferred] - {"place"}):
         return preferred
+    # A pond, moat or harbour does not by itself make an otherwise unclassified
+    # street map a coastal scene. Keep streets plus genuine water context when
+    # both occur. An inspected lake/coast subject or explicit mode takes priority.
     for kind, mode in (
-        ("water", "coastline"),
         ("contour", "topographic"),
         ("road", "urban"),
         ("trail", "trail"),
         ("river", "river"),
         ("coastline", "coastline"),
+        ("water", "coastline"),
     ):
         if kind in kinds:
             return mode

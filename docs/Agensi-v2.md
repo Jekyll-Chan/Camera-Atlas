@@ -1,45 +1,44 @@
-# Camera Atlas Free Skill v2.0.1
+# Camera Atlas Free Skill v2.2
 
-This release adapts the existing open-source engine to text-delivered Agensi skills and beginner use. The Skill version is **2.0.1**; the Python package stays **0.1.0**, pinned to an immutable, previously verified commit and SHA256. This is an adapter release, not a claim of a new renderer or hosted service.
+Skill v2.2 provides a photo-and-place workflow through the user's code-capable agent: isolated setup, real geographic data, a reviewed full-region mask, independent map compositing and actual files. Agensi delivers instructions; it does not host this renderer. The Python package version remains **0.1.0**; the immutable revision and verified capabilities distinguish the updated engine from the older package with that same label.
 
-Beginner instructions: [English](../.agents/skills/camera-atlas/references/START-HERE.en.md) · [简体中文](../.agents/skills/camera-atlas/references/START-HERE.zh-CN.md).
+Beginner instructions: [English](../.agents/skills/camera-atlas/references/START-HERE.en.md) · [简体中文](../.agents/skills/camera-atlas/references/START-HERE.zh-CN.md) · [Bilingual quickstart](Agent-Quickstart.md).
+
+## Requirements
 
 | Agent capability | Behavior |
 |---|---|
-| Python 3.11+, image files, trusted engine | Render actual final PNG, transparent layer, SVG and provenance |
-| Supported Python, engine missing, installation authorized | Explain and prepare one isolated environment; no global install |
-| No execution/installation, or user wants advice | Deliver a clearly labeled editorial plan |
-| No vision | Use user description; never claim visual inspection; automated rendering still needs human review |
-| No verified geographic data | Clean photo or plan with reason; never fabricated geography |
+| Python 3.11+, files, command execution and image inspection | Set up the verified renderer, review the mask and deliver real image files |
+| Supported Python, engine missing, installation authorized | Prepare one isolated environment with the required map decoder |
+| No execution or installation | Explain the limitation and offer a clearly labeled editorial plan |
+| No image inspection | Do not claim visual acceptance; automated checks require human review |
+| No verified geographic data | Preserve the photo and report the missing data; never fabricate lines |
 
-The standard-library `onboard.py` supports read-only doctor, verified isolated setup, and a real public demo. It is designed to run unchanged from a temporary file, with an explicitly fetched lock JSON. Setup only uses the official immutable source and checks its digest before installation. Public demo inputs also have pinned SHA256; no private images are transmitted. It downloads roughly 61 MB of source plus dependencies during first setup. Core, terrain, repair and HEIC dependency capabilities are reported separately.
+The standard-library `onboard.py` runs unchanged from a temporary file with an explicit lock path. Setup verifies the official immutable archive's SHA256 before installation. A current lock declares `agent_bridge`, `region_fill` and `online_maps`; setup installs `maps` by default. Doctor must report `online_ready`, not only an engine version. Native source-kit installation uses the same `maps` extra. Public samples have separate verified sources and licenses.
 
-## Platform packaging
+## What changed
+
+- A selected whole sky, water or other negative-space region sets the geographic viewport; the old square-corner size cap does not apply.
+- Expanding the region or radius queries a larger real extent at uniform scale, then clips the transparent layer around protected subjects.
+- The agent chooses and reviews the mask; a novice is not asked to paint it. Heuristic suggestions are not semantic segmentation.
+- Map mode and radius can be revised. A city pond no longer suppresses its surrounding streets. A verified display label does not change coordinates.
+- Original framing, normalized pixels, direction and supported color profiles are preserved outside actual map ink or approved repairs. Common phone photos up to 18 MB/25 MP are accepted without resizing; unsupported HDR/high-bit-depth or color-profile input is rejected rather than silently altered.
+
+## Packages
 
 ```bash
-python scripts/package_agensi.py --output dist/camera-atlas-agensi-v2.0.1.zip
+python scripts/package_agensi.py --output dist/Camera-Atlas-Skill-v2.2.0.zip
+python scripts/package_agent_kit.py --output dist/Camera-Atlas-Agent-Kit-v2.2.0.zip
 ```
 
-The ZIP places `SKILL.md` at its root. It includes bilingual guides, a standard-library helper, a source lock, a public sample walkthrough and its text data, and the MIT code license. The public photograph is available at a pinned link in the sample walkthrough. It contains no source photos, raster terrain, virtual environment, secrets or compiled executable. Source code and example photography/data keep their existing license boundaries. Do not upload the full project source archive as the skill package.
+The Agensi ZIP has `SKILL.md` at its root and contains text instructions, bilingual guides, the installer, source lock and public sample text data. It contains no private photos, environment, cache or compiled executable. The separate Agent Kit includes renderer source and licensed public samples. Never upload the entire repository archive as the text-only Agensi package.
 
-Platform declarations checked against official docs on 2026-11-10:
-- [Packaging](https://www.agensi.io/docs/packaging): text/code delivery, temporary exact script execution, 50 MB website / 5 MB agent upload, no bundled dependency environments.
-- [Loading](https://www.agensi.io/docs/how-agents-load-skills): on-demand file loading, actual session requirements, newest version and temporary scripts.
-- [Product formats](https://www.agensi.io/docs/what-you-can-sell): skills/packs, no hosting of our own server.
+No paid Agensi image tool is required. The user's agent/API, computer and network costs remain separate. Trae and DeepSeek client compatibility must be assessed by actual tools and sessions, not a product name.
 
-No paid Agensi tool is configured or needed. There is no external checkout link. Optional paid AI/agent plans or infrastructure costs remain separate. The adapter does not assume every connected agent can run Python, inspect photos, install dependencies or contact geography providers.
+## Publication and validation
 
-## Status
+The [validation record](Agensi-Live-Validation.md) is the source of observed status. The earlier live marketplace listing was version **1.0**, containing Skill **2.0.1**; those are different version fields. Its pinned corner-map renderer could not fulfill the full-sky test. Loading that older Skill through Codex does not validate v2.2 delivery.
 
-The local package, helper, source lock and engine/demo paths are testable without an Agensi account. Marketplace security review, account connection, listing approval and a real buyer session have not been verified. Listing copy is prepared under `marketplace/`; no claim of platform certification, guaranteed compatibility, sales or user demand is made.
+For v2.2, publish and verify the updated immutable renderer, test a fresh installation from its lock, submit the new package, then load the newest live version through Codex and test actual file delivery. A prepared ZIP, submitted update, approved listing and verified photo workflow are distinct states. One supplied-photo result does not establish universal image, agent or network compatibility.
 
-
-## v2.0.0 validation — 2026-11-10
-
-- Local suite: **69 passed**, one live-network test excluded by default.
-- Ruff lint/format and Skill structural validator passed.
-- Deterministic text-only package: **13 files, about 22 KB**, verified per-file SHA256 and repeatable ZIP output.
-- Copied the helper into an unrelated temporary location and supplied the lock file explicitly. A clean Python 3.11 environment correctly recommended setup; checksum-verified isolated installation succeeded, without using a global engine.
-- Downloaded the actual pinned official source archive and verified its SHA256. The full install used that matching local archive to avoid downloading the same 61 MB twice.
-- The standalone helper fetched three checksum-verified public demo inputs and rendered a real NASA/Natural Earth sample. Dimensions 1276×1280 preserved; zero unexpected base/composite pixel modifications; transparent overlay and SVG exported.
-- Actual Agensi login, skill delivery, review and buyer-session execution remain untested. Local validation is not marketplace certification.
+Official platform references, checked 2026-11-19: [connection](https://www.agensi.io/docs/mcp-setup), [file loading](https://www.agensi.io/docs/how-agents-load-skills), [agent submission](https://www.agensi.io/docs/submit-from-your-agent), [updates](https://www.agensi.io/docs/updates). Updates keep serving the previous live version until approved; check what `get_skill` actually returns.

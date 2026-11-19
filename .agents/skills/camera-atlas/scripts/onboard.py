@@ -18,9 +18,15 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-SKILL_VERSION = "2.0.1"
+SKILL_VERSION = "2.2.0"
 CORE_MODULES = ("PIL", "numpy", "shapely", "pyproj", "pydantic", "typer", "httpx")
-EXTRA_MODULES = {"terrain": ("rasterio", "contourpy"), "repair": ("cv2",), "heic": ("pillow_heif",)}
+EXTRA_MODULES = {
+    "terrain": ("rasterio", "contourpy"),
+    "repair": ("cv2",),
+    "heic": ("pillow_heif",),
+    "maps": ("mapbox_vector_tile",),
+}
+ONLINE_CAPABILITIES = ("agent_bridge", "region_fill", "online_maps")
 REPOSITORY = "https://github.com/Jekyll-Chan/Camera-Atlas"
 
 
@@ -40,6 +46,13 @@ def read_lock(path):
         raise OnboardingError("A verified source SHA256 is required")
     if lock.get("engine_version") != "0.1.0":
         raise OnboardingError("This adapter supports engine 0.1.0")
+    capabilities = lock.get("capabilities", {})
+    if not isinstance(capabilities, dict) or any(type(value) is not bool for value in capabilities.values()):
+        raise OnboardingError("Engine capabilities must be boolean declarations")
+    if any(capabilities.get(name) for name in ONLINE_CAPABILITIES) and not all(
+        capabilities.get(name) for name in ONLINE_CAPABILITIES
+    ):
+        raise OnboardingError("The online agent engine must declare bridge, region fill and online maps")
     for asset in lock.get("demo_files", []):
         rel = Path(asset["path"])
         if rel.is_absolute() or ".." in rel.parts or len(rel.parts) != 1:
@@ -57,14 +70,38 @@ def env_python(workspace):
 
 
 def probe(python):
-    code = """import importlib.metadata, importlib.util, json, sys
+    code = """import importlib, importlib.metadata, json, sys
 try:
     version = importlib.metadata.version('camera-atlas')
 except importlib.metadata.PackageNotFoundError:
     version = None
 modules = %r
+available = {}
+for name in modules:
+    try:
+        importlib.import_module(name)
+        available[name] = True
+    except Exception:
+        available[name] = False
+engine_importable = False
+region_fill = False
+try:
+    from camera_atlas import RenderConfig
+    engine_importable = True
+    region_fill = 'region_mask' in RenderConfig.model_fields
+except Exception:
+    pass
+agent_bridge = False
+try:
+    from camera_atlas import agent
+    agent_bridge = all(callable(getattr(agent, name, None)) for name in ('prepare', 'search', 'render'))
+except Exception:
+    pass
 print(json.dumps({'python_version': list(sys.version_info[:3]), 'engine_version': version,
-    'modules': {name: importlib.util.find_spec(name) is not None for name in modules}}))
+    'engine_importable': engine_importable,
+    'region_fill_supported': region_fill,
+    'agent_bridge_supported': agent_bridge,
+    'modules': available}))
 """ % (list(CORE_MODULES) + [m for names in EXTRA_MODULES.values() for m in names],)
     try:
         result = subprocess.run([str(python), "-c", code], capture_output=True, text=True, timeout=30)
@@ -89,20 +126,54 @@ def doctor(workspace, python=None):
     report = probe(python)
     supported = report["python_version"] >= [3, 11, 0]
     missing = [name for name in CORE_MODULES if not report["modules"][name]]
-    ready = supported and not missing and report["engine_version"] == "0.1.0"
+    offline_ready = (
+        supported and not missing and report["engine_version"] == "0.1.0" and report["engine_importable"]
+    )
+    region_ready = offline_ready and report["region_fill_supported"]
+    bridge = report["agent_bridge_supported"]
+    maps = all(report["modules"][name] for name in EXTRA_MODULES["maps"])
+    ready = region_ready and bridge and maps
+    unavailable = []
+    if not supported:
+        unavailable.append("Python 3.11 or later")
+    if missing:
+        unavailable.append("importable core dependencies: " + ", ".join(missing))
+    if report["engine_version"] != "0.1.0" or not report["engine_importable"]:
+        unavailable.append("supported importable Camera Atlas engine")
+    if not report["region_fill_supported"]:
+        unavailable.append("region-fill renderer")
+    if not bridge:
+        unavailable.append("prepare/search/render agent bridge")
+    if not maps:
+        unavailable.append("online map decoder (install the maps extra)")
     return {
         "skill_version": SKILL_VERSION,
         "engine_version": report["engine_version"],
         "python": str(python.absolute()),
         "python_version": report["python_version"],
         "ready": ready,
+        "offline_ready": offline_ready,
+        "region_fill_ready": region_ready,
+        "online_ready": ready,
+        "region_fill_supported": report.get("region_fill_supported", False),
+        "agent_bridge_supported": bridge,
         "recommended_mode": "render" if ready else "setup" if supported else "plan",
         "missing_modules": missing,
+        "unavailable_capabilities": unavailable,
         "optional_features": {
             name: all(report["modules"][module] for module in modules)
             for name, modules in EXTRA_MODULES.items()
         },
-        "note": "Rendering also needs photo file access. Visual review needs image inspection tools. "
+        "note": (
+            "Online agent workflow is ready. "
+            if ready
+            else "Offline rendering only; the photo/place agent workflow needs: "
+            + "; ".join(unavailable)
+            + ". "
+            if offline_ready
+            else "Setup is needed: " + "; ".join(unavailable) + ". "
+        )
+        + "Rendering also needs photo file access. Visual review needs image inspection tools. "
         "No shell or supported Python: deliver a clearly labeled plan, not an image.",
     }
 
@@ -153,6 +224,11 @@ def setup(workspace, lock, extras=(), archive=None):
         raise OnboardingError(
             "Setup needs Python 3.11+. Switch to a supported interpreter or use planning mode"
         )
+    current_engine = all(lock.get("capabilities", {}).get(name) is True for name in ONLINE_CAPABILITIES)
+    extras = tuple(dict.fromkeys(("maps",) + tuple(extras) if current_engine else extras))
+    if any(extra not in EXTRA_MODULES for extra in extras):
+        raise OnboardingError("Unsupported engine extra")
+    required_ready = "online_ready" if current_engine else "offline_ready"
     marker = workspace / ".camera-atlas-env.json"
     python = env_python(workspace)
     if (workspace / ".venv").exists():
@@ -164,8 +240,12 @@ def setup(workspace, lock, extras=(), archive=None):
         if state.get("revision") != lock["revision"]:
             raise OnboardingError("Workspace belongs to another engine revision; choose a fresh workspace")
         report = doctor(workspace)
-        if report["ready"] and all(report["optional_features"][x] for x in extras):
-            return {**report, "status": "ready", "reused": True}
+        if report[required_ready] and all(report["optional_features"][x] for x in extras):
+            return {
+                **report,
+                "status": "ready" if current_engine else "offline_ready",
+                "reused": True,
+            }
     if archive:
         archive = Path(archive)
         if not archive.is_file() or digest(archive) != lock["sha256"]:
@@ -203,23 +283,33 @@ def setup(workspace, lock, extras=(), archive=None):
                     "revision": lock["revision"],
                     "engine_version": lock["engine_version"],
                     "source_sha256": lock["sha256"],
-                    "state": "ready",
+                    "state": "installed",
                 },
                 indent=2,
             )
         )
     report = doctor(workspace)
-    if not report["ready"]:
+    missing_extras = [extra for extra in extras if not report["optional_features"][extra]]
+    if not report[required_ready] or missing_extras:
+        unavailable = report["unavailable_capabilities"] + [
+            "requested extra: " + name for name in missing_extras
+        ]
         raise OnboardingError(
-            "Setup finished but the engine is not ready; use planning mode and report the missing capability"
+            "Setup finished but required capabilities are unavailable: "
+            + "; ".join(unavailable)
+            + ". Run doctor for details; do not claim an online render."
         )
-    return {**report, "status": "ready", "reused": False, "revision": lock["revision"]}
+    status = "ready" if current_engine else "offline_ready"
+    state = json.loads(marker.read_text())
+    state["state"] = status
+    marker.write_text(json.dumps(state, indent=2))
+    return {**report, "status": status, "reused": False, "revision": lock["revision"]}
 
 
 def demo(workspace, lock, output=None):
     report = doctor(workspace)
-    if not report["ready"]:
-        raise OnboardingError("The engine is not ready. Run setup first or choose planning mode")
+    if not report["offline_ready"]:
+        raise OnboardingError("Offline rendering is not ready. Run setup first or choose planning mode")
     names = {x["path"] for x in lock["demo_files"]}
     if not {"lake_photo.jpg", "lucerne.geojson", "photos.sources.json"} <= names:
         raise OnboardingError("The verified public demo manifest is incomplete")

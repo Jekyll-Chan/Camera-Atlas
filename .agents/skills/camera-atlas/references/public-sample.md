@@ -1,18 +1,24 @@
-# Public sample · Lake Lucerne
+# Public samples · engineering checks
 
-Try this example with Camera Atlas before supplying your own photographs.
+Use the bridge in [agent-workflow.md](agent-workflow.md) with the verified v2.2 engine. The source kit contains two matched offline examples:
 
-> Run Camera Atlas’s Lake Lucerne public demo. Prepare the local environment if needed, then show me the finished image, transparent layer and source report.
+| Photo under `examples/data/` | Built-in place ID | Geography |
+| --- | --- | --- |
+| `city_photo.jpg` | `san-francisco` | Recorded OpenStreetMap streets/water |
+| `lake_photo.jpg` | `lucerne` | Natural Earth lake outline |
 
-The example uses a NASA photograph of the Alps taken from Skylab 3 and a Natural Earth lake outline. The lake is the mapped locality. The image credit and reuse information are in the photo source record.
+Run prepare, inspect/refine the region mask, then render with the matching built-in ID; no place search or network geography query is needed. Both photographs are NASA aerial/orbital engineering samples, not ground-travel aesthetic benchmarks. An installed wheel may not contain samples; run from the extracted kit root or pass `--data /actual/kit/examples/data`.
 
-- [Public input photograph](https://raw.githubusercontent.com/Jekyll-Chan/Camera-Atlas/f9595def3d63c56b3d0326160d28b989f39b9f8d/examples/data/lake_photo.jpg)
-- [Lake outline GeoJSON](https://raw.githubusercontent.com/Jekyll-Chan/Camera-Atlas/f9595def3d63c56b3d0326160d28b989f39b9f8d/examples/data/lucerne.geojson)
-- [Photo credits and source record](https://raw.githubusercontent.com/Jekyll-Chan/Camera-Atlas/f9595def3d63c56b3d0326160d28b989f39b9f8d/examples/data/photos.sources.json)
-- [Finished reference image](https://github.com/Jekyll-Chan/Camera-Atlas/blob/f9595def3d63c56b3d0326160d28b989f39b9f8d/examples/generated/01-lake/final.png)
+## Lake Lucerne setup check
 
-The submission ZIP includes copies of the GeoJSON and source record under `sample/`. For an actual render, follow [onboarding](onboarding.md) and run the helper’s `demo` command. It verifies the public inputs against the source lock before producing `final.png`, `map_overlay.png`, and `provenance.json`.
+> Run Camera Atlas's Lake Lucerne public demo. Prepare the local environment if needed, then show me the finished image, transparent layer and source report.
 
-中文试用指令
+The helper's `demo` command is a basic installation check, not proof of full-sky visual quality. Follow [onboarding](onboarding.md); use the current verified lock and do not replace a working v2.2 environment with an older engine. The helper obtains the public photograph, GeoJSON and source record from `demo_files` in `engine-lock.json`, checks their hashes and writes the result locally.
 
-> 请用 Camera Atlas 的卢塞恩湖公开样片做一次演示。需要时先准备本机环境，然后给我成品、透明地图图层和来源报告。
+The example uses a NASA photograph of the Alps taken from Skylab 3 and a Natural Earth lake outline. The lake is the mapped locality, not an exact camera position. The photo source record contains credit and reuse information. The text-only Agensi ZIP includes the GeoJSON and source record under `sample/`; it downloads the matched public photograph when needed. These sample licenses do not extend to the user's private photos.
+
+中文试用指令：
+
+> 请用 Camera Atlas 的卢塞恩湖公开样片做一次环境检查。需要时先准备本机环境，然后给我成品、透明地图图层和来源报告。
+
+公开航拍样片只验证安装与输出链条。真实旅行照片仍须单独检查天空边缘、主体保护、地图覆盖和文字可读性。

@@ -1,9 +1,15 @@
 # Editorial composition and review
 
-Default: editorial-minimal; fine warm-white lines, restrained opacity, one red location mark, no central title, opaque card or decorative frame. Other themes change only design parameters: topographic-fine, coastal-atlas, urban-documentary, monochrome-print. Monochrome intentionally uses a neutral mark. All optional geographic text can be disabled; required legal attribution remains.
+Preserve the approved clean base, original direction, crop, color and light. Compose independent transparent layers: no opaque card, central title, decorative frame or whole-photo regeneration. Default to fine warm-white lines, restrained opacity and one red location mark (open ring for locality, solid only for actual GPS). Keep source credit readable.
 
-Modes use data availability: water/coastline, contour topography, roads, trails, river, regional boundaries or minimal. An optional subject hint affects priority but never creates data. The image analyzer estimates texture and contrast, picks a corner and shrinks on busy backgrounds. It cannot identify sky, people, peaks, buildings or boats. Review visually; supply a normalized-size grayscale exclusion mask (nonzero protects) for important subjects.
+## Region before map
 
-Maps occupy about 20% of the photo by default and may shrink. Placement is purely artistic: map coordinates stay in WGS84/local AEQD independently of the pixel rectangle. A map is a locator, not terrain registered to the camera perspective. Use scale only with known projection and extent. North labels describe map direction only. Insufficient data yields a clean photo and a warning.
+Determine the continuous area where the map belongs from the user request and actual image. A whole-sky request includes the sky to the photo edges, around building outlines and between large branches. A sideways photo may have its sky down the right side; do not rotate it or assume sky means the top. Protect important subjects with a mask.
 
-Check standalone overlay alpha in an image editor; inspect low-contrast lines, clipped text and masked attribution. PNG is the reference image; SVG uses editable system font text and may differ in typography across viewers. All repaired detail is interpolation and requires human review. Do not claim authentic recovery of text-occluded features.
+The selected region overrides the usual 15–25% starting suggestion. No automatic shrink on busy texture applies in region-fill mode. A wide or tall region needs a matching geographic viewport, not a centered square. Read [region-fill.md](region-fill.md) for fitting, data coverage and review.
+
+Use real roads for cities, water/coastlines for coasts/lakes, verified DEM contours for mountains, and real trails/rivers when suitable. A pond or moat in an urban dataset is not a reason to discard the surrounding street network; select the appropriate map mode explicitly when necessary. Combine only supported, sourced features. A water body can naturally have an empty interior; do not invent contours. Placement is artistic, not registration to visible terrain or camera perspective.
+
+The legacy analyzer only estimates texture/contrast and picks a small corner. It cannot recognize sky, people, trees, peaks or buildings. Region-fill currently requires a visually reviewed selection, not a claim of automatic semantic segmentation.
+
+Review full-frame and selected-area crops. Check continuity toward the region ends, clipped words, protected objects and subtle line weight. A sparse map may need a wider source extract or another real-data layer, not heavier lines. Inspect PNG alpha and attribution. SVG text varies with viewer fonts; PNG is the reference. Repair is interpolation, not authentic recovery.

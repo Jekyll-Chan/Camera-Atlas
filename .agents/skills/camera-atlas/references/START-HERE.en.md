@@ -1,58 +1,38 @@
-# Camera Atlas Free v2: your first use
+# Camera Atlas v2.2: a photo and a place
 
-Bring one photo and the place where it was taken. Let your agent handle environment checks, geographic data and output files.
+Use an agent that can open your photo, run local commands and show the finished file. First use needs setup; later sessions can reuse that environment.
 
-## Use through Agensi
+## Through Agensi
 
-1. Sign in to Agensi and connect your agent using its official instructions: https://www.agensi.io/docs/mcp-setup . You may need to complete sign-in/authorization yourself. Availability depends on the app, account and actual tool permissions.
-2. Once a listing is approved, search for **Camera Atlas**, confirm that its author/repository points to **Jekyll-Chan/Camera-Atlas**, and check that the price is **Free**. This guide accompanies a prepared adapter; it does not mean Agensi has approved or published it. If you cannot find it, use GitHub below.
-3. In your connected agent's chat, attach the photo and paste:
+1. Connect your agent using [Agensi's official guide](https://www.agensi.io/docs/mcp-setup). Sign in to your own Agensi account when prompted.
+2. Ask it to load the free [Camera Atlas](https://www.agensi.io/skills/camera-atlas) Skill and check that the returned Skill version is **2.2 or later**. If an older version is still live, use the source kit below; the older version cannot provide this full-region workflow.
+3. Attach a photo and send:
 
-> Use the free Camera Atlas skill for this travel photo, taken at [PLACE]. First check whether you can produce the actual image. If needed, prepare an isolated environment in this workspace. Preserve the original framing and colors, and add fine map lines from verified geographic sources. Return the final image and transparent layer. If this environment cannot render, say so clearly and give me an actionable design plan.
+> Use Camera Atlas on this photo, taken at [PLACE + CITY/COUNTRY]. Handle setup and rendering for me. Fill the appropriate whole sky or water region with real map linework, protect the subject, and preserve orientation, framing, colors and light. Ask only when the place or composition is uncertain. Give me the finished image, transparent map and source report.
 
-You do not need to know Python, map APIs or GeoJSON. Exact GPS is optional. A named lake/city is a locality, not an exact camera position. Ambiguous names may need a country or region.
+The agent prepares a separate Python environment, finds the location, selects the region and exports the files. You do not need to draw a mask, find map coordinates or run code. Normal permission prompts from your agent may appear during first setup.
 
-## Try a public sample first
+## Without an Agensi connection
 
-> Use Camera Atlas's public sample demo. Check the environment, prepare the necessary dependencies, and show me the final image and transparent layer. Do not use my private photos yet.
+Use the **Camera Atlas Agent Kit**, which includes the renderer source. When v2.2 is published, get it from the [release page](https://github.com/Jekyll-Chan/Camera-Atlas/releases/tag/v2.2.0) or [Agent Kit download](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.0/Camera-Atlas-Agent-Kit-v2.2.0.zip).
 
-The sample uses NASA aerial/space photography and an actual Natural Earth lake outline. It is an engineering demonstration, not a ground-level travel photo. It uploads no private photograph and needs no geocoder API key.
+Extract it, open **Camera-Atlas** in your agent, and attach your photo. Add this sentence before the request above:
 
-## Understand the result
+> Read `.agents/skills/camera-atlas/SKILL.md` in this project first.
 
-- **Actual rendering:** your agent has Python 3.11+, image file access and the required network/data. First setup may download about 61 MB of public engine source plus dependencies; the isolated environment can be reused. Open `final.png` for the artwork, `map_overlay.png` for an editable transparent map, and `provenance.json` for sources.
-- **Planning only:** code execution, installation or reliable data is unavailable, or you asked for advice. You receive a clearly labeled design plan with geography, composition, protected subjects and next steps. It is not a rendered image.
+The smaller [Skill ZIP](https://github.com/Jekyll-Chan/Camera-Atlas/releases/download/v2.2.0/Camera-Atlas-Skill-v2.2.0.zip), when published, contains instructions and the verified installer. Importing it does not itself install the renderer. See the [validation report](https://github.com/Jekyll-Chan/Camera-Atlas/blob/main/docs/Agensi-Live-Validation.md) for observed publication and test status.
 
-Reading an image with Python is not visual understanding. If your agent cannot inspect images visually, it should report only automated checks and ask you to review composition. Missing reliable map data may also produce a clean photo without a map; that must be explained rather than called a successful map composition.
+## Your files and revisions
 
-## Ask for changes in ordinary language
+Open **final.png** for the artwork. **map_overlay.png** is the transparent map; **provenance.json** records its sources. A text plan is not a rendered image.
 
-- "Make the map fainter and move it to the top right."
-- "Remove place labels, but keep required source attribution."
-- "Protect the people, main peak and boat."
-- "Give me a plan only; do not install anything yet."
-- "Keep all editable layers."
+To revise: “Use the same clean base. Extend the map across the whole sky, make it fainter, and protect the branches.” Exact GPS is usually unnecessary; add a city or country for ambiguous place names.
 
-## Use without Agensi
+## Requirements and limits
 
-Open https://github.com/Jekyll-Chan/Camera-Atlas in an agent with Python execution, then say:
+- The agent needs Python 3.11+, file access, command execution, image inspection and permission for isolated first-time installation. It handles the commands.
+- The local route accepts up to 18 MB and 25 megapixels without resizing. HEIC needs an optional decoder. Unsupported HDR/high-bit-depth or unpreservable color-profile inputs need an approved export, not a silent color conversion.
+- Maps and dependency downloads need a working network; existing verified offline data can be reused. On failure, the agent should identify the problem and preserve the photo.
+- Trae and clients using DeepSeek are possible routes only when those actual tools exist. Real Trae sessions and the ordinary DeepSeek website/app have not been verified. Image upload alone does not prove execution or file delivery.
 
-> Read this repository's Camera Atlas Skill v2, check and prepare an isolated environment, then run the public sample demo. I am not comfortable with terminal commands; please handle the technical steps.
-
-Alternatively, provide the skill folder and its supporting text resources through the mechanism your agent supports. Use the dedicated lightweight Agensi ZIP for platform submission, not the full project archive.
-
-## Cost and privacy
-
-This adapter is free. Core rendering does not call a paid generative-image service. Your agent/AI account and compute/network resources may have their own costs. This adapter does not automatically buy Agensi tools, start subscriptions or request API keys.
-
-Photos stay within the agent environment you authorize. Online map queries disclose a place/area to the map provider; do not submit confidential locations. Switching agents does not automatically transfer your photo. Never put private original photos or GPS into a public repository or product gallery.
-
-## If something gets stuck
-
-- Cannot find the listing: it may not be published yet; use GitHub, and check authorship before using a similarly named listing.
-- Connection fails: follow Agensi's official sign-in guide. Its current documentation allows one active agent connection per account; switching apps may require reconnecting.
-- Missing Python/network/install permission: request a plan or use a code-enabled environment.
-- No map: ask the agent to explain the provenance warnings; do not request invented geographic detail.
-- No output file: ask for the actual existing `final.png` attachment/path. A plan should never be described as a completed image.
-
-Versions: **Skill v2.0.1** is this free adapter; its pinned, tested **Python engine is 0.1.0**. v2 does not mean Agensi supplies a hosted renderer or that every agent has been tested.
+Camera Atlas adds no required cloud-hosting account or paid image-generation call. Your AI subscription/API, computer and network may still cost money. Processing happens in the authorized agent environment; image context may reach its cloud model according to that agent's settings. Map providers receive place/range queries, not the photograph.

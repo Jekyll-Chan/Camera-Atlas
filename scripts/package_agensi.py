@@ -28,11 +28,20 @@ def build(output):
         data.decode("utf-8")
         files[f"sample/{name}"] = data
     files["LICENSE"] = (ROOT / "LICENSE").read_bytes()
+    lock = json.loads(files["references/engine-lock.json"])
+    region_pinned = all(
+        lock.get("capabilities", {}).get(name) is True
+        for name in ("agent_bridge", "region_fill", "online_maps")
+    )
     manifest = {
-        "skill_version": "2.0.1",
+        "skill_version": "2.2.0",
         "engine_version": "0.1.0",
         "price": "Free",
         "platform_tested": False,
+        "verification_scope": "Building this package does not establish live Agensi execution.",
+        "region_fill_release_pinned": region_pinned,
+        "renderer_revision": lock["revision"],
+        "region_fill_requirement": "Pinned current renderer with verified online_ready capability",
         "files": {k: hashlib.sha256(v).hexdigest() for k, v in files.items()},
     }
     files["package-manifest.json"] = json.dumps(manifest, indent=2, sort_keys=True).encode()
@@ -48,15 +57,15 @@ def build(output):
         raise ValueError("Package exceeds the documented agent-upload limit")
     return {
         "output": str(output),
-        "skill_version": "2.0.1",
+        "skill_version": "2.2.0",
         "files": len(files),
         "bytes": output.stat().st_size,
         "sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
-        "status": "prepared; Agensi review/connection not verified",
+        "status": "built; marketplace review and live execution must be verified separately",
     }
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output", type=Path, default=ROOT / "dist/camera-atlas-agensi-v2.0.1.zip")
+    parser.add_argument("--output", type=Path, default=ROOT / "dist/camera-atlas-agensi-v2.2.0.zip")
     print(json.dumps(build(parser.parse_args().output), indent=2))

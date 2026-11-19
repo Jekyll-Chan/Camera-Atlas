@@ -1,6 +1,6 @@
 # Agensi / Codex validation · 2026-11-19
 
-Status: live legacy instruction delivery verified; the revised local workflow passed one supplied-photo acceptance. Agensi 2.2.0 is live and its independent Codex photo-to-file run completed. The final visual audit found street lines crossing labels; the 2.2.1 typography/profile correction passed independent visual acceptance and is completing publication.
+Status: Agensi 2.2.1 is live and free. The real Codex photo-to-file workflow, independent patch visual acceptance, fresh installation and live patch replay passed. GitHub v2.2.1 and all four download assets are published and verified.
 
 ## Observed live result
 
@@ -58,6 +58,17 @@ Patch source is public at `966a7567f278ef825b4e1ffc07076f2437d0d829`. [CI run 44
 
 A fresh isolated installation of the pinned patch reported online readiness and reproduced the accepted live-case final and overlay pixels exactly, including both original ICC profiles. It imported exclusively from its installed site-packages, with no development checkout substitution.
 
-Remaining gates at this source checkpoint: public download assets and actual Agensi 2.2.1 delivery/render verification. Agensi 2.2.0 remains the last verified live version until those observations are recorded.
+Agensi accepted and approved 2.2.1 with the free price unchanged. A real Codex session fetched the live Skill, lock and setup helper and verified byte identity against the submitted payload. It checked the fresh installed interpreter with the fetched helper, prepared the original photo in a new private workspace, performed an actual locality search and rendered the revised map. This patch replay reused the sky mask created by the earlier independent live agent; the full photo-only region-selection exercise was performed on 2.2.0.
+
+The live 2.2.1 final, transparent overlay and mask pixels exactly match the independently accepted patch. Both output ICC profiles are preserved; no manual postprocessing or profile tagging was needed. Zero pixels changed outside the sky mask or wherever overlay alpha is zero, and recomposition is exact. Actual full-sky, roof-edge, primary-label and complete-credit inspections passed.
+
+[GitHub release v2.2.1](https://github.com/Jekyll-Chan/Camera-Atlas/releases/tag/v2.2.1) targets `e2f8bf7daae55ba68f3bf3ced07e6d23b0a718b9`, which pins the accepted renderer source above. [Release build 44524257895](https://github.com/Jekyll-Chan/Camera-Atlas/actions/runs/44524257895) and [CI 44524258029](https://github.com/Jekyll-Chan/Camera-Atlas/actions/runs/44524258029) completed successfully, including Python 3.11–3.13. The release contains the Agent Kit ZIP, Skill ZIP, wheel and source archive. Both ZIPs were independently downloaded from the public release and matched the locally built packages exactly:
+
+| Asset | Bytes | SHA256 |
+| --- | ---: | --- |
+| Camera-Atlas-Skill-v2.2.1.zip | 33,774 | `19a7450b10698b02519dd9e174ad4e9aef25cb9646b97664fd0c2d2878b930ab` |
+| Camera-Atlas-Agent-Kit-v2.2.1.zip | 1,020,502 | `16692ae1007ad18877c078cc403346aae9012d2f524778f8b3b382ff6e212409` |
+
+Publication and the requested Codex/Agensi validation are complete for this tested case. Agensi instruction delivery is not a cloud image-generation backend; rendering still occurs in the user's capable agent environment.
 
 These checks cover one supplied Yasaka Shrine photograph and locality. They do not establish universal photo, geography, network or agent-client compatibility. Private imagery and test artifacts remain outside this public repository.
